@@ -36,15 +36,83 @@
     },
     "enabled": true,
     "rules": {
-      "a11y": "error",
-      "complexity": "error",
-      "correctness": "error",
-      "nursery": "error",
-      "performance": "error",
-      "recommended": true,
-      "security": "error",
-      "style": "error",
-      "suspicious": "error"
+      "recommended": false,
+      "complexity": {
+        "noAdjacentSpacesInRegex": "error",
+        "noExtraBooleanCast": "error",
+        "noUselessCatch": "error",
+        "noUselessEscapeInRegex": "error",
+        "noUselessTypeConstraint": "error"
+      },
+      "correctness": {
+        "noConstAssign": "error",
+        "noConstantCondition": "error",
+        "noEmptyCharacterClassInRegex": "error",
+        "noEmptyPattern": "error",
+        "noGlobalObjectCalls": "error",
+        "noInvalidBuiltinInstantiation": "error",
+        "noInvalidConstructorSuper": "error",
+        "noNonoctalDecimalEscape": "error",
+        "noPrecisionLoss": "error",
+        "noSelfAssign": "error",
+        "noSetterReturn": "error",
+        "noSwitchDeclarations": "error",
+        "noUndeclaredVariables": "error",
+        "noUnreachable": "error",
+        "noUnreachableSuper": "error",
+        "noUnsafeFinally": "error",
+        "noUnsafeOptionalChaining": "error",
+        "noUnusedLabels": "error",
+        "noUnusedImports": "error",
+        "noUnusedPrivateClassMembers": "error",
+        "noUnusedVariables": "error",
+        "useIsNan": "error",
+        "useValidForDirection": "error",
+        "useValidTypeof": "error",
+        "useYield": "error"
+      },
+      "style": {
+        "noCommonJs": "error",
+        "noNamespace": "error",
+        "useArrayLiterals": "error",
+        "useAsConstAssertion": "error",
+        "useBlockStatements": "off"
+      },
+      "suspicious": {
+        "noAsyncPromiseExecutor": "error",
+        "noCatchAssign": "error",
+        "noClassAssign": "error",
+        "noCompareNegZero": "error",
+        "noConstantBinaryExpressions": "error",
+        "noControlCharactersInRegex": "error",
+        "noDebugger": "error",
+        "noDuplicateCase": "error",
+        "noDuplicateClassMembers": "error",
+        "noDuplicateElseIf": "error",
+        "noDuplicateObjectKeys": "error",
+        "noDuplicateParameters": "error",
+        "noEmptyBlockStatements": "error",
+        "noExplicitAny": "error",
+        "noExtraNonNullAssertion": "error",
+        "noFallthroughSwitchClause": "error",
+        "noFunctionAssign": "error",
+        "noGlobalAssign": "error",
+        "noImportAssign": "error",
+        "noIrregularWhitespace": "error",
+        "noMisleadingCharacterClass": "error",
+        "noMisleadingInstantiator": "error",
+        "noNonNullAssertedOptionalChain": "error",
+        "noPrototypeBuiltins": "error",
+        "noRedeclare": "error",
+        "noShadowRestrictedNames": "error",
+        "noSparseArray": "error",
+        "noUnsafeDeclarationMerging": "error",
+        "noUnsafeNegation": "error",
+        "noUselessRegexBackrefs": "error",
+        "noWith": "error",
+        "useGetterReturn": "error",
+        "useNamespaceKeyword": "error"
+      }
     }
   },
   "overrides": [
@@ -62,15 +130,6 @@
             "useImportExtensions": "off",
             "useJsxKeyInIterable": "error"
           },
-          "nursery": {
-            "useExplicitType": "off",
-            "noJsxLiterals": "off",
-            "noUnresolvedImports": "off",
-            "useSortedClasses": {
-              "level": "warn",
-              "fix": "safe"
-            }
-          },
           "suspicious": {
             "noArrayIndexKey": "off",
             "noReactSpecificProps": "off",
@@ -86,13 +145,6 @@
             "noNonNullAssertion": "off",
             "useExportsLast": "off",
             "useBlockStatements": "off",
-            "useNamingConvention": {
-              "level": "error",
-              "options": {
-                "strictCase": false,
-                "requireAscii": true
-              }
-            },
             "useFilenamingConvention": {
               "level": "error",
               "options": {
@@ -120,10 +172,10 @@
       "linter": {
         "rules": {
           "correctness": {
-            "noNodejsModules": "off",
-            "noProcessEnv": "off"
+            "noNodejsModules": "off"
           },
           "style": {
+            "noProcessEnv": "off",
             "noDefaultExport": "off"
           }
         }
