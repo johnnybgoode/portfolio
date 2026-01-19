@@ -4,6 +4,7 @@ import {
   isCalloutBlock,
   isColumnBlock,
   isColumnListBlock,
+  isDatabaseBlock,
   isDividerBlock,
   isHeading1Block,
   isHeading2Block,
@@ -13,6 +14,7 @@ import {
   isQuoteBlock,
 } from '../data/block';
 import { BlockChildren, BlockItems } from './BlockList';
+import { Database } from './Database';
 import { Heading } from './Heading';
 import { Text } from './Text';
 
@@ -124,6 +126,10 @@ export const Block = ({ block }: BlockProps) => {
         <Text textItem={richText[0]} />
       </Heading>
     );
+  }
+
+  if (isDatabaseBlock(block)) {
+    return <Database databaseId={block.id} />;
   }
 
   if (isDividerBlock(block)) {

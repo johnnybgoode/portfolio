@@ -5,6 +5,9 @@ type TextProps = {
 };
 
 export const Text = ({ textItem }: TextProps) => {
+  if (typeof textItem === 'undefined') {
+    return null;
+  }
   const { plain_text: text, annotations } = textItem;
   if (annotations.bold) {
     return <strong>{text}</strong>;

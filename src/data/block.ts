@@ -2,6 +2,7 @@ import type {
   BlockObjectResponse,
   BulletedListItemBlockObjectResponse,
   CalloutBlockObjectResponse,
+  ChildDatabaseBlockObjectResponse,
   ColumnBlockObjectResponse,
   ColumnListBlockObjectResponse,
   DividerBlockObjectResponse,
@@ -112,4 +113,10 @@ export const isDividerBlock = (
   block: NotionBlock,
 ): block is DividerBlockObjectResponse => {
   return block.type === 'divider';
+};
+
+export const isDatabaseBlock = (
+  block: NotionBlock,
+): block is ChildDatabaseBlockObjectResponse => {
+  return block.type === 'child_database';
 };

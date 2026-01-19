@@ -1,8 +1,9 @@
 import { Heading } from './Heading';
 
 type LoadingOrErrorProps = {
-  isLoading: boolean;
+  dataType?: string;
   error: unknown;
+  isLoading: boolean;
 };
 
 type ErrorMessageProps = {
@@ -18,7 +19,11 @@ export const ErrorMessage = ({ title, message }: ErrorMessageProps) => (
   </div>
 );
 
-export const LoadingOrError = ({ isLoading, error }: LoadingOrErrorProps) => {
+export const LoadingOrError = ({
+  dataType,
+  error,
+  isLoading,
+}: LoadingOrErrorProps) => {
   if (isLoading) {
     return <Loading />;
   }
@@ -26,7 +31,7 @@ export const LoadingOrError = ({ isLoading, error }: LoadingOrErrorProps) => {
     return (
       <ErrorMessage
         message="Please try again later."
-        title="Error loading page"
+        title={`Error loading ${dataType || 'page'}`}
       />
     );
   }
