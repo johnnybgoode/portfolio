@@ -1,5 +1,6 @@
 import type { MultiSelectPropertyItemObjectResponse } from '@notionhq/client';
 import { useEffect, useState } from 'react';
+import { CursorStyle, TypeWriterStyle } from '../styles/components/TypeWriter.css';
 
 type TypeWriterProps = {
   textItems: MultiSelectPropertyItemObjectResponse;
@@ -65,9 +66,9 @@ export const TypeWriter = ({
   ]);
 
   return (
-    <pre>
+    <pre className={TypeWriterStyle}>
       {`> ${visibleText}`}
-      <span className="cursor" style={{ MozTextBlink: 'blink' }}>
+      <span className={CursorStyle}>
         _
       </span>
     </pre>
