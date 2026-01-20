@@ -1,16 +1,10 @@
-import type { MultiSelectPropertyItemObjectResponse } from '@notionhq/client';
-import { act, render, screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { TypeWriter } from '../../components/TypeWriter';
+import { render } from '../utils/render';
 
 describe('TypeWriter', () => {
-  const mockTextItems: MultiSelectPropertyItemObjectResponse = {
-    multi_select: [
-      { id: '1', name: 'Hello', color: 'blue' },
-      { id: '2', name: 'World', color: 'red' },
-      { id: '3', name: 'Test', color: 'green' },
-    ],
-  } as MultiSelectPropertyItemObjectResponse;
+  const mockTextItems = ['Hello', 'World', 'Test'];
 
   const defaultProps = {
     textItems: mockTextItems,
@@ -30,13 +24,13 @@ describe('TypeWriter', () => {
     // Mock Date.now to control time precisely
     vi.spyOn(Date, 'now').mockImplementation(() => mockNow);
 
-    vi.spyOn(global, 'requestAnimationFrame').mockImplementation((cb) => {
+    vi.spyOn(global, 'requestAnimationFrame').mockImplementation(cb => {
       rafCallbacks.push(cb);
       return ++rafId;
     });
 
     vi.spyOn(global, 'cancelAnimationFrame').mockImplementation(() => {
-      rafCallbacks.pop()
+      rafCallbacks.pop();
     });
   });
 
@@ -68,7 +62,7 @@ describe('TypeWriter', () => {
   });
 
   it('should type the first characters without skipping', async () => {
-    render(<TypeWriter {...defaultProps} /> );
+    render(<TypeWriter {...defaultProps} />);
 
     await advanceAnimation(defaultProps.typingSpeed);
 
@@ -92,41 +86,39 @@ describe('TypeWriter', () => {
 
     await advanceAnimation(10);
     await screen.findByText(/> Hello/);
-
   });
 
   it('should cycle through all text items and maintain character integrity', async () => {
-     render(<TypeWriter {...defaultProps} />);
+    render(<TypeWriter {...defaultProps} />);
 
-     // Type "Hello" (5 chars) 
-     // Each character needs typingSpeed (10ms) to elapse.
-     // At 16ms per frame, each frame types one character.
-     // Need 5 frames minimum: 5 * 16 = 80ms
-     await advanceAnimation(100);
-     await screen.findByText(/> Hello/);
+    // Type "Hello" (5 chars)
+    // Each character needs typingSpeed (10ms) to elapse.
+    // At 16ms per frame, each frame types one character.
+    // Need 5 frames minimum: 5 * 16 = 80ms
+    await advanceAnimation(100);
+    await screen.findByText(/> Hello/);
 
-     // Delete "Hello" (5 chars at 2x speed = 5ms each) + delay (10ms)
-     // Total: 25ms + 10ms = 35ms, use 70ms to be safe
-     await advanceAnimation(70);
-     let lastMessage = screen.queryByText(/Hello/);
-     expect(lastMessage).not.toBeInTheDocument();
+    // Delete "Hello" (5 chars at 2x speed = 5ms each) + delay (10ms)
+    // Total: 25ms + 10ms = 35ms, use 70ms to be safe
+    await advanceAnimation(70);
+    let lastMessage = screen.queryByText(/Hello/);
+    expect(lastMessage).not.toBeInTheDocument();
 
-     // Type "World" (5 chars)
-     await advanceAnimation(100);
-     await screen.findByText(/> World/);
+    // Type "World" (5 chars)
+    await advanceAnimation(100);
+    await screen.findByText(/> World/);
 
-     await advanceAnimation(70)
-     lastMessage = screen.queryByText(/World/);
-     expect(lastMessage).not.toBeInTheDocument();
+    await advanceAnimation(70);
+    lastMessage = screen.queryByText(/World/);
+    expect(lastMessage).not.toBeInTheDocument();
 
-     // Type "Test"
-     await advanceAnimation(100)
-     await screen.findByText(/> Test/)
+    // Type "Test"
+    await advanceAnimation(100);
+    await screen.findByText(/> Test/);
   });
 
   it('should render cursor element', async () => {
     render(<TypeWriter {...defaultProps} />);
     screen.getByText('_');
   });
-
 });
