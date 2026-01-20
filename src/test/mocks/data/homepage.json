@@ -1,0 +1,76 @@
+{
+  "page": {
+    "Headline": {
+      "id": "%3AUgE",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "John Entwistle",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "John Entwistle",
+          "href": null
+        }
+      ]
+    },
+    "Taglines": {
+      "id": "_RHR",
+      "type": "multi_select",
+      "multi_select": [
+        {
+          "id": "da857e2a-3965-477d-b15d-dd4a9c8a4941",
+          "name": "Software engineer",
+          "color": "red"
+        },
+        {
+          "id": "3a1c64dc-d4f2-41ed-b8d1-25bc74cb5045",
+          "name": "Technical lead",
+          "color": "blue"
+        },
+        {
+          "id": "b2fdf6fc-2eed-4892-ba70-f8544af46c28",
+          "name": "Coffee enthusiast",
+          "color": "pink"
+        }
+      ]
+    },
+    "Subheading": {
+      "id": "aLGH",
+      "type": "rich_text",
+      "rich_text": []
+    },
+    "Name": {
+      "id": "title",
+      "type": "title",
+      "title": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Home",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Home",
+          "href": null
+        }
+      ]
+    }
+  }
+}

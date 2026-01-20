@@ -1,13 +1,12 @@
 import { Route, Routes } from 'react-router';
+import { LandingPage } from './components/LandingPage';
 import { Page } from './components/Page';
 import './App.css';
 
 const Router = () => (
   <Routes>
     <Route
-      element={
-        <Page displayTitle={false} pageId="2ea0c25cdd3980649eb4c157c0a41524" />
-      }
+      element={<LandingPage pageId="2ed0c25cdd39804ea469c8c0f3c020a5" />}
       path="/"
     />
     <Route
