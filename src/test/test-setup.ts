@@ -1,4 +1,4 @@
-import { PropertySymbol } from "happy-dom";
+import { PropertySymbol } from 'happy-dom';
 import '@testing-library/jest-dom/vitest';
 import { cleanup } from '@testing-library/react';
 import { afterAll, afterEach, beforeAll } from 'vitest';
@@ -11,8 +11,11 @@ afterEach(() => {
 });
 afterAll(() => server.close());
 
-// @ts-ignore "expression of type 'any' can't be used to index type Document"
-const browserWindow = global.document[PropertySymbol.ownerWindow] || global.document[PropertySymbol.window];
+const browserWindow =
+  // @ts-ignore "expression of type 'any' can't be used to index type Document"
+  global.document[PropertySymbol.ownerWindow] ||
+  // @ts-ignore "expression of type 'any' can't be used to index type Document"
+  global.document[PropertySymbol.window];
 
 // Override global timer functions with happy-dom's implementations
 global.setTimeout = browserWindow.setTimeout;
