@@ -1,8 +1,9 @@
 import { PropertySymbol } from 'happy-dom';
 import '@testing-library/jest-dom/vitest';
 import { cleanup } from '@testing-library/react';
+import '@vanilla-extract/css/disableRuntimeStyles';
 import { afterAll, afterEach, beforeAll } from 'vitest';
-import { server } from './mocks/server';
+import { server } from '../mocks/server';
 
 beforeAll(() => server.listen());
 afterEach(() => {

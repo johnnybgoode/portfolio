@@ -1,3 +1,4 @@
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import react from '@vitejs/plugin-react';
 import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vitest/config';
@@ -13,6 +14,7 @@ export default defineConfig({
       exclude: [
         'src/main.tsx',
         'src/mocks/**/*',
+        'src/styles/**/*',
         'src/test/**/*',
         'vite.env.d.ts',
       ],
@@ -37,12 +39,13 @@ export default defineConfig({
         },
       },
       {
+        plugins: [vanillaExtractPlugin()],
         test: {
           environment: 'happy-dom',
           globals: true,
-          include: ['src/**/*.test.ts?(x)'],
+          include: ['src/test/**/*.test.ts?(x)'],
           name: 'unit',
-          setupFiles: 'src/test/test-setup.ts',
+          setupFiles: 'src/test/utils/setup.ts',
         },
       },
     ],
