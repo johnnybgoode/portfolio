@@ -8,9 +8,10 @@ export default defineConfig({
   plugins: [react(), vanillaExtractPlugin()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-      '@test': path.resolve(__dirname, './src/test'),
-      '@test/mocks': path.resolve(__dirname, './src/test/mocks'),
+      '~': path.resolve(__dirname, './src'),
+      '~components': path.resolve(__dirname, './src/components'),
+      '~styles': path.resolve(__dirname, './src/styles'),
+      '~test': path.resolve(__dirname, './src/test'),
     },
   },
   server: {
