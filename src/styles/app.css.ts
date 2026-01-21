@@ -1,12 +1,6 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { globalStyle } from '@vanilla-extract/css';
 import { vars } from './theme.css';
 import { space } from './utils';
-
-export const appStyle = style({
-  ...space('padding', '2rem'),
-  ...space('margin', '0 auto'),
-  maxWidth: '1280px',
-});
 
 globalStyle(':root', {
   fontFamily: vars.font.body,

@@ -2,7 +2,7 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '../theme.css';
 import { space } from '../utils';
 
-export const TypeWriterStyle = style({
+export const TypeWriterClass = style({
   fontFamily: vars.font.mono,
   fontSize: vars.typography.h5.size,
   ...space('margin', '0.25em 0'),
@@ -10,7 +10,7 @@ export const TypeWriterStyle = style({
   width: '100%',
 });
 
-export const CursorStyle = style({
+export const CursorClass = style({
   fontSize: '0.9em',
   paddingInlineStart: '2px',
   verticalAlign: 'top',

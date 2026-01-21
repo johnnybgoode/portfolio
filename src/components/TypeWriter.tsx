@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
-  CursorStyle,
-  TypeWriterStyle,
+  CursorClass,
+  TypeWriterClass,
 } from '../styles/components/TypeWriter.css';
 
 const cursorStyles = {
@@ -31,7 +31,7 @@ const Cursor = ({ isTyping, rate, style }: CursorProps) => {
   }, [blink, rate]);
 
   return (
-    <span className={CursorStyle} style={visStyle}>
+    <span className={CursorClass} style={visStyle}>
       {cursorStyles[style]}
     </span>
   );
@@ -142,7 +142,7 @@ export const TypeWriter = ({
   }, []);
 
   return (
-    <pre className={TypeWriterStyle}>
+    <pre className={TypeWriterClass}>
       {`> ${visibleText}`}
       <Cursor
         isTyping={isTyping}

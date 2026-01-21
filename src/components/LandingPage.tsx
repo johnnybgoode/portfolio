@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getBlockData } from '../data/block';
 import { getPageData } from '../data/page';
 import { isMultiSelectProperty, isRichTextProperty } from '../data/properties';
-import { headerStyle } from '../styles/components/LandingPage.css';
+import { headerClass } from '../styles/components/LandingPage.css';
 import { BlockItems } from './BlockList';
 import { Heading } from './Heading';
 import { LoadingOrError } from './Loading';
@@ -43,7 +43,7 @@ export const LandingPage = ({ pageId }: LandingPageProps) => {
 
   return (
     <>
-      <header className={headerStyle}>
+      <header className={headerClass}>
         <div>
           {page.Headline && isRichTextProperty(page.Headline) && (
             <Heading level={1}>

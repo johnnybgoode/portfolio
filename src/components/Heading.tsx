@@ -1,9 +1,5 @@
 import type { JSX, PropsWithChildren } from 'react';
-import {
-  headingStyle1,
-  headingStyle2,
-  headingStyle3,
-} from '../styles/typography.css';
+import { h1Class, h2Class, h3Class } from '../styles/typography.css';
 
 type HeadingProps = PropsWithChildren<{
   level: number;
@@ -12,11 +8,11 @@ type HeadingProps = PropsWithChildren<{
 const getHeadingClass = (headingLevel: number) => {
   switch (headingLevel) {
     case 1:
-      return headingStyle1;
+      return h1Class;
     case 2:
-      return headingStyle2;
+      return h2Class;
     case 3:
-      return headingStyle3;
+      return h3Class;
     default:
       return undefined;
   }

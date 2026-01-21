@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
-export const headerStyle = style({
+export const headerClass = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
