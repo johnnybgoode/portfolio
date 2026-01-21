@@ -9,7 +9,7 @@ export const Router = () => (
       path="/"
     />
     <Route
-      element={<Page pageId="2e70c25cdd3981c28b55e02cc9e421ba" />}
+      element={<Page pageId="2ed0c25c-dd39-8028-b4b8-dd6f1ddff103" />}
       path="/resume"
     />
   </Routes>
