@@ -1,20 +1,4 @@
-const makeRichText = (text: string) => ({
-  type: 'text',
-  text: {
-    content: text,
-    link: null,
-  },
-  annotations: {
-    bold: false,
-    italic: false,
-    strikethrough: false,
-    underline: false,
-    code: false,
-    color: 'default',
-  },
-  plain_text: text,
-  href: null,
-});
+import { makeRichText } from './properties';
 
 const makeTitleProperty = (text: string) => ({
   id: 'title',

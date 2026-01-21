@@ -1,6 +1,6 @@
 import type { PageObjectResponse } from '@notionhq/client';
 
-type PageData = {
+export type PageData = {
   page: PageObjectResponse['properties'];
 };
 
