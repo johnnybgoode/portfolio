@@ -1,23 +1,12 @@
-type GetDatabaseParameters = {
-  databaseId?: string;
-  dataSourceId?: string;
-};
-export const getDatabase = async ({
-  databaseId,
-  dataSourceId,
-}: GetDatabaseParameters) => {
-  if (!databaseId && !dataSourceId) {
+export const getDatabase = async (databaseId: string) => {
+  if (!databaseId) {
     throw new Error('databaseId or dataSourceId is required');
   }
-  const query = dataSourceId
-    ? `dataSourceId=${dataSourceId}`
-    : `databaseId=${databaseId}`;
 
-  const response = await fetch(`/api/data-source?${query}`);
+  const response = await fetch(`/api/database/${databaseId}`);
   if (!response.ok) {
-    throw new Error('Failed to fetch database data');
+    throw new Error('Failed to fetch database.');
   }
 
-  const data = await response.json();
-  return data;
+  return response.json();
 };

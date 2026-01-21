@@ -19,16 +19,26 @@ const fetchPageData = async (pageId: string) => {
   return pageData;
 };
 
+const parsePageId = (url: string, res: VercelResponse) => {
+  try {
+    return url.split('?')[0].split('/').pop();
+  } catch (__e: unknown) {
+    res.status(400).json({ error: 'Failed to parse URL' });
+  }
+};
+
 export default async function GET(req: VercelRequest, res: VercelResponse) {
-  if (!req.query.pageId || typeof req.query.pageId !== 'string') {
-    return res.status(400).json({ error: 'Missing pageId in request body.' });
+  const pageId = parsePageId(req.url!, res);
+  if (!pageId) {
+    return res.status(400).json({ error: 'Page ID is required.' });
   }
   try {
-    const pageData = await fetchPageData(req.query.pageId);
+    const pageData = await fetchPageData(pageId);
     res.status(200).json({
       page: pageData.properties,
     });
-  } catch (error) {
+  } catch (error: unknown) {
+    console.error(error);
     if (
       isNotionClientError(error) &&
       error.code === APIErrorCode.ObjectNotFound

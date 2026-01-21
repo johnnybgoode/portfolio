@@ -77,7 +77,7 @@ type NotionBlocksRecursive = {
 export const getBlockData = async (
   blockId: string,
 ): Promise<{ blocks: NotionBlock[] }> => {
-  const response = await fetch(`/api/blocks?parentId=${blockId}`);
+  const response = await fetch(`/api/blocks/${blockId}`);
   if (!response.ok) {
     throw new Error('Failed to fetch block data');
   }

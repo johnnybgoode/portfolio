@@ -1,7 +1,7 @@
+import { error } from 'node:console';
 import {
   Client,
   DataSourceObjectResponse,
-  isFullDatabase,
   isFullPageOrDataSource,
 } from '@notionhq/client';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
@@ -10,13 +10,6 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 const notion = new Client({
   auth: process.env.NOTION_AUTH_TK,
 });
-
-const fetchDatabase = async (databaseId: string) => {
-  const response = await notion.databases.retrieve({
-    database_id: databaseId,
-  });
-  return response;
-};
 
 const fetchDataSource = async (dataSourceId: string) => {
   const response = await notion.dataSources.retrieve({
@@ -55,40 +48,27 @@ const fetchAndQueryDataSource = async (dataSourceId: string) => {
   };
 };
 
+const parseDataSourceId = (url: string, res: VercelResponse) => {
+  try {
+    return url.split('?')[0].split('/').pop();
+  } catch (__e: unknown) {
+    res.status(400).json({ error: 'Failed to parse URL' });
+  }
+};
+
 export default async function GET(req: VercelRequest, res: VercelResponse) {
-  if (!req.query.databaseId && !req.query.dataSourceId) {
-    return res
-      .status(400)
-      .json({ error: 'A databaseId or dataSourceId param is required.' });
-  }
-  if (req.query.dataSourceId && typeof req.query.dataSourceId !== 'string') {
-    return res.status(400).json({ error: 'dataSourceId must be a string.' });
-  }
-  if (req.query.databaseId && typeof req.query.databaseId !== 'string') {
-    return res.status(400).json({ error: 'databaseId must be a string.' });
+  const dataSourceId = parseDataSourceId(req.url!, res);
+
+  if (!dataSourceId || typeof dataSourceId !== 'string') {
+    return res.status(400).json({ error: 'Data source ID is required.' });
   }
 
   try {
-    if (req.query.databaseId) {
-      const databaseResponse = await fetchDatabase(req.query.databaseId);
-      if (!isFullDatabase(databaseResponse) || !databaseResponse.data_sources) {
-        return res
-          .status(404)
-          .json({ error: 'Data source not found for the given database.' });
-      }
-      const dataSourceResponse = await fetchAndQueryDataSource(
-        databaseResponse.data_sources[0].id,
-      );
+    const dataSourceResponse = await fetchAndQueryDataSource(dataSourceId);
 
-      return res.status(200).json(dataSourceResponse);
-    } else if (req.query.dataSourceId) {
-      const dataSourceResponse = await fetchAndQueryDataSource(
-        req.query.dataSourceId,
-      );
-
-      return res.status(200).json(dataSourceResponse);
-    }
+    return res.status(200).json(dataSourceResponse);
   } catch (__error) {
+    console.error(error);
     return res.status(500).json({ error: 'Failed to fetch data source.' });
   }
 }

@@ -47,17 +47,27 @@ const filterGroups = <T>(arr: T[], predicate: (i: T) => boolean) => {
   return groups;
 };
 
+const parseParentId = (url: string, res: VercelResponse) => {
+  try {
+    return url.split('?')[0].split('/').pop();
+  } catch (__e: unknown) {
+    res.status(400).json({ error: 'Failed to parse URL' });
+  }
+};
+
 export default async function GET(req: VercelRequest, res: VercelResponse) {
-  if (!req.query.parentId || typeof req.query.parentId !== 'string') {
-    return res.status(400).json({ error: 'Missing parentId param.' });
+  const parentId = parseParentId(req.url!, res);
+
+  if (!parentId || typeof parentId !== 'string') {
+    return res.status(400).json({ error: 'Parent ID is required.' });
   }
 
   try {
     const response = await notion.blocks.children.list({
-      block_id: req.query.parentId,
+      block_id: parentId,
     });
 
-    const fullBlocks: NotionBlock[] = response.results
+    const fullBlocks = response.results
       .filter(
         (block): block is BlockObjectResponse =>
           isFullBlock(block) && !block.archived && !block.in_trash,
@@ -73,7 +83,7 @@ export default async function GET(req: VercelRequest, res: VercelResponse) {
           in_trash,
           ...blockData
         } = block;
-        return blockData;
+        return blockData as NotionBlock;
       });
 
     const bulletedListGroups = filterGroups(
@@ -94,8 +104,8 @@ export default async function GET(req: VercelRequest, res: VercelResponse) {
     res.status(200).json({
       blocks,
     });
-  } catch (__error) {
-    // @todo handle NotionClientErrors
+  } catch (error: unknown) {
+    console.error(error);
     res.status(500).json({ error: 'Failed to fetch blocks.' });
   }
 }

@@ -4,5 +4,23 @@
     "api/blocks*.ts": {
       "includeFiles": "src/data/block.ts"
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/api/blocks/:id",
+      "destination": "/api/blocks.ts"
+    },
+    {
+      "source": "/api/database/:id",
+      "destination": "/api/database.ts"
+    },
+    {
+      "source": "/api/data-source/:id",
+      "destination": "/api/data-source.ts"
+    },
+    {
+      "source": "/api/page/:id",
+      "destination": "/api/page.ts"
+    }
+  ]
 }

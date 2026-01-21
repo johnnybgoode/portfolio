@@ -5,7 +5,7 @@ export type PageData = {
 };
 
 export const getPageData = async (pageId: string) => {
-  const response = await fetch(`/api/page?pageId=${pageId}`);
+  const response = await fetch(`/api/page/${pageId}`);
   if (!response.ok) {
     throw new Error('Failed to fetch page data');
   }

@@ -40,7 +40,7 @@ const TableCell = ({ data }: { data: PropertyItemObjectResponse }) => {
 export const Database = ({ databaseId }: { databaseId: string }) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['databaseData', databaseId],
-    queryFn: () => getDatabase({ databaseId }),
+    queryFn: () => getDatabase(databaseId),
   });
 
   if (isLoading || error) {
