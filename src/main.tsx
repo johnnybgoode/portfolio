@@ -5,7 +5,13 @@ import { BrowserRouter } from 'react-router';
 import './styles/app.css';
 import { App } from './App.tsx';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 2,
+    },
+  },
+});
 
 async function enableMocking() {
   if (!import.meta.env.DEV) {
