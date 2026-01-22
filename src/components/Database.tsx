@@ -38,22 +38,29 @@ const TableCell = ({ data }: { data: PropertyItemObjectResponse }) => {
 };
 
 export const Database = ({ databaseId }: { databaseId: string }) => {
-  const { data, isLoading, error } = useQuery({
+  const {
+    data: database,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ['databaseData', databaseId],
     queryFn: () => getDatabase(databaseId),
   });
 
-  if (isLoading || error) {
+  if (isLoading || error || !database) {
     return (
       <LoadingOrError dataType="database" error={error} isLoading={isLoading} />
     );
   }
+  const { data } = database;
 
   return (
     <div>
-      <Heading level={2}>
-        <Text textItem={data.title[0]} />
-      </Heading>
+      {data.title && (
+        <Heading level={2}>
+          <Text textItem={data.title[0]} />
+        </Heading>
+      )}
       {data.results.length > 0 && (
         <table>
           <thead>
@@ -64,7 +71,7 @@ export const Database = ({ databaseId }: { databaseId: string }) => {
             </tr>
           </thead>
           <tbody>
-            {(data.results as PropertyItemObjectResponse[]).map(row => (
+            {data.results.map(row => (
               <tr key={row.id}>
                 {Object.entries(row).map(
                   ([key, property]) =>

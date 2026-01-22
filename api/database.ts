@@ -1,6 +1,8 @@
 import { Client, isFullDatabase } from '@notionhq/client';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
+const dataSource = import('./data-source.ts');
+
 const notion = new Client({
   auth: process.env.NOTION_AUTH_TK,
 });
@@ -28,8 +30,6 @@ export default async function GET(req: VercelRequest, res: VercelResponse) {
 
   try {
     const databaseResponse = await fetchDatabase(databaseId);
-    const protocol = req.headers['x-forwarded-proto'];
-    const host = req.headers.host;
     if (
       !isFullDatabase(databaseResponse) ||
       !databaseResponse.data_sources ||
@@ -40,16 +40,19 @@ export default async function GET(req: VercelRequest, res: VercelResponse) {
         .status(404)
         .json({ error: 'Data source not found for the given database.' });
     }
-    try {
-      const response = await fetch(
-        `${protocol}://${host}/api/data-source/${databaseId}`,
-      );
-      const data = await response.json();
-      return res.status(response.status).json(data);
-    } catch (e) {
-      console.error(e);
-      res.status(500).json(':(');
-    }
+    const { fetchAndQueryDataSource } = await dataSource;
+    const dataSourceId = databaseResponse.data_sources[0].id;
+    const dataSourceResponse = await fetchAndQueryDataSource(dataSourceId);
+    const name = databaseResponse.data_sources[0].name
+      .toLowerCase()
+      .replace(/[^a-z]/g, ' ')
+      .trim()
+      .replace(/ +/, '-');
+
+    return res.status(200).json({
+      name,
+      data: dataSourceResponse,
+    });
   } catch (error: unknown) {
     console.error(error);
     return res.status(500).json({ error: 'Failed to fetch database.' });

@@ -3,6 +3,9 @@
   "functions": {
     "api/blocks*.ts": {
       "includeFiles": "src/data/block.ts"
+    },
+    "api/database.ts": {
+      "includeFiles": "api/data-source.ts"
     }
   },
   "rewrites": [

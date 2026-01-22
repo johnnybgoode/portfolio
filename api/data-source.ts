@@ -25,13 +25,12 @@ const queryDataSource = async (dataSourceId: string) => {
   return response;
 };
 
-const fetchAndQueryDataSource = async (dataSourceId: string) => {
+export const fetchAndQueryDataSource = async (dataSourceId: string) => {
   const [dataSourceResponse, dataSourceQueryResponse] = await Promise.all([
     fetchDataSource(dataSourceId),
     queryDataSource(dataSourceId),
   ]);
-  const { id, icon, cover, title } =
-    dataSourceResponse as DataSourceObjectResponse;
+  const { id, title } = dataSourceResponse as DataSourceObjectResponse;
   const results = dataSourceQueryResponse.results.map(result => {
     const properties = isFullPageOrDataSource(result) ? result.properties : {};
     return {
@@ -41,8 +40,6 @@ const fetchAndQueryDataSource = async (dataSourceId: string) => {
   });
   return {
     id,
-    icon,
-    cover,
     title,
     results,
   };
