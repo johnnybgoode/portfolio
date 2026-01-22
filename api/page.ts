@@ -34,9 +34,7 @@ export default async function GET(req: VercelRequest, res: VercelResponse) {
   }
   try {
     const pageData = await fetchPageData(pageId);
-    res.status(200).json({
-      page: pageData.properties,
-    });
+    res.status(200).json(pageData.properties);
   } catch (error: unknown) {
     console.error(error);
     if (

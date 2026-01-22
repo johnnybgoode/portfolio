@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getBlockData } from '../data/block';
-import { getPageData } from '../data/page';
+import { getPage } from '../data/page';
 import { BlockItems } from './BlockList';
 import { Heading } from './Heading';
 import { LoadingOrError } from './Loading';
@@ -13,12 +13,12 @@ type PageProps = {
 
 export const Page = ({ pageId, displayTitle = true }: PageProps) => {
   const {
-    data: pageData,
+    data: page,
     isLoading: pageLoading,
     error: pageError,
   } = useQuery({
     queryKey: ['pageData', pageId],
-    queryFn: () => getPageData(pageId),
+    queryFn: () => getPage(pageId),
   });
 
   const {
@@ -33,11 +33,10 @@ export const Page = ({ pageId, displayTitle = true }: PageProps) => {
   const isLoadingOrerror =
     pageLoading || blockLoading || pageError || blockError;
 
-  if (isLoadingOrerror || !pageData) {
+  if (isLoadingOrerror || !page) {
     return <LoadingOrError error={pageError} isLoading={pageLoading} />;
   }
 
-  const { page } = pageData;
   return (
     <>
       {displayTitle && page.title.type === 'title' && (
