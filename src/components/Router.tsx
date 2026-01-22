@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router';
 import { LandingPage } from './LandingPage';
-import { Page } from './Page';
+import { Resume } from './Resume';
 
 export const Router = () => (
   <Routes>
@@ -9,7 +9,7 @@ export const Router = () => (
       path="/"
     />
     <Route
-      element={<Page pageId="2ed0c25c-dd39-8028-b4b8-dd6f1ddff103" />}
+      element={<Resume pageId="2ef0c25cdd398099be9be1e645bb73ec" />}
       path="/resume"
     />
   </Routes>
