@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   CursorClass,
   TypeWriterClass,
-} from '../styles/components/TypeWriter.css';
+} from '../../styles/components/TypeWriter.css';
 
 const cursorStyles = {
   block: '▋',

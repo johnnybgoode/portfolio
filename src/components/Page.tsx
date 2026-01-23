@@ -2,9 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { getBlockData } from '../data/block';
 import { getPage } from '../data/page';
 import { BlockItems } from './BlockList';
-import { Heading } from './Heading';
 import { LoadingOrError } from './Loading';
-import { Text } from './Text';
+import { Heading } from './ui/Heading';
+import { Text } from './ui/Text';
 
 type PageProps = {
   displayTitle?: boolean;

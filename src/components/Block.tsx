@@ -15,8 +15,8 @@ import {
 } from '../data/block';
 import { BlockChildren, BlockItems } from './BlockList';
 import { Database } from './Database';
-import { Heading } from './Heading';
-import { Text } from './Text';
+import { Heading } from './ui/Heading';
+import { Text } from './ui/Text';
 
 type BlockProps = {
   block: NotionBlock;

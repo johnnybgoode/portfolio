@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { getResumePage } from '../data/page';
-import { Heading } from './Heading';
 import { LoadingOrError } from './Loading';
 import { Masthead } from './Masthead';
 import { Page } from './Page';
-import { Text } from './Text';
+import { Heading } from './ui/Heading';
+import { Text } from './ui/Text';
 
 type ResumeProps = {
   pageId: string;
@@ -27,11 +27,11 @@ export const Resume = ({ pageId }: ResumeProps) => {
   return (
     <>
       <Masthead>
-        {page.Title && (
-          <Heading level={1}>
-            <Text textItem={page.Title.rich_text[0]} />
-          </Heading>
-        )}
+          {page.Title && (
+            <Heading level={1}>
+              <Text textItem={page.Title.rich_text[0]} />
+            </Heading>
+          )}
       </Masthead>
       <Page displayTitle={false} pageId={pageId} />
     </>

@@ -1,6 +1,8 @@
-import type { PropsWithChildren } from 'react';
+import { Box, type BoxProps } from './ui/Box';
 
-type MastheadProps = PropsWithChildren<{}>;
-export const Masthead = ({ children }: MastheadProps) => {
-  return <section>{children}</section>;
-};
+type MastheadProps = BoxProps<'div'>;
+export const Masthead = ({ as: __as, children, ...rest }: MastheadProps) => (
+  <Box as="div" {...rest}>
+    {children}
+  </Box>
+);

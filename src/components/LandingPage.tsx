@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { getLandingPage } from '../data/page';
 import { headerClass } from '../styles/components/LandingPage.css';
-import { Heading } from './Heading';
 import { LoadingOrError } from './Loading';
 import { Page } from './Page';
-import { Text } from './Text';
-import { TypeWriter } from './TypeWriter';
+import { Heading } from './ui/Heading';
+import { Text } from './ui/Text';
+import { TypeWriter } from './ui/TypeWriter';
 
 type LandingPageProps = {
   pageId: string;

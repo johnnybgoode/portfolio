@@ -4,9 +4,9 @@ import type {
 } from '@notionhq/client';
 import { useQuery } from '@tanstack/react-query';
 import { getDatabase } from '../data/database';
-import { Heading } from './Heading';
 import { LoadingOrError } from './Loading';
-import { Text } from './Text';
+import { Heading } from './ui/Heading';
+import { Text } from './ui/Text';
 
 const TableCell = ({ data }: { data: PropertyItemObjectResponse }) => {
   if (typeof data === 'string' || typeof data === 'number') {
