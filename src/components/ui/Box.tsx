@@ -13,14 +13,15 @@ export type BoxProps<C extends ElementType> = {
   ComponentPropsWithoutRef<C>;
 
 export const Box = <C extends ElementType>(props: BoxProps<C>) => {
-  const { as: Component = 'div', ...rest } = props;
+  const { as: Component = 'div', className, ...rest } = props;
   const sprinkleKeys = Array.from(sprinkles.properties.keys());
   const sprinkleProps = pick(rest, sprinkleKeys);
   const forwardProps = omit(rest, sprinkleKeys);
 
-  const className = sprinkles({
+  const styleClass = sprinkles({
     ...sprinkleProps,
   });
+  const classes = [className, styleClass].join(' ');
 
-  return <Component {...forwardProps} className={className} />;
+  return <Component {...forwardProps} className={classes} />;
 };

@@ -1,6 +1,7 @@
 import { createGlobalTheme } from '@vanilla-extract/css';
 
 const size = {
+  '50': '12px',
   '100': '14px',
   '200': '16px', // base
   '300': '20px',

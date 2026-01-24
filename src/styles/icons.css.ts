@@ -15,6 +15,7 @@ const iconFontBase = style({
   lineHeight: 1,
   WebkitFontSmoothing: 'antialiased',
   MozOsxFontSmoothing: 'grayscale',
+  verticalAlign: 'middle',
 });
 
 const iconBase = style([

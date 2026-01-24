@@ -33,3 +33,6 @@ export const omit = <
       {} as Record<string, unknown>,
     );
 };
+
+export const keyOf = <T extends {}>(o: T): keyof T =>
+  Object.keys(o) as unknown as keyof T;
