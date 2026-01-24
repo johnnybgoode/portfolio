@@ -5,19 +5,18 @@ import type {
   PhoneNumberPropertyItemObjectResponse,
   UrlPropertyItemObjectResponse,
 } from '@notionhq/client';
-
-type PagePropertyValue = PageData[string];
+import type { PagePropertyValue, RichTextPropertyValue } from './properties';
 
 export type PageData = PageObjectResponse['properties'];
 
 export type ResumePageData = Partial<{
-  Title: PagePropertyValue & { type: 'rich_text' };
+  Title: RichTextPropertyValue;
   Email: EmailPropertyItemObjectResponse;
   Phone: PhoneNumberPropertyItemObjectResponse;
   Linkedin: UrlPropertyItemObjectResponse;
   Github: UrlPropertyItemObjectResponse;
-  Website: UrlPropertyItemObjectResponse;
-  Summary: PagePropertyValue & { type: 'rich_text' };
+  Website: RichTextPropertyValue;
+  Summary: RichTextPropertyValue;
   Skills: MultiSelectPropertyItemObjectResponse;
 }>;
 

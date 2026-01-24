@@ -4,7 +4,7 @@ import { getPage } from '../data/page';
 import { BlockItems } from './BlockList';
 import { LoadingOrError } from './Loading';
 import { Heading } from './ui/Heading';
-import { Text } from './ui/Text';
+import { RichText } from './ui/RichText';
 
 type PageProps = {
   displayTitle?: boolean;
@@ -42,7 +42,7 @@ export const Page = ({ pageId, displayTitle = true }: PageProps) => {
       {displayTitle && page.title.type === 'title' && (
         <Heading level={1}>
           {page.title.title.map(textItem => (
-            <Text key={textItem.plain_text} textItem={textItem} />
+            <RichText key={textItem.plain_text} text={textItem} />
           ))}
         </Heading>
       )}

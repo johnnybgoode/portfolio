@@ -1,21 +1,16 @@
 import type {
   MultiSelectPropertyItemObjectResponse,
   PageObjectResponse,
-  RichTextPropertyItemObjectResponse,
   UrlPropertyItemObjectResponse,
 } from '@notionhq/client';
 
-type PagePropertyValue = PageObjectResponse['properties'][string];
-type RichTextArrayBasedPropertyValueResponse = Omit<
-  RichTextPropertyItemObjectResponse,
-  'rich_text'
-> & {
-  rich_text: Array<RichTextPropertyItemObjectResponse['rich_text']>;
-};
+export type PageProperties = PageObjectResponse['properties'];
+export type PagePropertyValue = PageProperties[string];
+export type RichTextPropertyValue = PagePropertyValue & { type: 'rich_text' };
 
 export const isRichTextProperty = (
   property: PagePropertyValue,
-): property is RichTextArrayBasedPropertyValueResponse => {
+): property is RichTextPropertyValue => {
   return property.type === 'rich_text';
 };
 

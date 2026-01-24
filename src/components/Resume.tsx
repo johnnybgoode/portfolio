@@ -4,7 +4,8 @@ import { LoadingOrError } from './Loading';
 import { Masthead } from './Masthead';
 import { Page } from './Page';
 import { Heading } from './ui/Heading';
-import { Text } from './ui/Text';
+import { Icon } from './ui/Icon';
+import { RichText } from './ui/RichText';
 
 type ResumeProps = {
   pageId: string;
@@ -29,7 +30,7 @@ export const Resume = ({ pageId }: ResumeProps) => {
       <Masthead>
           {page.Title && (
             <Heading level={1}>
-              <Text textItem={page.Title.rich_text[0]} />
+              <RichText text={page.Title.rich_text} />
             </Heading>
           )}
       </Masthead>

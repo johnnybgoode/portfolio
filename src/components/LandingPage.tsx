@@ -4,7 +4,7 @@ import { headerClass } from '../styles/components/LandingPage.css';
 import { LoadingOrError } from './Loading';
 import { Page } from './Page';
 import { Heading } from './ui/Heading';
-import { Text } from './ui/Text';
+import { RichText } from './ui/RichText';
 import { TypeWriter } from './ui/TypeWriter';
 
 type LandingPageProps = {
@@ -31,7 +31,7 @@ export const LandingPage = ({ pageId }: LandingPageProps) => {
         <div>
           {page.Headline && (
             <Heading level={1}>
-              <Text textItem={page.Headline.rich_text[0]} />
+              <RichText text={page.Headline.rich_text[0]} />
             </Heading>
           )}
           {page.Taglines && (

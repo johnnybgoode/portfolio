@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getDatabase } from '../data/database';
 import { LoadingOrError } from './Loading';
 import { Heading } from './ui/Heading';
-import { Text } from './ui/Text';
+import { RichText } from './ui/RichText';
 
 const TableCell = ({ data }: { data: PropertyItemObjectResponse }) => {
   if (typeof data === 'string' || typeof data === 'number') {
@@ -16,18 +16,19 @@ const TableCell = ({ data }: { data: PropertyItemObjectResponse }) => {
     return <td>Unsupported data</td>;
   }
   if (data.type === 'rich_text') {
-    const richText = data.rich_text as unknown as Array<RichTextItemResponse>;
+    const richRichText =
+      data.rich_text as unknown as Array<RichTextItemResponse>;
     return (
       <td>
-        <Text textItem={richText[0]} />
+        <RichText text={richRichText[0]} />
       </td>
     );
   }
   if (data.type === 'title') {
-    const titleText = data.title as unknown as Array<RichTextItemResponse>;
+    const titleRichText = data.title as unknown as Array<RichTextItemResponse>;
     return (
       <td>
-        <Text textItem={titleText[0]} />
+        <RichText text={titleRichText[0]} />
       </td>
     );
   }
@@ -58,7 +59,7 @@ export const Database = ({ databaseId }: { databaseId: string }) => {
     <div>
       {data.title && (
         <Heading level={2}>
-          <Text textItem={data.title[0]} />
+          <RichText text={data.title[0]} />
         </Heading>
       )}
       {data.results.length > 0 && (

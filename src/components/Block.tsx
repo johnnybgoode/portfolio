@@ -16,7 +16,7 @@ import {
 import { BlockChildren, BlockItems } from './BlockList';
 import { Database } from './Database';
 import { Heading } from './ui/Heading';
-import { Text } from './ui/Text';
+import { RichText } from './ui/RichText';
 
 type BlockProps = {
   block: NotionBlock;
@@ -102,28 +102,28 @@ export const Block = ({ block }: BlockProps) => {
   }
 
   if (isHeading1Block(block)) {
-    const richText = block.heading_1.rich_text;
+    const richRichText = block.heading_1.rich_text;
     return (
       <Heading level={1}>
-        <Text textItem={richText[0]} />
+        <RichText text={richRichText[0]} />
       </Heading>
     );
   }
 
   if (isHeading2Block(block)) {
-    const richText = block.heading_2.rich_text;
+    const richRichText = block.heading_2.rich_text;
     return (
       <Heading level={2}>
-        <Text textItem={richText[0]} />
+        <RichText text={richRichText[0]} />
       </Heading>
     );
   }
 
   if (isHeading3Block(block)) {
-    const richText = block.heading_3.rich_text;
+    const richRichText = block.heading_3.rich_text;
     return (
       <Heading level={3}>
-        <Text textItem={richText[0]} />
+        <RichText text={richRichText[0]} />
       </Heading>
     );
   }
