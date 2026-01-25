@@ -3,9 +3,8 @@ import { vars } from './theme.css';
 import { space } from './utils';
 
 globalStyle(':root', {
-  fontFamily: vars.font.body,
-  lineHeight: 1.5,
-  fontWeight: 400,
+  fontFamily: vars.typography.font.body,
+  fontWeight: vars.typography.weight[400],
 
   color: vars.color.sand,
   backgroundColor: vars.color.dusk,

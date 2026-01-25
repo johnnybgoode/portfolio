@@ -30,7 +30,7 @@ export const LandingPage = ({ pageId }: LandingPageProps) => {
       <header className={headerClass}>
         <div>
           {page.headline && (
-            <Heading level={1}>
+            <Heading level="title">
               <RichText text={page.headline.rich_text} />
             </Heading>
           )}

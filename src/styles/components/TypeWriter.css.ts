@@ -3,7 +3,7 @@ import { vars } from '../theme.css';
 import { space } from '../utils';
 
 export const TypeWriterClass = style({
-  fontFamily: vars.font.mono,
+  fontFamily: vars.typography.font.mono,
   fontSize: vars.typography.h5.size,
   ...space('margin', '0.25em 0'),
   textAlign: 'left',

@@ -1,17 +1,5 @@
 import { createGlobalTheme } from '@vanilla-extract/css';
 
-const size = {
-  '50': '12px',
-  '100': '14px',
-  '200': '16px', // base
-  '300': '20px',
-  '400': '26px',
-  '500': '32px',
-  '600': '38px',
-  '700': '44px',
-  '800': '50px',
-  '1000': '60px',
-};
 export const vars = createGlobalTheme(':root', {
   color: {
     dusk: '#292522',
@@ -19,11 +7,6 @@ export const vars = createGlobalTheme(':root', {
     foam: '#85B695',
     cyan: '#89B3B6',
     sun: '#EBC06D', // '#E2C28C'
-  },
-  font: {
-    // body: '"Helvetica", sans-serif',
-    body: '"Roboto", sans-serif',
-    mono: '"DM Mono", monospace',
   },
   space: {
     '0': '0px',
@@ -34,21 +17,52 @@ export const vars = createGlobalTheme(':root', {
     '500': '32px',
   },
   typography: {
+    font: {
+      // body: '"Helvetica", sans-serif',
+      body: '"Nunito Sans", sans-serif',
+      heading: '"Montserrat", sans-serif',
+      mono: '"DM Mono", monospace',
+    },
+    size: {
+      '50': '12px',
+      '100': '14px',
+      '200': '16px', // base
+      '300': '20px',
+    },
+    weight: {
+      '300': '300',
+      '400': '400',
+      '500': '500',
+    },
+    title: {
+      size: '70px',
+      weight: '600',
+      lineHeight: '1.2em',
+    },
     h1: {
-      size: size[800],
+      size: '48px',
+      weight: '500',
+      lineHeight: '1.1em',
     },
     h2: {
-      size: size[700],
+      size: '32px',
+      weight: '500',
+      lineHeight: '1.1em',
     },
     h3: {
-      size: size[600],
+      size: '24px',
+      weight: '500',
+      lineHeight: '1.1em',
     },
     h4: {
-      size: size[500],
+      size: '20px',
+      weight: '500',
+      lineHeight: '1.1em',
     },
     h5: {
-      size: size[400],
+      size: '18px',
+      weight: '500',
+      lineHeight: '1.1em',
     },
-    size,
   },
 });
