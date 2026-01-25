@@ -1,3 +1,4 @@
+import { srOnlyClass } from '../../styles/common.css';
 import { icons } from '../../styles/icons.css';
 import {
   type ColorProps,
@@ -20,5 +21,9 @@ type IconProps = {
   Omit<BoxProps<'i'>, keyof Sprinkles>;
 
 export const Icon = ({ name, size, ...rest }: IconProps) => {
-  return <Box as="i" className={icons[name]} fontSize={size} {...rest} />;
+  return (
+    <Box as="i" className={icons[name]} fontSize={size} {...rest}>
+      <span className={srOnlyClass}>{`${name}-icon`}</span>
+    </Box>
+  );
 };
