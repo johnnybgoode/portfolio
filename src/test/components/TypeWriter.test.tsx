@@ -1,6 +1,6 @@
 import { act, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { TypeWriter } from '../../components/TypeWriter';
+import { TypeWriter } from '../../components/ui/TypeWriter';
 import { render } from '../utils/render';
 
 describe('TypeWriter', () => {
