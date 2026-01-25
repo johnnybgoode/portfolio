@@ -1,3 +1,27 @@
+import {
+  type NarrowProperties,
+  type PagePropertyValue,
+} from '../../../data/properties';
+
+type PropertyValue<
+  K extends PagePropertyValue['type'],
+  P extends NarrowProperties<PagePropertyValue, K>,
+> = K extends keyof P ? Pick<P, K> & Partial<P> : never;
+
+export const makeProperty = <
+  K extends PagePropertyValue['type'],
+  P extends NarrowProperties<PagePropertyValue, K>,
+>(
+  type: K,
+  value: PropertyValue<K, P>,
+  label?: string,
+) => ({
+  ...value,
+  label: label || type,
+  id: 'foo',
+  type,
+});
+
 export const makeRichText = (text: string) =>
   ({
     type: 'text',

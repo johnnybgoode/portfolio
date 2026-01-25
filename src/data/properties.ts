@@ -14,6 +14,12 @@ export type PagePropertyValueWithLabel<T extends PagePropertyValue> = T & {
   label: string;
 };
 
+export type NarrowProperties<T extends PagePropertyValue, K> = T extends {
+  type: K;
+}
+  ? T
+  : never;
+
 export const isRichTextProperty = (
   property: PagePropertyValue,
 ): property is RichTextPropertyValue => {
