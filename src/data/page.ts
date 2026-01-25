@@ -9,6 +9,7 @@ import type {
   PagePropertyValueWithLabel,
   RelationPropertyValue,
   RichTextPropertyValue,
+  TitlePropertyValue,
 } from './properties';
 
 export type PageData = {
@@ -26,9 +27,22 @@ type ResumeProperties = {
   skills: MultiSelectPropertyItemObjectResponse;
   experience: RelationPropertyValue;
 };
+
 export type ResumePageData = Partial<{
   [K in keyof ResumeProperties]: PagePropertyValueWithLabel<
     ResumeProperties[K]
+  >;
+}>;
+
+type ExperienceProperties = {
+  name: TitlePropertyValue;
+  start: RichTextPropertyValue;
+  end: RichTextPropertyValue;
+  position: RichTextPropertyValue;
+};
+export type ExperiencePageData = Partial<{
+  [K in keyof ExperienceProperties]: PagePropertyValueWithLabel<
+    ExperienceProperties[K]
   >;
 }>;
 

@@ -8,6 +8,7 @@ export type PageProperties = PageObjectResponse['properties'];
 export type PagePropertyValue = PageProperties[string];
 export type RelationPropertyValue = PagePropertyValue & { type: 'relation' };
 export type RichTextPropertyValue = PagePropertyValue & { type: 'rich_text' };
+export type TitlePropertyValue = PagePropertyValue & { type: 'title' };
 
 export type PagePropertyValueWithLabel<T extends PagePropertyValue> = T & {
   label: string;
