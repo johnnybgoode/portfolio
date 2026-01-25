@@ -34,7 +34,28 @@ export default async function GET(req: VercelRequest, res: VercelResponse) {
   }
   try {
     const pageData = await fetchPageData(pageId);
-    res.status(200).json(pageData.properties);
+    const properties = Object.fromEntries(
+      Object.entries(pageData.properties).map(([label, value]) => {
+        const fieldKey = label
+          .toLowerCase()
+          .replace(/[^a-z0-9]/, ' ')
+          .replace(/\s+/, '_')
+          .split('_')
+          .map((w, i) =>
+            i > 0 ? `${w.charAt(0).toUpperCase()}${w.substring(1)}` : w,
+          )
+          .join('');
+
+        return [
+          fieldKey,
+          {
+            label,
+            ...value,
+          },
+        ];
+      }),
+    );
+    res.status(200).json(properties);
   } catch (error: unknown) {
     console.error(error);
     if (

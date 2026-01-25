@@ -29,14 +29,14 @@ export const LandingPage = ({ pageId }: LandingPageProps) => {
     <>
       <header className={headerClass}>
         <div>
-          {page.Headline && (
+          {page.headline && (
             <Heading level={1}>
-              <RichText text={page.Headline.rich_text[0]} />
+              <RichText text={page.headline.rich_text} />
             </Heading>
           )}
-          {page.Taglines && (
+          {page.taglines && (
             <TypeWriter
-              textItems={page.Taglines.multi_select.map(item => item.name)}
+              textItems={page.taglines.multi_select.map(item => item.name)}
               typingDelay={1400}
               typingSpeed={125}
             />

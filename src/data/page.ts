@@ -1,28 +1,40 @@
 import type {
   EmailPropertyItemObjectResponse,
   MultiSelectPropertyItemObjectResponse,
-  PageObjectResponse,
   PhoneNumberPropertyItemObjectResponse,
   UrlPropertyItemObjectResponse,
 } from '@notionhq/client';
-import type { PagePropertyValue, RichTextPropertyValue } from './properties';
+import type {
+  PageProperties,
+  PagePropertyValueWithLabel,
+  RelationPropertyValue,
+  RichTextPropertyValue,
+} from './properties';
 
-export type PageData = PageObjectResponse['properties'];
+export type PageData = {
+  [K in keyof PageProperties]: PagePropertyValueWithLabel<PageProperties[K]>;
+};
 
+type ResumeProperties = {
+  title: RichTextPropertyValue;
+  email: EmailPropertyItemObjectResponse;
+  phone: PhoneNumberPropertyItemObjectResponse;
+  linkedin: UrlPropertyItemObjectResponse;
+  github: UrlPropertyItemObjectResponse;
+  website: UrlPropertyItemObjectResponse;
+  professionalSummary: RichTextPropertyValue;
+  skills: MultiSelectPropertyItemObjectResponse;
+  experience: RelationPropertyValue;
+};
 export type ResumePageData = Partial<{
-  Title: RichTextPropertyValue;
-  Email: EmailPropertyItemObjectResponse;
-  Phone: PhoneNumberPropertyItemObjectResponse;
-  Linkedin: UrlPropertyItemObjectResponse;
-  Github: UrlPropertyItemObjectResponse;
-  Website: RichTextPropertyValue;
-  Summary: RichTextPropertyValue;
-  Skills: MultiSelectPropertyItemObjectResponse;
+  [K in keyof ResumeProperties]: PagePropertyValueWithLabel<
+    ResumeProperties[K]
+  >;
 }>;
 
 export type LandingPageData = Partial<{
-  Headline: PagePropertyValue & { type: 'rich_text' };
-  Taglines: MultiSelectPropertyItemObjectResponse;
+  headline: PagePropertyValueWithLabel<RichTextPropertyValue>;
+  taglines: PagePropertyValueWithLabel<MultiSelectPropertyItemObjectResponse>;
 }>;
 
 export const getPage = async <T extends PageData>(pageId: string) => {

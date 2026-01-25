@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { getResumePage } from '../data/page';
 import { LoadingOrError } from './Loading';
-import { Masthead } from './Masthead';
-import { Page } from './Page';
+import { Box } from './ui/Box';
+import { Flex } from './ui/Flex';
 import { Heading } from './ui/Heading';
 import { Icon } from './ui/Icon';
 import { RichText } from './ui/RichText';
@@ -27,14 +27,16 @@ export const Resume = ({ pageId }: ResumeProps) => {
 
   return (
     <>
-      <Masthead>
-          {page.Title && (
+      <Flex alignItems="flex-start" gap="300">
+        <Box width="70">
+          {page.title && (
             <Heading level={1}>
-              <RichText text={page.Title.rich_text} />
+              <RichText text={page.title.rich_text} />
             </Heading>
           )}
-      </Masthead>
-      <Page displayTitle={false} pageId={pageId} />
+        </Box>
+      </Flex>
+      <hr />
     </>
   );
 };

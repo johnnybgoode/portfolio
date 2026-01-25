@@ -39,7 +39,7 @@ export const Page = ({ pageId, displayTitle = true }: PageProps) => {
 
   return (
     <>
-      {displayTitle && page.title.type === 'title' && (
+      {displayTitle && page.title?.type === 'title' && (
         <Heading level={1}>
           {page.title.title.map(textItem => (
             <RichText key={textItem.plain_text} text={textItem} />
