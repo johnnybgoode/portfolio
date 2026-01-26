@@ -9,7 +9,7 @@ import type {
 } from '../../styles/sprinkles.css';
 import { Box, type BoxElementWithStyles } from './Box';
 
-type IconProps = {
+export type IconProps = {
   name: keyof typeof icons;
   size?: Sprinkles['fontSize'];
 } & BoxElementWithStyles<'i', ColorProps | SizeProps | SpaceProps | TypeProps>;
