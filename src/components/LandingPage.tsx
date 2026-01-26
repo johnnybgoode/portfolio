@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getLandingPage } from '../data/page';
-import { headerClass, landingPageClass } from '../styles/components/LandingPage.css';
+import { headerClass, landingPageClass } from '../styles/pages/LandingPage.css';
 import { LoadingOrError } from './Loading';
 import { Page } from './Page';
 import { Heading } from './ui/Heading';
