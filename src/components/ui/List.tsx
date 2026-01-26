@@ -1,17 +1,13 @@
 import type { ReactNode } from 'react';
-import {
-  type ListProps as ListStyleProps,
-  type Sprinkles,
-} from '../../styles/sprinkles.css';
-import { Box, type BoxProps } from './Box';
+import type { ListProps as ListStyleProps } from '../../styles/sprinkles.css';
+import { Box, type BoxElementWithStyles } from './Box';
 
 type ListProps = {
   items?: ReactNode[];
   type?: 'bulleted' | 'numbered';
-} & Pick<Sprinkles, ListStyleProps> &
-  Omit<BoxProps<'ul' | 'ol'>, keyof Sprinkles>;
+} & BoxElementWithStyles<'ul' | 'ol', ListStyleProps>;
 
-export const List = ({ items, type }: ListProps) => {
+export const List = ({ as: _as, items, type }: ListProps) => {
   if (!items) {
     return null;
   }

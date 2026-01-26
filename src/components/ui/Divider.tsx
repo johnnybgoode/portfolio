@@ -1,15 +1,10 @@
 import { DividerClasses } from '../../styles/components/Divider.css';
-import type {
-  BorderProps,
-  SpaceProps,
-  Sprinkles,
-} from '../../styles/sprinkles.css';
-import { Box, type BoxProps } from './Box';
+import type { BorderProps, SpaceProps } from '../../styles/sprinkles.css';
+import { Box, type BoxElementWithStyles } from './Box';
 
-type DividerProps = Omit<BoxProps<'div'>, keyof Sprinkles> &
-  Pick<Sprinkles, BorderProps | SpaceProps> & {
-    direction?: keyof typeof DividerClasses;
-  };
+type DividerProps = BoxElementWithStyles<'div', BorderProps | SpaceProps> & {
+  direction?: keyof typeof DividerClasses;
+};
 
 export const Divider = ({
   as: __as,

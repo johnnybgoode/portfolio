@@ -34,7 +34,7 @@ export const Resume = ({ pageId }: ResumeProps) => {
       <Flex alignItems="flex-start" gap="300">
         <Box width="70">
           {page.title && (
-            <Heading level={1}>
+            <Heading level={1} width="40">
               <RichText text={page.title.rich_text} />
             </Heading>
           )}
@@ -77,7 +77,12 @@ export const Resume = ({ pageId }: ResumeProps) => {
             <Experience key={relation.id} pageId={relation.id} />
           ))}
         </Box>
-        <Divider borderWidth="50" direction="vertical" marginX="400" marginY="200" />
+        <Divider
+          borderWidth="50"
+          direction="vertical"
+          marginX="400"
+          marginY="200"
+        />
         <Box flexGrow={1} width="30">
           <Heading level={3}>{page.skills?.label}</Heading>
           <List items={page.skills?.multi_select.map(item => item.name)} />

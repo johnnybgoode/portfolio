@@ -12,6 +12,11 @@ export type BoxProps<C extends ElementType> = {
 } & Sprinkles &
   ComponentPropsWithoutRef<C>;
 
+export type BoxElementWithStyles<
+  T extends ElementType,
+  S extends keyof Sprinkles,
+> = Omit<BoxProps<T>, keyof Sprinkles> & Pick<Sprinkles, S>;
+
 export const Box = <C extends ElementType>(props: BoxProps<C>) => {
   const { as: Component = 'div', className, ...rest } = props;
   const sprinkleKeys = Array.from(sprinkles.properties.keys());
