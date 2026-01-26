@@ -2,6 +2,7 @@ import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles';
 import { keyOf } from '../utils';
 import { vars } from './theme.css';
 
+export type BorderProps = typeof borderProps;
 export type ColorProps = typeof colorProps;
 export type DisplayProps = typeof displayProps;
 export type FlexProps = typeof flexProps;
@@ -11,6 +12,23 @@ export type SizeProps = typeof sizeProps;
 export type TypeProps = typeof typeProps;
 
 export type Sprinkles = Parameters<typeof sprinkles>[0];
+
+const borderProperties = defineProperties({
+  properties: {
+    borderBottomWidth: {
+      '0': '0',
+      '50': '0.5px',
+      '100': '1px',
+      '200': '2px',
+      '300': '3px',
+    },
+    borderStyle: ['solid', 'dashed'],
+  },
+  shorthands: {
+    borderWidth: ['borderBottomWidth'],
+  },
+});
+export const borderProps = keyOf(borderProperties.styles);
 
 const colorProperties = defineProperties({
   properties: {
@@ -30,6 +48,8 @@ const flexProperties = defineProperties({
   properties: {
     alignItems: ['stretch', 'flex-start', 'center', 'flex-end'],
     flexDirection: ['row', 'column'],
+    flexGrow: [0, 1],
+    flexShrink: [0, 1],
     gap: {
       '0': 0,
       '100': 4,
@@ -82,8 +102,8 @@ const spaceProperties = defineProperties({
       'marginInlineStart',
       'marginInlineEnd',
     ],
-    marginX: ['marginBlockStart', 'marginBlockEnd'],
-    mariginY: ['marginInlineStart', 'marginInlineEnd'],
+    marginX: ['marginInlineStart', 'marginInlineEnd'],
+    marginY: ['marginBlockStart', 'marginBlockEnd'],
   },
 });
 export const spaceProps = keyOf(spaceProperties.styles);
@@ -114,6 +134,7 @@ const typeProperties = defineProperties({
 export const typeProps = keyOf(typeProperties.styles);
 
 export const sprinkles = createSprinkles(
+  borderProperties,
   displayProperties,
   colorProperties,
   flexProperties,
