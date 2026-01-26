@@ -13,6 +13,7 @@ export const AppClass = style({
 
 globalStyle(':root', {
   fontFamily: vars.typography.font.body,
+  fontSize: vars.typography.size[100],
   fontWeight: vars.typography.weight[400],
 
   color: vars.color.sand,

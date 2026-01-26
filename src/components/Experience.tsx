@@ -1,6 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { getBlockData } from '../data/block';
-import { type ExperiencePageData, getPage } from '../data/page';
+import {
+  type ExperiencePageData,
+  getPage,
+  type ResumePageData,
+} from '../data/page';
+import { ExperienceClass } from '../styles/components/Experience.css';
 import { BlockItems } from './BlockList';
 import { LoadingOrError } from './Loading';
 import { Box } from './ui/Box';
@@ -8,11 +13,11 @@ import { Flex } from './ui/Flex';
 import { Heading } from './ui/Heading';
 import { RichText } from './ui/RichText';
 
-type PageProps = {
+type ExperienceaItemProps = {
   pageId: string;
 };
 
-export const Experience = ({ pageId }: PageProps) => {
+const ExperienceItem = ({ pageId }: ExperienceaItemProps) => {
   const {
     data: page,
     isLoading: pageLoading,
@@ -39,23 +44,45 @@ export const Experience = ({ pageId }: PageProps) => {
   }
 
   return (
-    <>
-      <Box>
-        <Heading level={4}>
-          <RichText text={page.name?.title} />
-        </Heading>
-      </Box>
+    <Flex className={ExperienceClass} flexDirection="column" gap="100">
+      <Heading level={4} marginY="200">
+        <RichText text={page.name?.title} />
+      </Heading>
       <Flex justifyContent="space-between">
         <Box>
           <RichText text={page.position?.rich_text} />
-        </Box>{' '}
+        </Box>
         <Box>
           <RichText text={page.start?.rich_text} />
           &mdash;
           <RichText text={page.end?.rich_text} />
         </Box>
       </Flex>
-      {blockData && <BlockItems blocks={blockData.blocks} />}
-    </>
+      <Box>{blockData && <BlockItems blocks={blockData.blocks} />}</Box>
+    </Flex>
+  );
+};
+
+type ExperienceProps = {
+  experience: ResumePageData['experience'];
+};
+
+export const Experience = ({ experience }: ExperienceProps) => {
+  if (!experience || !experience.relation) {
+    return;
+  }
+  const { label, relation } = experience;
+
+  return (
+    <Box>
+      <Heading level={3}>{label}</Heading>
+      <Flex alignItems="stretch">
+        <Box padding="200">
+          {relation?.map(relationItem => (
+            <ExperienceItem key={relationItem.id} pageId={relationItem.id} />
+          ))}
+        </Box>
+      </Flex>
+    </Box>
   );
 };

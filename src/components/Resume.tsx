@@ -31,51 +31,48 @@ export const Resume = ({ pageId }: ResumeProps) => {
 
   return (
     <div style={{ maxWidth: '1024px' }}>
-      <Flex alignItems="center" gap="300" justifyContent="space-between">
+      <Flex
+        alignItems="center"
+        gap="300"
+        justifyContent="space-between"
+        paddingY="300"
+      >
         <Box width="70">
           {page.title && (
-            <Heading level={1} width="40">
+            <Heading level={1} style={{ minWidth: '230px' }} width="40">
               <RichText text={page.title.rich_text} />
             </Heading>
           )}
         </Box>
 
-        <TextBox as="div" fontSize="100">
+        <Box>
           <IconLabel iconName="mail" label={page.email?.email} />
           <IconLabel iconName="phone" label={page.phone?.phone_number} />
           <IconLabel iconName="linkedin" label={page.linkedin?.url} />
           <IconLabel iconName="github" label={page.github?.url} />
           <IconLabel iconName="link" label={page.website?.url} />
-        </TextBox>
+        </Box>
       </Flex>
 
-      <Divider borderWidth="50" marginY="400" />
+      <Divider marginY="300" width="50" />
 
-      <Box>
+      <Box padding="300">
         <Heading level={3}>{page.professionalSummary?.label}</Heading>
         <Box as="aside" paddingX="400" paddingY="300">
-          <RichText text={page.professionalSummary?.rich_text} />
+          <TextBox as="aside" fontSize="200">
+            <RichText text={page.professionalSummary?.rich_text} />
+          </TextBox>
         </Box>
       </Box>
 
-      <Divider borderWidth="50" marginY="400" />
+      <Divider marginY="400" width="50" />
 
-      <Flex alignItems="stretch">
-        <Box>
-          <Heading level={3}>{page.experience?.label}</Heading>
-          {page.experience?.relation?.map(relation => (
-            <Experience key={relation.id} pageId={relation.id} />
-          ))}
-        </Box>
+      <Flex alignItems="stretch" paddingY="300">
+        <Experience experience={page.experience} />
 
-        <Divider
-          borderWidth="50"
-          direction="vertical"
-          marginX="400"
-          marginY="200"
-        />
+        <Divider direction="vertical" marginX="400" marginY="200" width="50" />
 
-        <Box flexGrow={1} width="30">
+        <Box flexGrow={1} width="40">
           <Heading level={3}>{page.skills?.label}</Heading>
           <List items={page.skills?.multi_select.map(item => item.name)} />
         </Box>
