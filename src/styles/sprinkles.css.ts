@@ -13,19 +13,21 @@ export type TypeProps = typeof typeProps;
 
 export type Sprinkles = Parameters<typeof sprinkles>[0];
 
+const borderWidth = {
+  '0': '0',
+  '50': '0.5px',
+  '100': '1px',
+  '200': '2px',
+  '300': '3px',
+};
 const borderProperties = defineProperties({
   properties: {
-    borderBottomWidth: {
-      '0': '0',
-      '50': '0.5px',
-      '100': '1px',
-      '200': '2px',
-      '300': '3px',
-    },
+    borderBottomWidth: borderWidth,
+    borderLeftWidth: borderWidth,
     borderStyle: ['solid', 'dashed'],
   },
   shorthands: {
-    borderWidth: ['borderBottomWidth'],
+    borderWidth: ['borderBottomWidth', 'borderLeftWidth'],
   },
 });
 export const borderProps = keyOf(borderProperties.styles);

@@ -1,25 +1,38 @@
 import { DividerClasses } from '../../styles/components/Divider.css';
-import type { BorderProps, SpaceProps } from '../../styles/sprinkles.css';
+import type {
+  BorderProps,
+  SpaceProps,
+  Sprinkles,
+} from '../../styles/sprinkles.css';
 import { Box, type BoxElementWithStyles } from './Box';
 
 type DividerProps = BoxElementWithStyles<'div', BorderProps | SpaceProps> & {
   direction?: keyof typeof DividerClasses;
+  width?: Sprinkles['borderWidth'];
 };
 
 export const Divider = ({
   as: __as,
-  borderWidth,
   direction,
+  width,
   ...rest
 }: DividerProps) => {
-  const borderBottomWidth = borderWidth || '50';
+  const borderWidth = width || '50';
   const borderDirection = direction || 'horizontal';
+  const borderStyles =
+    borderDirection === 'horizontal'
+      ? {
+          borderBottomWidth: borderWidth,
+        }
+      : {
+          borderLeftWidth: borderWidth,
+        };
 
   return (
     <Box
       as="div"
-      borderBottomWidth={borderBottomWidth}
       className={DividerClasses[borderDirection]}
+      {...borderStyles}
       {...rest}
     >
       &nbsp;

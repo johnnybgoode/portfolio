@@ -1,16 +1,14 @@
 import { style, styleVariants } from '@vanilla-extract/css';
 
 const base = style({
-  borderWidth: '0px',
-  borderStyle: 'solid',
-  opacity: '0.6',
+  opacity: '0.5',
 });
 
 export const DividerClasses = styleVariants({
   horizontal: [
     base,
     {
-      borderBottomWidth: '1px',
+      borderBottomStyle: 'solid',
       display: 'block',
       height: 0,
       width: '100%',
@@ -19,7 +17,7 @@ export const DividerClasses = styleVariants({
   vertical: [
     base,
     {
-      borderLeftWidth: '1px',
+      borderLeftStyle: 'solid',
       display: 'inline-block',
       minHeight: '1em',
       width: '1px',
