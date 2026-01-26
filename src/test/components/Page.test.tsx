@@ -11,7 +11,10 @@ describe('Page', () => {
   it('renders page properties', async () => {
     server.use(
       makeGetPageHandler({
-        title: makeProperty('title', { title: [makeRichText('Catchy title')] }),
+        title: makeProperty({
+          type: 'title',
+          value: { title: [makeRichText('Catchy title')] },
+        }),
       }),
       makeGetBlocksHandler([]),
     );
@@ -23,7 +26,10 @@ describe('Page', () => {
   it('renders page blocks', async () => {
     server.use(
       makeGetPageHandler({
-        title: makeProperty('title', { title: [makeRichText('Catchy title')] }),
+        title: makeProperty({
+          type: 'title',
+          value: { title: [makeRichText('Catchy title')] },
+        }),
       }),
       makeGetBlocksHandler([
         makeContentBlock('paragraph', 'cool content'),

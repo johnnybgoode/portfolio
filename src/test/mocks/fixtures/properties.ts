@@ -11,11 +11,15 @@ type PropertyValue<
 export const makeProperty = <
   K extends PagePropertyValue['type'],
   P extends NarrowProperties<PagePropertyValue, K>,
->(
-  type: K,
-  value: PropertyValue<K, P>,
-  label?: string,
-) => ({
+>({
+  type,
+  value,
+  label,
+}: {
+  type: K;
+  value: PropertyValue<K, P>;
+  label?: string;
+}) => ({
   ...value,
   label: label || type,
   id: 'foo',

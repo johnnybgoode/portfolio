@@ -48,3 +48,28 @@ export const makeGetNestedBlocksHandler = () => {
   };
   return [getBlocksHandler, registerBlocks] as const;
 };
+
+export const makeGetRelatedPagesHandler = () => {
+  const responses = {} as Record<string, PageData>;
+
+  const getPagesHandler = http.get<{ id: string }>(
+    '/api/page/:id',
+    ({ params }) => {
+      if (responses[params.id]) {
+        return HttpResponse.json(responses[params.id]);
+      }
+      return HttpResponse.error();
+    },
+  );
+  const registerResponse = ({
+    pageId,
+    pageData,
+  }: {
+    pageId: string;
+    pageData: PageData;
+  }) => {
+    responses[pageId] = pageData;
+  };
+
+  return [getPagesHandler, registerResponse] as const;
+};
