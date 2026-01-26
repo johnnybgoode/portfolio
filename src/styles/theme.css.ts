@@ -13,6 +13,7 @@ export const vars = createGlobalTheme(':root', {
     '100': '2px',
     '200': '4px',
     '300': '8px',
+    '350': '12px',
     '400': '16px',
     '500': '24px',
     '600': '32px',
@@ -58,12 +59,12 @@ export const vars = createGlobalTheme(':root', {
       lineHeight: '1.1em',
     },
     h4: {
-      size: '20px',
+      size: '18px',
       weight: '500',
       lineHeight: '1.1em',
     },
     h5: {
-      size: '18px',
+      size: '16px',
       weight: '500',
       lineHeight: '1.1em',
     },

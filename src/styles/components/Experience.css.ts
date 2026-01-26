@@ -2,7 +2,7 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '../theme.css';
 
 export const ExperienceClass = style({
-  paddingInline: vars.space[400],
+  paddingInlineStart: vars.space[400],
   paddingBlockEnd: vars.space[400],
   position: 'relative',
   selectors: {

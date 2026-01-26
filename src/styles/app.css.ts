@@ -13,18 +13,18 @@ export const AppClass = style({
 globalStyle(':root', {
   fontFamily: vars.typography.font.body,
   fontSize: vars.typography.size[100],
-  fontWeight: vars.typography.weight[400],
+  fontWeight: vars.typography.weight[300],
 
   color: vars.color.sand,
   backgroundColor: vars.color.dusk,
 });
 
 globalStyle('a', {
-  fontWeight: 500,
+  fontWeight: vars.typography.weight[400],
   textDecoration: 'inherit',
-  color: vars.color.foam,
+  color: vars.color.sand,
 });
 
 globalStyle('a:hover', {
-  textDecoration: 'underline',
+  color: vars.color.foam,
 });

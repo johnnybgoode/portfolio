@@ -49,6 +49,7 @@ export const displayProps = keyOf(displayProperties.styles);
 const flexProperties = defineProperties({
   properties: {
     alignItems: ['stretch', 'flex-start', 'center', 'flex-end'],
+    alignSelf: ['flex-start', 'center', 'flex-end'],
     flexDirection: ['row', 'column'],
     flexGrow: [0, 1],
     flexShrink: [0, 1],
@@ -66,6 +67,7 @@ const flexProperties = defineProperties({
       'space-around',
       'space-between',
     ],
+    justifySelf: ['flex-stretch', 'center', 'flex-end'],
   },
 });
 export const flexProps = keyOf(flexProperties.styles);
@@ -131,6 +133,7 @@ export const sizeProps = keyOf(sizeProperties.styles);
 const typeProperties = defineProperties({
   properties: {
     fontSize: vars.typography.size,
+    fontWeight: vars.typography.weight,
   },
 });
 export const typeProps = keyOf(typeProperties.styles);

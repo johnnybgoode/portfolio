@@ -23,7 +23,7 @@ const h2Class = style({
   fontSize: vars.typography.h2.size,
   fontWeight: vars.typography.h2.weight,
   lineHeight: vars.typography.h2.lineHeight,
-  ...space('margin', '0.4em 0'),
+  ...space('margin', '0.5em 0'),
 });
 
 const h3Class = style({
@@ -31,7 +31,7 @@ const h3Class = style({
   fontSize: vars.typography.h3.size,
   fontWeight: vars.typography.h3.weight,
   lineHeight: vars.typography.h3.lineHeight,
-  ...space('margin', '0.3em 0'),
+  ...space('margin', '0.5em 0'),
 });
 
 const h4Class = style({
@@ -39,7 +39,7 @@ const h4Class = style({
   fontSize: vars.typography.h4.size,
   fontWeight: vars.typography.h4.weight,
   lineHeight: vars.typography.h4.lineHeight,
-  ...space('margin', '0.2em 0'),
+  ...space('margin', '0.5em 0'),
 });
 
 const h5Class = style({
@@ -47,7 +47,7 @@ const h5Class = style({
   fontSize: vars.typography.h5.size,
   fontWeight: vars.typography.h5.weight,
   lineHeight: vars.typography.h5.lineHeight,
-  ...space('margin', '0.1em 0'),
+  ...space('margin', '0.5em 0'),
 });
 
 export const headingClasses = {

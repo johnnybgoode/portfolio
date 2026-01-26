@@ -1,6 +1,7 @@
 import { style, styleVariants } from '@vanilla-extract/css';
 
 const base = style({
+  flexShrink: 1,
   opacity: '0.5',
 });
 

@@ -12,6 +12,7 @@ import { Box } from './ui/Box';
 import { Flex } from './ui/Flex';
 import { Heading } from './ui/Heading';
 import { RichText } from './ui/RichText';
+import { TextBox } from './ui/TextBox';
 
 type ExperienceaItemProps = {
   pageId: string;
@@ -45,19 +46,25 @@ const ExperienceItem = ({ pageId }: ExperienceaItemProps) => {
 
   return (
     <Flex className={ExperienceClass} flexDirection="column" gap="100">
-      <Heading level={4} marginY="200">
-        <RichText text={page.name?.title} />
-      </Heading>
-      <Flex justifyContent="space-between">
-        <Box>
-          <RichText text={page.position?.rich_text} />
-        </Box>
+      <Flex
+        alignItems="center"
+        justifyContent="space-between"
+        paddingInlineEnd="400"
+      >
+        <Heading level={4} marginY="200">
+          <RichText text={page.name?.title} />
+        </Heading>
         <Box>
           <RichText text={page.start?.rich_text} />
           &mdash;
           <RichText text={page.end?.rich_text} />
         </Box>
       </Flex>
+      <Box>
+        <TextBox fontWeight="500">
+          <RichText text={page.position?.rich_text} />
+        </TextBox>
+      </Box>
       <Box>{blockData && <BlockItems blocks={blockData.blocks} />}</Box>
     </Flex>
   );
@@ -77,7 +84,7 @@ export const Experience = ({ experience }: ExperienceProps) => {
     <Box>
       <Heading level={3}>{label}</Heading>
       <Flex alignItems="stretch">
-        <Box padding="200">
+        <Box paddingInlineEnd="300" paddingInlineStart="400" paddingY="200">
           {relation?.map(relationItem => (
             <ExperienceItem key={relationItem.id} pageId={relationItem.id} />
           ))}
