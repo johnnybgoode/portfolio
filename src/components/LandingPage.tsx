@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getLandingPage } from '../data/page';
-import { headerClass } from '../styles/components/LandingPage.css';
+import { headerClass, landingPageClass } from '../styles/components/LandingPage.css';
 import { LoadingOrError } from './Loading';
 import { Page } from './Page';
 import { Heading } from './ui/Heading';
@@ -26,7 +26,7 @@ export const LandingPage = ({ pageId }: LandingPageProps) => {
   }
 
   return (
-    <>
+    <div className={landingPageClass}>
       <header className={headerClass}>
         <div>
           {page.headline && (
@@ -44,6 +44,6 @@ export const LandingPage = ({ pageId }: LandingPageProps) => {
         </div>
       </header>
       <Page displayTitle={false} pageId={pageId} />
-    </>
+    </div>
   );
 };

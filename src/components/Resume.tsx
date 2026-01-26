@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getPage, type ResumePageData } from '../data/page';
+import { ResumeClass } from '../styles/pages/Resume.css';
 import { Experience } from './Experience';
 import { LoadingOrError } from './Loading';
 import { Box } from './ui/Box';
@@ -30,7 +31,7 @@ export const Resume = ({ pageId }: ResumeProps) => {
   }
 
   return (
-    <div style={{ maxWidth: '1024px' }}>
+    <div className={ResumeClass}>
       <Flex
         alignItems="center"
         gap="300"

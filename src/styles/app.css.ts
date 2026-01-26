@@ -1,13 +1,12 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { vars } from './theme.css';
-import { space } from './utils';
 
 export const AppClass = style({
-  display: 'flex',
   placeItems: 'center',
   minWidth: '320px',
   minHeight: '100vh',
-  margin: 0,
+  maxWidth: '1280px',
+  margin: '0 auto',
   width: '100%',
 });
 
@@ -18,13 +17,6 @@ globalStyle(':root', {
 
   color: vars.color.sand,
   backgroundColor: vars.color.dusk,
-});
-
-globalStyle('#root', {
-  ...space('padding', '2rem'),
-  ...space('margin', '0 auto'),
-  maxWidth: '1280px',
-  width: '100%',
 });
 
 globalStyle('a', {

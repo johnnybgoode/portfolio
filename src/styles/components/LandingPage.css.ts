@@ -6,3 +6,9 @@ export const headerClass = style({
   justifyContent: 'center',
   flexDirection: 'column',
 });
+
+export const landingPageClass = style({
+  display: 'flex',
+  height: '100vh',
+  placeItems: 'center',
+});

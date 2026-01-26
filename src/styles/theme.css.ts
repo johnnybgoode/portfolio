@@ -14,7 +14,10 @@ export const vars = createGlobalTheme(':root', {
     '200': '4px',
     '300': '8px',
     '400': '16px',
-    '500': '32px',
+    '500': '24px',
+    '600': '32px',
+    '700': '40px',
+    '800': '48px',
   },
   typography: {
     font: {
