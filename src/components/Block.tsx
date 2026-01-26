@@ -15,8 +15,12 @@ import {
 } from '../data/block';
 import { BlockChildren, BlockItems } from './BlockList';
 import { Database } from './Database';
+import { Divider } from './ui/Divider';
+import { Flex } from './ui/Flex';
 import { Heading } from './ui/Heading';
+import { List } from './ui/List';
 import { RichText } from './ui/RichText';
+import { TextBox } from './ui/TextBox';
 
 type BlockProps = {
   block: NotionBlock;
@@ -35,7 +39,7 @@ export const Block = ({ block }: BlockProps) => {
   const children = getChildren(block);
 
   if (isColumnListBlock(block)) {
-    return <div style={{ display: 'flex', gap: '16px' }}>{children}</div>;
+    return <Flex gap="300">{children}</Flex>;
   }
 
   if (isColumnBlock(block)) {
@@ -49,10 +53,10 @@ export const Block = ({ block }: BlockProps) => {
       .map(textItem => textItem.plain_text)
       .join('');
     return (
-      <p>
+      <TextBox as="p">
         {text}
         {children}
-      </p>
+      </TextBox>
     );
   }
 
@@ -61,10 +65,10 @@ export const Block = ({ block }: BlockProps) => {
       .map(textItem => textItem.plain_text)
       .join('');
     return (
-      <aside>
+      <TextBox as="aside">
         {text}
         {children}
-      </aside>
+      </TextBox>
     );
   }
 
@@ -81,11 +85,11 @@ export const Block = ({ block }: BlockProps) => {
   }
 
   if (isListBlock(block)) {
-    const ListWrapper = block.type === 'bulleted_list' ? 'ul' : 'ol';
+    const listType = block.type === 'bulleted_list' ? 'bulleted' : 'numbered';
     return (
-      <ListWrapper>
+      <List type={listType}>
         <BlockItems blocks={block.children} />
-      </ListWrapper>
+      </List>
     );
   }
 
@@ -133,7 +137,7 @@ export const Block = ({ block }: BlockProps) => {
   }
 
   if (isDividerBlock(block)) {
-    return <hr />;
+    return <Divider />;
   }
 
   return null;

@@ -1,7 +1,7 @@
 import type { ColorProps, TypeProps } from '../../styles/sprinkles.css';
 import { Box, type BoxElementWithStyles } from './Box';
 
-type AllowedTags = 'div' | 'p' | 'span';
+type AllowedTags = 'aside' | 'div' | 'p' | 'span';
 type TextProps<T extends AllowedTags> = BoxElementWithStyles<
   T,
   ColorProps | TypeProps

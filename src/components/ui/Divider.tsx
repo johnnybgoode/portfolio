@@ -12,7 +12,7 @@ export const Divider = ({
   direction,
   ...rest
 }: DividerProps) => {
-  const borderBottomWidth = borderWidth || '100';
+  const borderBottomWidth = borderWidth || '50';
   const borderDirection = direction || 'horizontal';
 
   return (
