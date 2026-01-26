@@ -3,13 +3,18 @@ import { getBlockData, type NotionBlock } from '../data/block';
 import { Block } from './Block';
 import { LoadingOrError } from './Loading';
 
-export const BlockItems = ({ blocks }: { blocks: NotionBlock[] }) => (
-  <>
-    {blocks.map(block => (
-      <Block block={block} key={block.id} />
-    ))}
-  </>
-);
+export const BlockItems = ({ blocks }: { blocks: NotionBlock[] }) => {
+  if (!blocks) {
+    return null;
+  }
+  return (
+    <>
+      {blocks.map(block => (
+        <Block block={block} key={block.id} />
+      ))}
+    </>
+  );
+};
 
 type BlockChildrenProps = {
   parentId: string;

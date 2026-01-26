@@ -24,3 +24,27 @@ export const makeGetPageHandler = (data: PageData) =>
 
 export const makeGetBlocksHandler = (blocks: NotionBlock[]) =>
   http.get('/api/blocks/:id', () => HttpResponse.json({ blocks }));
+
+export const makeGetNestedBlocksHandler = () => {
+  const blocksResponses = {} as Record<string, NotionBlock[]>;
+
+  const getBlocksHandler = http.get<{ id: string }>(
+    '/api/blocks/:id',
+    ({ params }) => {
+      if (blocksResponses[params.id]) {
+        return HttpResponse.json({ blocks: blocksResponses[params.id] });
+      }
+      return HttpResponse.error();
+    },
+  );
+  const registerBlocks = ({
+    parentId,
+    blocks,
+  }: {
+    parentId: string;
+    blocks: NotionBlock[];
+  }) => {
+    blocksResponses[parentId] = blocks;
+  };
+  return [getBlocksHandler, registerBlocks] as const;
+};
