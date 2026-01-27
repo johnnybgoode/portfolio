@@ -8,11 +8,14 @@ import { Box, type BoxElementWithStyles } from './Box';
 type FlexProps = BoxElementWithStyles<
   'div',
   FlexStyleProps | SpaceProps | SizeProps
->;
+> & {
+  display?: 'flex' | 'inline-flex';
+};
 
-export const Flex = ({ as: __as, children, ...rest }: FlexProps) => {
+export const Flex = ({ as: __as, children, display, ...rest }: FlexProps) => {
+  const flexDisplay = display || 'flex';
   return (
-    <Box as="div" display="flex" {...rest}>
+    <Box as="div" display={flexDisplay} {...rest}>
       {children}
     </Box>
   );

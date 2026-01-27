@@ -1,6 +1,6 @@
 import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles';
 import { keyOf } from '../utils';
-import { vars } from './theme.css';
+import { breakpoints, vars } from './theme.css';
 
 export type BorderProps = typeof borderProps;
 export type ColorProps = typeof colorProps;
@@ -41,7 +41,7 @@ export const colorProps = keyOf(colorProperties.styles);
 
 const displayProperties = defineProperties({
   properties: {
-    display: ['none', 'flex', 'block', 'inline'],
+    display: ['none', 'block', 'flex', 'inline', 'inline-flex'],
   },
 });
 export const displayProps = keyOf(displayProperties.styles);
@@ -54,10 +54,10 @@ const flexProperties = defineProperties({
     flexGrow: [0, 1],
     flexShrink: [0, 1],
     gap: {
-      '0': 0,
-      '100': 4,
-      '200': 8,
-      '300': 16,
+      '0': '0px',
+      '100': '4px',
+      '200': '8px',
+      '300': '16px',
     },
     justifyContent: [
       'stretch',
@@ -69,6 +69,12 @@ const flexProperties = defineProperties({
     ],
     justifySelf: ['flex-stretch', 'center', 'flex-end'],
   },
+  defaultCondition: 'mobile',
+  conditions: {
+    mobile: {},
+    tablet: { '@media': breakpoints.tablet.mediaQuery },
+  },
+  responsiveArray: ['mobile', 'tablet'],
 });
 export const flexProps = keyOf(flexProperties.styles);
 
@@ -109,6 +115,12 @@ const spaceProperties = defineProperties({
     marginX: ['marginInlineStart', 'marginInlineEnd'],
     marginY: ['marginBlockStart', 'marginBlockEnd'],
   },
+  defaultCondition: 'mobile',
+  conditions: {
+    mobile: {},
+    tablet: { '@media': breakpoints.tablet.mediaQuery },
+  },
+  responsiveArray: ['mobile', 'tablet'],
 });
 export const spaceProps = keyOf(spaceProperties.styles);
 
@@ -127,6 +139,12 @@ const sizeProperties = defineProperties({
       '100': '100%',
     },
   },
+  defaultCondition: 'mobile',
+  conditions: {
+    mobile: {},
+    tablet: { '@media': breakpoints.tablet.mediaQuery },
+  },
+  responsiveArray: ['mobile', 'tablet'],
 });
 export const sizeProps = keyOf(sizeProperties.styles);
 

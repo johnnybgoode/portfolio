@@ -1,5 +1,17 @@
 import { createGlobalTheme } from '@vanilla-extract/css';
 
+export const breakpoints = {
+  mobile: {
+    width: 0,
+  },
+  tablet: {
+    width: 768,
+    get mediaQuery() {
+      return `(min-width: ${this.width}px)`;
+    },
+  },
+} as const;
+
 export const vars = createGlobalTheme(':root', {
   color: {
     dusk: '#292522',

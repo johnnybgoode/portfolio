@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getPage, type ResumePageData } from '../data/page';
-import { ResumeClass } from '../styles/pages/Resume.css';
+import { useBreakpoint } from '../hooks/useBreakpoint';
+import { resumeWrapper } from '../styles/pages/Resume.css';
 import { Experience } from './Experience';
 import { LoadingOrError } from './Loading';
 import { Box } from './ui/Box';
@@ -26,16 +27,18 @@ export const Resume = ({ pageId }: ResumeProps) => {
     queryFn: () => getPage<ResumePageData>(pageId),
   });
 
+  const breakpoint = useBreakpoint();
+
   if (isLoading || error || !page) {
     return <LoadingOrError error={error} isLoading={isLoading} />;
   }
 
   return (
-    <div className={ResumeClass}>
+    <div className={resumeWrapper}>
       <Flex alignItems="stretch" justifyContent="space-between" paddingY="300">
-        <Box flexGrow={1} width="70">
+        <Box flexGrow={1} width={['40', '70']}>
           {page.title && (
-            <Heading level={1} style={{ minWidth: '230px' }} width="40">
+            <Heading level={1} style={{ minWidth: '230px' }} width={'30'}>
               <RichText text={page.title.rich_text} />
             </Heading>
           )}
@@ -43,7 +46,7 @@ export const Resume = ({ pageId }: ResumeProps) => {
 
         <Divider direction="vertical" marginX="400" marginY="400" width="50" />
 
-        <Box alignSelf="center" style={{ minWidth: '208px' }}>
+        <Box alignSelf="center" style={{ minWidth: '210px' }}>
           <IconLink href={page.email?.email} iconName="mail" />
           <IconLink href={page.phone?.phone_number} iconName="phone" />
           <IconLink href={page.linkedin?.url} iconName="linkedin" />
@@ -65,14 +68,20 @@ export const Resume = ({ pageId }: ResumeProps) => {
 
       <Divider marginY="400" width="50" />
 
-      <Flex alignItems="stretch">
+      <Flex alignItems="stretch" flexDirection={['column', 'row']}>
         <Box flexGrow={1} paddingY="300">
           <Experience experience={page.experience} />
         </Box>
 
-        <Divider direction="vertical" marginX="400" marginY="200" width="50" />
+        <Divider
+          direction={breakpoint === 'mobile' ? 'horizontal' : 'vertical'}
+          marginX={['0', '400']}
+          marginY={['400', '200']}
+          paddingBlockStart={['300', '0']}
+          width="50"
+        />
 
-        <Box paddingY="300" style={{ minWidth: '208px' }}>
+        <Box paddingY={['0', '300']} style={{ minWidth: '210px' }}>
           <Heading level={3}>{page.skills?.label}</Heading>
           <List items={page.skills?.multi_select.map(item => item.name)} />
         </Box>

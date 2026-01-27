@@ -14,7 +14,7 @@ export const IconLink = ({ href, iconName, linkIcon, text }: IconLinkProps) => {
   }
   const shouldLinkIcon = typeof linkIcon !== 'undefined' ? linkIcon : true;
   const linkText = text || href;
-  const icon = <Icon name={iconName} paddingInlineEnd="200" width="100" />;
+  const icon = <Icon name={iconName} paddingInlineEnd="200" />;
   return (
     <div className={IconLinkClass}>
       {!shouldLinkIcon && icon}
