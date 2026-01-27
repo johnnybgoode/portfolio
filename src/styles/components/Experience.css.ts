@@ -7,13 +7,15 @@ export const ExperienceClass = style({
   position: 'relative',
   selectors: {
     '&:before': {
-      backgroundColor: vars.color.sand,
-      borderRadius: '4px',
       content: ' ',
-      display: 'block',
+      display: 'list-item',
+      listStylePosition: 'inside',
+      listStyleType: 'none',
+      listStyleImage:
+        'url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSIjRUNFMUQ3Ij48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgLz48L3N2Zz4=)',
       position: 'absolute',
-      left: '-4px',
-      top: '11px',
+      left: '-3px',
+      top: '3px',
       width: '8px',
       height: '8px',
     },
