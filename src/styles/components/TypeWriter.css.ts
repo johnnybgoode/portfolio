@@ -4,7 +4,7 @@ import { space } from '../utils';
 
 export const TypeWriterClass = style({
   fontFamily: vars.typography.font.mono,
-  fontSize: vars.typography.h5.size,
+  fontSize: vars.typography.h3.size,
   ...space('margin', '0.25em 0'),
   textAlign: 'left',
   width: '100%',

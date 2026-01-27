@@ -2,9 +2,11 @@ import { createGlobalTheme } from '@vanilla-extract/css';
 
 export const breakpoints = {
   mobile: {
+    fontSize: '12px',
     width: 0,
   },
   tablet: {
+    fontSize: '14px',
     width: 768,
     get mediaQuery() {
       return `(min-width: ${this.width}px)`;
@@ -40,10 +42,10 @@ export const vars = createGlobalTheme(':root', {
       mono: '"DM Mono", monospace',
     },
     size: {
-      '50': '12px',
-      '100': '14px',
-      '200': '16px', // base
-      '300': '20px',
+      '50': '0.85rem',
+      '100': '1rem',
+      '200': '1.15rem',
+      // '300': '1.25rem',
     },
     weight: {
       '300': '300',
@@ -51,32 +53,32 @@ export const vars = createGlobalTheme(':root', {
       '500': '500',
     },
     title: {
-      size: '70px',
+      size: '4.85rem',
       weight: '600',
       lineHeight: '1.2em',
     },
     h1: {
-      size: '48px',
+      size: '3.45rem',
       weight: '500',
       lineHeight: '1.1em',
     },
     h2: {
-      size: '32px',
+      size: '2.3rem',
       weight: '500',
       lineHeight: '1.1em',
     },
     h3: {
-      size: '24px',
+      size: '1.725rem',
       weight: '500',
       lineHeight: '1.1em',
     },
     h4: {
-      size: '18px',
+      size: '1.3rem',
       weight: '500',
       lineHeight: '1.1em',
     },
     h5: {
-      size: '16px',
+      size: '1.15rem',
       weight: '500',
       lineHeight: '1.1em',
     },

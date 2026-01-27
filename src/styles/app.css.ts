@@ -1,5 +1,5 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { vars } from './theme.css';
+import { breakpoints, vars } from './theme.css';
 
 export const AppClass = style({
   placeItems: 'center',
@@ -12,11 +12,16 @@ export const AppClass = style({
 
 globalStyle(':root', {
   fontFamily: vars.typography.font.body,
-  fontSize: vars.typography.size[100],
+  fontSize: breakpoints.mobile.fontSize,
   fontWeight: vars.typography.weight[300],
 
   color: vars.color.sand,
   backgroundColor: vars.color.dusk,
+  '@media': {
+    [breakpoints.tablet.mediaQuery]: {
+      fontSize: breakpoints.tablet.fontSize,
+    },
+  },
 });
 
 globalStyle('a', {
