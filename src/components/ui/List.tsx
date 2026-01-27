@@ -1,11 +1,14 @@
 import type { ReactNode } from 'react';
 import { ListClass } from '../../styles/components/List.css';
-import type { ListProps as ListStyleProps } from '../../styles/sprinkles.css';
+import type {
+  ListProps as ListStyleProps,
+  SpaceProps,
+} from '../../styles/sprinkles.css';
 import { Box, type BoxElementWithStyles } from './Box';
 
 type BaseListProps = {
   type?: 'bulleted' | 'numbered';
-} & BoxElementWithStyles<'ul' | 'ol', ListStyleProps>;
+} & BoxElementWithStyles<'ul' | 'ol', ListStyleProps | SpaceProps>;
 
 interface ItemListProps extends BaseListProps {
   items?: ReactNode[];
@@ -30,7 +33,7 @@ export const List = ({
   }
   const tag = type === 'numbered' ? 'ol' : 'ul';
   return (
-    <Box as={tag} className={ListClass} margin="200" {...rest}>
+    <Box as={tag} className={ListClass} {...rest}>
       {children || items?.map((item, i) => <li key={i}>{item}</li>)}
     </Box>
   );

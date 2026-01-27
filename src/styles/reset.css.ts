@@ -28,7 +28,7 @@ globalStyle('input, button, textarea, select', {
 });
 
 globalStyle('ol, ul', {
-  listStylePosition: 'outside',
+  listStylePosition: 'inside',
   ...space('margin', '0'),
   ...space('padding', '0'),
 });
