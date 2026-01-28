@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
 import './styles/app.css';
 import { App } from './App.tsx';
+import { ThemeContextProvider } from './components/ThemeContext.tsx';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,7 +35,9 @@ enableMocking()
       <StrictMode>
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
-            <App />
+            <ThemeContextProvider>
+              <App />
+            </ThemeContextProvider>
           </BrowserRouter>
         </QueryClientProvider>
       </StrictMode>,

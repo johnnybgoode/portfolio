@@ -27,13 +27,14 @@ export const vars = createGlobalTheme(':root', {
     '0': '0px',
     '100': '2px',
     '200': '4px',
+    '250': '6px',
     '300': '8px',
     '350': '12px',
     '400': '16px',
     '500': '24px',
-    '600': '32px',
-    '700': '40px',
-    '800': '48px',
+    // '600': '32px',
+    // '700': '40px',
+    // '800': '48px',
   },
   typography: {
     font: {
@@ -94,7 +95,7 @@ export const [darkThemeClass, colorVars] = createTheme({
 });
 
 export const lightThemeClass = createTheme(colorVars, {
-  primary: colors.sun,
+  primary: colors.cyan,
   background: colors.sand,
   body: colors.dusk,
   ...colors,

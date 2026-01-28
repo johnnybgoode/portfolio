@@ -34,6 +34,7 @@ export const icons = styleVariants({
   mail: [iconBase, { ':before': { content: '\\f0e0' } }],
   phone: [iconBase, { ':before': { content: '\\f095' } }],
   pin: [iconBase, { ':before': { content: '\\f041' } }],
+  sun: [iconBase, { ':before': { content: '\\f185' } }],
 });
 
 // const iconFont = fontFace({
