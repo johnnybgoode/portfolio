@@ -1,0 +1,231 @@
+{
+  "empty": { "blocks": [] },
+  "work-history-1": {
+    "blocks": [
+      {
+        "type": "bulleted_list",
+        "id": "bulleted-list-99c7-ddb2b6754a9c",
+        "parent": {
+          "type": "page_id",
+          "page_id": "work-history-1"
+        },
+        "children": [
+          {
+            "id": "ddb2b6754a9c",
+            "parent": {
+              "type": "page_id",
+              "page_id": "work-history-1"
+            },
+            "has_children": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Designed and deployed a serverless cloud architecture reducing application downtime by 40%",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Designed and deployed a serverless cloud architecture reducing application downtime by 40%",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          {
+            "id": "eefd6a551643",
+            "parent": {
+              "type": "page_id",
+              "page_id": "work-history-1"
+            },
+            "has_children": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Led a cross-functional team to build an e-commerce platform serving over 1 million users monthly",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Led a cross-functional team to build an e-commerce platform serving over 1 million users monthly",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "work-history-2": {
+    "blocks": [
+      {
+        "type": "bulleted_list",
+        "id": "bulleted-list-b687-f5960902f3e3",
+        "parent": {
+          "type": "page_id",
+          "page_id": "work-history-2"
+        },
+        "children": [
+          {
+            "id": "f5960902f3e3",
+            "parent": {
+              "type": "page_id",
+              "page_id": "work-history-2"
+            },
+            "has_children": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Improved application performance by 30% through code optimization and load-balancing strategies",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Improved application performance by 30% through code optimization and load-balancing strategies",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          {
+            "id": "f80241a46438",
+            "parent": {
+              "type": "page_id",
+              "page_id": "work-history-2"
+            },
+            "has_children": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Automated CI/CD pipelines, cutting deployment time by 50%",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Automated CI/CD pipelines, cutting deployment time by 50%",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "work-history-3": {
+    "blocks": [
+      {
+        "type": "bulleted_list",
+        "id": "bulleted-list-bfc7-f3de004e8645",
+        "parent": {
+          "type": "page_id",
+          "page_id": "work-history-3"
+        },
+        "children": [
+          {
+            "id": "f3de004e8645",
+            "parent": {
+              "type": "page_id",
+              "page_id": "work-history-3"
+            },
+            "has_children": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Build RESTful APIs that served data to the JavaScript front-end used by over 500,000 concurrent users",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Build RESTful APIs that served data to the JavaScript front-end used by over 500,000 concurrent users",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          },
+          {
+            "id": "e642e8f4728e",
+            "parent": {
+              "type": "page_id",
+              "page_id": "work-history-3"
+            },
+            "has_children": false,
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Build internal tooling to automate testing and QA which improved CTR by 5%",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Build internal tooling to automate testing and QA which improved CTR by 5%",
+                  "href": null
+                }
+              ],
+              "color": "default"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

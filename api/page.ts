@@ -6,6 +6,12 @@ import {
 } from '@notionhq/client';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
+type StaticPageKeys = keyof typeof STATIC_PAGE_IDS;
+const STATIC_PAGE_IDS = {
+  home: process.env.PAGE_HOME,
+  resume: process.env.PAGE_RESUME,
+} as const;
+
 // Initializing a client
 const notion = new Client({
   auth: process.env.NOTION_AUTH_TK,
@@ -21,7 +27,11 @@ const fetchPageData = async (pageId: string) => {
 
 const parsePageId = (url: string, res: VercelResponse) => {
   try {
-    return url.split('?')[0].split('/').pop();
+    const reqPageId = url.split('?')[0].split('/').pop();
+    if (reqPageId && reqPageId in STATIC_PAGE_IDS) {
+      return STATIC_PAGE_IDS[reqPageId as StaticPageKeys];
+    }
+    return reqPageId;
   } catch (__e: unknown) {
     res.status(400).json({ error: 'Failed to parse URL' });
   }

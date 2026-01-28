@@ -1,0 +1,478 @@
+{
+  "home": {
+    "headline": {
+      "label": "Headline",
+      "id": "%3AUgE",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": { "content": "John Smith", "link": null },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "John Smith",
+          "href": null
+        }
+      ]
+    },
+    "taglines": {
+      "label": "Taglines",
+      "id": "_RHR",
+      "type": "multi_select",
+      "multi_select": [
+        {
+          "id": "dd4a9c8a4941",
+          "name": "Software engineer",
+          "color": "red"
+        },
+        {
+          "id": "25bc74cb5045",
+          "name": "Technical lead",
+          "color": "green"
+        },
+        {
+          "id": "b20730734279",
+          "name": "Dog person",
+          "color": "blue"
+        },
+        {
+          "id": "f8544af46c28",
+          "name": "Drinker of coffee",
+          "color": "pink"
+        }
+      ]
+    },
+    "subheading": {
+      "label": "Subheading",
+      "id": "aLGH",
+      "type": "rich_text",
+      "rich_text": []
+    },
+    "name": {
+      "label": "Name",
+      "id": "title",
+      "type": "title",
+      "title": [
+        {
+          "type": "text",
+          "text": { "content": "Home", "link": null },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Home",
+          "href": null
+        }
+      ]
+    }
+  },
+  "resume": {
+    "github": {
+      "label": "Github",
+      "id": "%3EpPh",
+      "type": "url",
+      "url": "github.com"
+    },
+    "professionalSummary": {
+      "label": "Professional Summary",
+      "id": "%3FevJ",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Versatile software engineer with 15 years experience developing apps and websites used by millions.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Versatile software engineer with 15 years experience developing apps and websites used by millions.",
+          "href": null
+        }
+      ]
+    },
+    "website": {
+      "label": "Website",
+      "id": "G_%5Dp",
+      "type": "url",
+      "url": "not-john-smith.com"
+    },
+    "title": {
+      "label": "Title",
+      "id": "N%60eA",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": { "content": "John Smith", "link": null },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "John Smith",
+          "href": null
+        }
+      ]
+    },
+    "skills": {
+      "label": "Skills",
+      "id": "OopM",
+      "type": "multi_select",
+      "multi_select": [
+        {
+          "id": "cc08dbaa488e",
+          "name": "Typescript",
+          "color": "green"
+        },
+        {
+          "id": "bf504e7edbf8",
+          "name": "React",
+          "color": "red"
+        },
+        {
+          "id": "889221773d94",
+          "name": "Redux",
+          "color": "blue"
+        },
+        {
+          "id": "348ed4da21d9",
+          "name": "Java",
+          "color": "purple"
+        },
+        {
+          "id": "4b829012a7e0",
+          "name": "Kotlin",
+          "color": "brown"
+        }
+      ]
+    },
+    "linkedin": {
+      "label": "Linkedin",
+      "id": "PzR%7C",
+      "type": "url",
+      "url": "linkedin.com"
+    },
+    "email": {
+      "label": "Email",
+      "id": "WrNv",
+      "type": "email",
+      "email": "my@email.com"
+    },
+    "experience": {
+      "label": "Experience",
+      "id": "%60vRM",
+      "type": "relation",
+      "relation": [
+        { "id": "work-history-1" },
+        { "id": "work-history-2" },
+        { "id": "work-history-3" }
+      ],
+      "has_more": false
+    },
+    "phone": {
+      "label": "Phone",
+      "id": "sMhc",
+      "type": "phone_number",
+      "phone_number": "(555) 867-5309"
+    },
+    "name": {
+      "label": "Name",
+      "id": "title",
+      "type": "title",
+      "title": [
+        {
+          "type": "text",
+          "text": { "content": "Main Resume", "link": null },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Main Resume",
+          "href": null
+        }
+      ]
+    }
+  },
+  "work-history-1": {
+    "position": {
+      "label": "Position",
+      "id": "CuuV",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": { "content": "Senior Software Engineer", "link": null },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Senior Software Engineer",
+          "href": null
+        }
+      ]
+    },
+    "start": {
+      "label": "Start",
+      "id": "gcsA",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": { "content": "2020", "link": null },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "2020",
+          "href": null
+        }
+      ]
+    },
+    "end": {
+      "label": "End",
+      "id": "%7DDcV",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": { "content": "2025", "link": null },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "2025",
+          "href": null
+        }
+      ]
+    },
+    "name": {
+      "label": "Name",
+      "id": "title",
+      "type": "title",
+      "title": [
+        {
+          "type": "text",
+          "text": { "content": "Big Tech", "link": null },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Big Tech",
+          "href": null
+        }
+      ]
+    }
+  },
+  "work-history-2": {
+    "position": {
+      "label": "Position",
+      "id": "CuuV",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": { "content": "Engineering Manager", "link": null },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Engineering Manager",
+          "href": null
+        }
+      ]
+    },
+    "start": {
+      "label": "Start",
+      "id": "gcsA",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": { "content": "2016", "link": null },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "2016",
+          "href": null
+        }
+      ]
+    },
+    "end": {
+      "label": "End",
+      "id": "%7DDcV",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": { "content": "2020", "link": null },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "2020",
+          "href": null
+        }
+      ]
+    },
+    "name": {
+      "label": "Name",
+      "id": "title",
+      "type": "title",
+      "title": [
+        {
+          "type": "text",
+          "text": { "content": "Fast Startup", "link": null },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Fast Startup",
+          "href": null
+        }
+      ]
+    }
+  },
+  "work-history-3": {
+    "position": {
+      "label": "Position",
+      "id": "CuuV",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": { "content": "Senior Developer", "link": null },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Senior Developer",
+          "href": null
+        }
+      ]
+    },
+    "start": {
+      "label": "Start",
+      "id": "gcsA",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": { "content": "2010", "link": null },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "2010",
+          "href": null
+        }
+      ]
+    },
+    "end": {
+      "label": "End",
+      "id": "%7DDcV",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": { "content": "2016", "link": null },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "2016",
+          "href": null
+        }
+      ]
+    },
+    "name": {
+      "label": "Name",
+      "id": "title",
+      "type": "title",
+      "title": [
+        {
+          "type": "text",
+          "text": { "content": "Small Business", "link": null },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Small Business",
+          "href": null
+        }
+      ]
+    }
+  }
+}

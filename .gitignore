@@ -22,3 +22,4 @@ dist-ssr
 **/.env*
 .vercel
 coverage
+**/test/**/*.offline.json
