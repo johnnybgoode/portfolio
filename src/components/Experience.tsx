@@ -5,14 +5,30 @@ import {
   getPage,
   type ResumePageData,
 } from '../data/page';
-import { ExperienceClass } from '../styles/components/Experience.css';
+import styles from '../styles/components/Experience.css';
 import { BlockItems } from './BlockList';
 import { LoadingOrError } from './Loading';
 import { Box } from './ui/Box';
+import { Divider } from './ui/Divider';
 import { Flex } from './ui/Flex';
 import { Heading } from './ui/Heading';
 import { RichText } from './ui/RichText';
 import { TextBox } from './ui/TextBox';
+
+const TimelineSegment = () => {
+  return (
+    <div className={styles.timelineSegment}>
+      <svg
+        className={styles.timelineDot}
+        viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <Divider direction="vertical" width="50" />
+    </div>
+  );
+};
 
 type ExperienceaItemProps = {
   pageId: string;
@@ -45,28 +61,31 @@ const ExperienceItem = ({ pageId }: ExperienceaItemProps) => {
   }
 
   return (
-    <Flex className={ExperienceClass} flexDirection="column" gap="100">
-      <Flex
-        alignItems="center"
-        justifyContent="space-between"
-        paddingInlineEnd="400"
-      >
-        <Heading level={4} marginY="200">
-          <RichText text={page.name?.title} />
-        </Heading>
+    <div className={styles.experienceItem}>
+      <TimelineSegment />
+      <Flex flexDirection="column" gap="100">
+        <Flex
+          alignItems="center"
+          justifyContent="space-between"
+          paddingInlineEnd="400"
+        >
+          <Heading level={4} marginY="200">
+            <RichText text={page.name?.title} />
+          </Heading>
+          <Box>
+            <RichText text={page.start?.rich_text} />
+            &mdash;
+            <RichText text={page.end?.rich_text} />
+          </Box>
+        </Flex>
         <Box>
-          <RichText text={page.start?.rich_text} />
-          &mdash;
-          <RichText text={page.end?.rich_text} />
+          <TextBox fontWeight="500">
+            <RichText text={page.position?.rich_text} />
+          </TextBox>
         </Box>
+        <Box>{blockData && <BlockItems blocks={blockData.blocks} />}</Box>
       </Flex>
-      <Box>
-        <TextBox fontWeight="500">
-          <RichText text={page.position?.rich_text} />
-        </TextBox>
-      </Box>
-      <Box>{blockData && <BlockItems blocks={blockData.blocks} />}</Box>
-    </Flex>
+    </div>
   );
 };
 

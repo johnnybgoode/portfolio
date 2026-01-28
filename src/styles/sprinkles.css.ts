@@ -1,6 +1,6 @@
 import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles';
 import { keyOf } from '../utils';
-import { breakpoints, vars } from './theme.css';
+import { breakpoints, colorVars, vars } from './theme.css';
 
 export type BorderProps = typeof borderProps;
 export type ColorProps = typeof colorProps;
@@ -34,7 +34,7 @@ export const borderProps = keyOf(borderProperties.styles);
 
 const colorProperties = defineProperties({
   properties: {
-    color: vars.color,
+    color: colorVars,
   },
 });
 export const colorProps = keyOf(colorProperties.styles);

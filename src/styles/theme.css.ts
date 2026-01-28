@@ -1,4 +1,4 @@
-import { createGlobalTheme } from '@vanilla-extract/css';
+import { createGlobalTheme, createTheme } from '@vanilla-extract/css';
 
 export const breakpoints = {
   mobile: {
@@ -14,14 +14,15 @@ export const breakpoints = {
   },
 } as const;
 
+const colors = {
+  dusk: '#292522',
+  sand: '#ECE1D7',
+  foam: '#85B695',
+  cyan: '#89B3B6',
+  sun: '#EBC06D', // '#E2C28C'
+};
+
 export const vars = createGlobalTheme(':root', {
-  color: {
-    dusk: '#292522',
-    sand: '#ECE1D7',
-    foam: '#85B695',
-    cyan: '#89B3B6',
-    sun: '#EBC06D', // '#E2C28C'
-  },
   space: {
     '0': '0px',
     '100': '2px',
@@ -83,4 +84,18 @@ export const vars = createGlobalTheme(':root', {
       lineHeight: '1.1em',
     },
   },
+});
+
+export const [darkThemeClass, colorVars] = createTheme({
+  primary: colors.foam,
+  background: colors.dusk,
+  body: colors.sand,
+  ...colors,
+});
+
+export const lightThemeClass = createTheme(colorVars, {
+  primary: colors.sun,
+  background: colors.sand,
+  body: colors.dusk,
+  ...colors,
 });

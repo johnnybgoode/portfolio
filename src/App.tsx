@@ -1,9 +1,10 @@
 import { Router } from './components/Router';
-import { AppClass } from './styles/app.css';
+import { appWrapper } from './styles/app.css';
 import './styles/reset.css';
+import { darkThemeClass } from './styles/theme.css';
 
 export const App = () => (
-  <div className={AppClass}>
+  <div className={[appWrapper, darkThemeClass].join(' ')}>
     <Router />
   </div>
 );

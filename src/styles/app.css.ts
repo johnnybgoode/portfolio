@@ -1,13 +1,15 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { breakpoints, vars } from './theme.css';
+import { breakpoints, colorVars, vars } from './theme.css';
 
-export const AppClass = style({
+export const appWrapper = style({
   placeItems: 'center',
   minWidth: '320px',
   minHeight: '100vh',
   maxWidth: '1280px',
   margin: '0 auto',
   width: '100%',
+  color: colorVars.body,
+  backgroundColor: colorVars.background,
 });
 
 globalStyle(':root', {
@@ -15,8 +17,6 @@ globalStyle(':root', {
   fontSize: breakpoints.mobile.fontSize,
   fontWeight: vars.typography.weight[300],
 
-  color: vars.color.sand,
-  backgroundColor: vars.color.dusk,
   '@media': {
     [breakpoints.tablet.mediaQuery]: {
       fontSize: breakpoints.tablet.fontSize,
@@ -27,9 +27,9 @@ globalStyle(':root', {
 globalStyle('a', {
   fontWeight: vars.typography.weight[400],
   textDecoration: 'inherit',
-  color: vars.color.sand,
+  color: colorVars.body,
 });
 
 globalStyle('a:hover', {
-  color: vars.color.foam,
+  color: colorVars.primary,
 });

@@ -1,11 +1,13 @@
 import { style, styleVariants } from '@vanilla-extract/css';
+import { colorVars } from '../theme.css';
 
 const base = style({
+  borderColor: colorVars.body,
   flexShrink: 1,
   opacity: '0.5',
 });
 
-export const DividerClasses = styleVariants({
+export const dividerVariants = styleVariants({
   horizontal: [
     base,
     {

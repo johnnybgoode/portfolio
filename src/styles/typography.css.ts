@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from './theme.css';
+import { colorVars, vars } from './theme.css';
 import { space } from './utils';
 
 export const titleClass = style({
@@ -67,8 +67,9 @@ export const paragraphClass = style({
 export const linkClass = style({
   fontWeight: vars.typography.weight[400],
   textDecoration: 'inherit',
-  color: vars.color.foam,
+  color: colorVars.body,
   ':hover': {
+    color: colorVars.primary,
     textDecoration: 'underline',
   },
 });

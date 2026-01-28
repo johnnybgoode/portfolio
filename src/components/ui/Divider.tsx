@@ -1,4 +1,4 @@
-import { DividerClasses } from '../../styles/components/Divider.css';
+import { dividerVariants } from '../../styles/components/Divider.css';
 import type {
   BorderProps,
   SpaceProps,
@@ -7,7 +7,7 @@ import type {
 import { Box, type BoxElementWithStyles } from './Box';
 
 type DividerProps = BoxElementWithStyles<'div', BorderProps | SpaceProps> & {
-  direction?: keyof typeof DividerClasses;
+  direction?: keyof typeof dividerVariants;
   width?: Sprinkles['borderWidth'];
 };
 
@@ -31,7 +31,7 @@ export const Divider = ({
   return (
     <Box
       as="div"
-      className={DividerClasses[borderDirection]}
+      className={dividerVariants[borderDirection]}
       {...borderStyles}
       {...rest}
     >
