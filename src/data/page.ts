@@ -12,9 +12,11 @@ import type {
   TitlePropertyValue,
 } from './properties';
 
-export type PageData = {
-  [K in keyof PageProperties]: PagePropertyValueWithLabel<PageProperties[K]>;
-};
+type PagePropertiesWithLabel<P extends PageProperties> = Partial<{
+  [K in keyof P]: PagePropertyValueWithLabel<P[K]>;
+}>;
+
+export type PageData = PagePropertiesWithLabel<PageProperties>;
 
 type ResumeProperties = {
   title: RichTextPropertyValue;
@@ -27,12 +29,7 @@ type ResumeProperties = {
   skills: MultiSelectPropertyItemObjectResponse;
   experience: RelationPropertyValue;
 };
-
-export type ResumePageData = Partial<{
-  [K in keyof ResumeProperties]: PagePropertyValueWithLabel<
-    ResumeProperties[K]
-  >;
-}>;
+export type ResumePageData = PagePropertiesWithLabel<ResumeProperties>;
 
 type ExperienceProperties = {
   name: TitlePropertyValue;
@@ -40,16 +37,13 @@ type ExperienceProperties = {
   end: RichTextPropertyValue;
   position: RichTextPropertyValue;
 };
-export type ExperiencePageData = Partial<{
-  [K in keyof ExperienceProperties]: PagePropertyValueWithLabel<
-    ExperienceProperties[K]
-  >;
-}>;
+export type ExperiencePageData = PagePropertiesWithLabel<ExperienceProperties>;
 
-export type LandingPageData = Partial<{
-  headline: PagePropertyValueWithLabel<RichTextPropertyValue>;
-  taglines: PagePropertyValueWithLabel<MultiSelectPropertyItemObjectResponse>;
-}>;
+type LandingPageProperties = {
+  headline: RichTextPropertyValue;
+  taglines: MultiSelectPropertyItemObjectResponse;
+};
+export type LandingPageData = PagePropertiesWithLabel<LandingPageProperties>;
 
 export const getPage = async <T extends PageData>(pageId: string) => {
   const response = await fetch(`/api/page/${pageId}`);
@@ -59,7 +53,3 @@ export const getPage = async <T extends PageData>(pageId: string) => {
   const data: T = await response.json();
   return data;
 };
-
-export const getResumePage = getPage<ResumePageData>;
-
-export const getLandingPage = getPage<LandingPageData>;

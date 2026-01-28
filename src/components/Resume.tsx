@@ -1,9 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import { getPage, type ResumePageData } from '../data/page';
+import type { NotionBlock } from '../data/block';
+import { type ResumePageData } from '../data/page';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 import { resumeWrapper } from '../styles/pages/Resume.css';
 import { Experience } from './Experience';
-import { LoadingOrError } from './Loading';
 import { Box } from './ui/Box';
 import { Divider } from './ui/Divider';
 import { Flex } from './ui/Flex';
@@ -14,24 +13,12 @@ import { RichText } from './ui/RichText';
 import { TextBox } from './ui/TextBox';
 
 type ResumeProps = {
-  pageId: string;
+  blocks?: NotionBlock[];
+  page: ResumePageData;
 };
 
-export const Resume = ({ pageId }: ResumeProps) => {
-  const {
-    data: page,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ['pageData', pageId],
-    queryFn: () => getPage<ResumePageData>(pageId),
-  });
-
+export const Resume = ({ page }: ResumeProps) => {
   const breakpoint = useBreakpoint();
-
-  if (isLoading || error || !page) {
-    return <LoadingOrError error={error} isLoading={isLoading} />;
-  }
 
   return (
     <div className={resumeWrapper}>

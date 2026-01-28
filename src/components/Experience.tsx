@@ -1,13 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import { getBlockData } from '../data/block';
-import {
-  type ExperiencePageData,
-  getPage,
-  type ResumePageData,
-} from '../data/page';
+import { type NotionBlock } from '../data/block';
+import { type ExperiencePageData, type ResumePageData } from '../data/page';
 import styles from '../styles/components/Experience.css';
 import { BlockItems } from './BlockList';
-import { LoadingOrError } from './Loading';
+import { PageContainer } from './PageContainer';
 import { Box } from './ui/Box';
 import { Divider } from './ui/Divider';
 import { Flex } from './ui/Flex';
@@ -31,35 +26,11 @@ const TimelineSegment = () => {
 };
 
 type ExperienceaItemProps = {
-  pageId: string;
+  blocks?: NotionBlock[];
+  page: ExperiencePageData;
 };
 
-const ExperienceItem = ({ pageId }: ExperienceaItemProps) => {
-  const {
-    data: page,
-    isLoading: pageLoading,
-    error: pageError,
-  } = useQuery({
-    queryKey: ['pageData', pageId],
-    queryFn: () => getPage<ExperiencePageData>(pageId),
-  });
-
-  const {
-    data: blockData,
-    isLoading: blockLoading,
-    error: blockError,
-  } = useQuery({
-    queryKey: ['blockData', pageId],
-    queryFn: () => getBlockData(pageId),
-  });
-
-  const isLoadingOrerror =
-    pageLoading || blockLoading || pageError || blockError;
-
-  if (isLoadingOrerror || !page) {
-    return <LoadingOrError error={pageError} isLoading={pageLoading} />;
-  }
-
+const ExperienceItem = ({ blocks, page }: ExperienceaItemProps) => {
   return (
     <div className={styles.experienceItem}>
       <TimelineSegment />
@@ -83,7 +54,7 @@ const ExperienceItem = ({ pageId }: ExperienceaItemProps) => {
             <RichText text={page.position?.rich_text} />
           </TextBox>
         </Box>
-        <Box>{blockData && <BlockItems blocks={blockData.blocks} />}</Box>
+        <Box>{blocks && <BlockItems blocks={blocks} />}</Box>
       </Flex>
     </div>
   );
@@ -105,7 +76,11 @@ export const Experience = ({ experience }: ExperienceProps) => {
       <Flex alignItems="stretch">
         <Box paddingInlineEnd="300" paddingInlineStart="400" paddingY="200">
           {relation?.map(relationItem => (
-            <ExperienceItem key={relationItem.id} pageId={relationItem.id} />
+            <PageContainer
+              key={relationItem.id}
+              PageComponent={ExperienceItem}
+              pageId={relationItem.id}
+            />
           ))}
         </Box>
       </Flex>

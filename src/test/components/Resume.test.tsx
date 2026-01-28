@@ -1,5 +1,6 @@
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { describe, it } from 'vitest';
+import { PageContainer } from '../../components/PageContainer';
 import { Resume } from '../../components/Resume';
 import { makeProperty, makeRichText } from '../mocks/fixtures/properties';
 import {
@@ -30,11 +31,19 @@ describe('Resume', () => {
         linkedin: makeProperty({ type: 'url', value: { url: 'linkedin.com' } }),
         github: makeProperty({ type: 'url', value: { url: 'github.com' } }),
         website: makeProperty({ type: 'url', value: { url: 'foo.com' } }),
+        skills: makeProperty({
+          type: 'multi_select',
+          value: {
+            multi_select: [
+              { color: 'blue', id: 'cool-skill', name: 'Cool skill' },
+            ],
+          },
+        }),
       }),
       makeGetBlocksHandler([]),
     );
 
-    render(<Resume pageId="resume" />);
+    render(<PageContainer PageComponent={Resume} pageId="resume" />);
     await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));
 
     await screen.findByText(/john e/i);
@@ -48,6 +57,7 @@ describe('Resume', () => {
     await screen.findByText('github.com');
     await screen.findByText('link-icon');
     await screen.findByText('foo.com');
+    await screen.findByText(/cool skill/i);
   });
 
   it('renders experience section', async () => {
@@ -104,11 +114,9 @@ describe('Resume', () => {
 
     server.use(getPagesHandler, makeGetBlocksHandler([]));
 
-    render(<Resume pageId="resume" />);
-    // await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));
+    render(<PageContainer PageComponent={Resume} pageId="resume" />);
 
-    // screen.logTestingPlaygroundURL();
     await screen.findByRole('heading', { name: /experience/i });
-    // await screen.findByText(/button pusher/i)
+    await screen.findByText(/button pusher/i);
   });
 });
