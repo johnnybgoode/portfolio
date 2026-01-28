@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getBlockData } from '../data/block';
 import { getPage } from '../data/page';
+import { pageWrapper } from '../styles/pages/Page.css';
 import { BlockItems } from './BlockList';
 import { LoadingOrError } from './Loading';
 import { Heading } from './ui/Heading';
@@ -38,7 +39,7 @@ export const Page = ({ pageId, displayTitle = true }: PageProps) => {
   }
 
   return (
-    <>
+    <div className={pageWrapper}>
       {displayTitle && page.title?.type === 'title' && (
         <Heading level={1}>
           {page.title.title.map(textItem => (
@@ -47,6 +48,6 @@ export const Page = ({ pageId, displayTitle = true }: PageProps) => {
         </Heading>
       )}
       {blockData && <BlockItems blocks={blockData.blocks} />}
-    </>
+    </div>
   );
 };

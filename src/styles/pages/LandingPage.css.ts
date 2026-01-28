@@ -5,10 +5,12 @@ export const headerClass = style({
   alignItems: 'center',
   justifyContent: 'center',
   flexDirection: 'column',
+  width: '100%',
+  height: '100%',
 });
 
 export const landingPageClass = style({
-  display: 'flex',
   height: '100vh',
-  placeItems: 'center',
+  maxWidth: '1280px',
+  margin: '0 auto',
 });

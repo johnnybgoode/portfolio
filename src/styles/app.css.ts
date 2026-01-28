@@ -2,11 +2,9 @@ import { globalStyle, style } from '@vanilla-extract/css';
 import { breakpoints, colorVars, vars } from './theme.css';
 
 export const appWrapper = style({
-  placeItems: 'center',
+  // placeItems: 'center',
   minWidth: '320px',
   minHeight: '100vh',
-  maxWidth: '1280px',
-  margin: '0 auto',
   width: '100%',
   color: colorVars.body,
   backgroundColor: colorVars.background,
