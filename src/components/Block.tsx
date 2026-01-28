@@ -13,7 +13,7 @@ import {
   isParagraphBlock,
   isQuoteBlock,
 } from '../data/block';
-import { BlockChildren, BlockItems } from './BlockList';
+import { BlockItems, Blocks } from './Blocks';
 import { Database } from './Database';
 import { Divider } from './ui/Divider';
 import { Flex } from './ui/Flex';
@@ -30,7 +30,7 @@ const getChildren = (block: NotionBlock) => {
   if (isListBlock(block)) {
     return <BlockItems blocks={block.children} />;
   } else if (block.has_children) {
-    return <BlockChildren parentId={block.id} />;
+    return <Blocks parentId={block.id} />;
   }
   return null;
 };

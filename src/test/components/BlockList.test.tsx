@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import { describe, it } from 'vitest';
-import { BlockChildren } from '../../components/BlockList';
+import { Blocks } from '../../components/Blocks';
 import { makeContentBlock, makeListBlock } from '../mocks/fixtures/blocks';
 import { makeGetNestedBlocksHandler } from '../mocks/handlers';
 import { server } from '../mocks/server';
@@ -28,7 +28,7 @@ describe('BlockList', () => {
       ],
     });
 
-    render(<BlockChildren parentId="page" />);
+    render(<Blocks parentId="page" />);
 
     await screen.findByText(/good point/i);
     await screen.findByText(/great point/i);

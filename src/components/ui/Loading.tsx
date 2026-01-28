@@ -1,4 +1,4 @@
-import { Heading } from './ui/Heading';
+import { Heading } from './Heading';
 
 type LoadingOrErrorProps = {
   dataType?: string;
@@ -12,7 +12,8 @@ type ErrorMessageProps = {
 };
 
 export const Loading = () => <div>Loading...</div>;
-export const ErrorMessage = ({ title, message }: ErrorMessageProps) => (
+
+const ErrorMessage = ({ title, message }: ErrorMessageProps) => (
   <div>
     <Heading level={3}>{title}</Heading>
     {message}

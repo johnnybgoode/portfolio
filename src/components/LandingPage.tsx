@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { getLandingPage } from '../data/page';
 import { headerClass, landingPageClass } from '../styles/pages/LandingPage.css';
-import { LoadingOrError } from './Loading';
 import { Page } from './Page';
 import { Heading } from './ui/Heading';
+// import { LoadingOrError } from './ui/Loading';
 import { RichText } from './ui/RichText';
 import { TypeWriter } from './ui/TypeWriter';
 
@@ -12,18 +12,10 @@ type LandingPageProps = {
 };
 
 export const LandingPage = ({ pageId }: LandingPageProps) => {
-  const {
-    data: page,
-    isLoading,
-    error,
-  } = useQuery({
+  const { data: page } = useSuspenseQuery({
     queryKey: ['pageData', pageId],
     queryFn: () => getLandingPage(pageId),
   });
-
-  if (isLoading || error || !page) {
-    return <LoadingOrError error={error} isLoading={isLoading} />;
-  }
 
   return (
     <div className={landingPageClass}>

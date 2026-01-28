@@ -1,26 +1,31 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { type RenderOptions, render } from '@testing-library/react';
-import type { PropsWithChildren, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: { gcTime: Number.POSITIVE_INFINITY, retry: false },
-  },
-});
-
-// biome-ignore lint: style/useComponentExportOnlyModules
-const AppProviders = ({ children }: PropsWithChildren) => {
-  return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
+const mockDependencies = () => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: { gcTime: Number.POSITIVE_INFINITY, retry: false },
+    },
+  });
+  return {
+    queryClient,
+  } as const;
 };
 
 const customRender = (
   ui: ReactElement,
-  options: Omit<RenderOptions, 'wrapper'> & { route?: string } = {
+  options: RenderOptions & { route?: string } = {
     reactStrictMode: true,
   },
-) => render(ui, { wrapper: AppProviders, ...options });
+) => {
+  const { queryClient } = mockDependencies();
+
+  return render(
+    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>,
+    { ...options },
+  );
+};
 
 // re-export everything
 export * from '@testing-library/react';

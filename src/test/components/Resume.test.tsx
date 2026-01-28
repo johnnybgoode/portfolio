@@ -1,4 +1,4 @@
-import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { describe, it } from 'vitest';
 import { Resume } from '../../components/Resume';
 import { makeProperty, makeRichText } from '../mocks/fixtures/properties';
@@ -35,7 +35,6 @@ describe('Resume', () => {
     );
 
     render(<Resume pageId="resume" />);
-    await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));
 
     await screen.findByText(/john e/i);
     await screen.findByText('mail-icon');
@@ -105,10 +104,8 @@ describe('Resume', () => {
     server.use(getPagesHandler, makeGetBlocksHandler([]));
 
     render(<Resume pageId="resume" />);
-    // await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));
 
-    // screen.logTestingPlaygroundURL();
     await screen.findByRole('heading', { name: /experience/i });
-    // await screen.findByText(/button pusher/i)
+    await screen.findByText(/button pusher/i);
   });
 });

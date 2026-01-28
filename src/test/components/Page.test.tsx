@@ -23,6 +23,7 @@ describe('Page', () => {
 
     await screen.findByText(/catchy title/i);
   });
+
   it('renders page blocks', async () => {
     server.use(
       makeGetPageHandler({

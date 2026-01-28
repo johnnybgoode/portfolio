@@ -31,7 +31,6 @@ describe('Block', () => {
     };
     render(<Block block={columnBlock} />);
     await screen.findByText(/good content/i);
-    screen.logTestingPlaygroundURL();
   });
 
   it('renders heading_1 blocks', async () => {

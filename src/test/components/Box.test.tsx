@@ -15,7 +15,6 @@ describe('Box', () => {
       'class',
       expect.stringContaining('sprinkles_display_block'),
     );
-    screen.logTestingPlaygroundURL();
   });
   it('renders as link element', async () => {
     render(

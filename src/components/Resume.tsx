@@ -1,9 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { getPage, type ResumePageData } from '../data/page';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 import { resumeWrapper } from '../styles/pages/Resume.css';
 import { Experience } from './Experience';
-import { LoadingOrError } from './Loading';
 import { Box } from './ui/Box';
 import { Divider } from './ui/Divider';
 import { Flex } from './ui/Flex';
@@ -18,20 +17,11 @@ type ResumeProps = {
 };
 
 export const Resume = ({ pageId }: ResumeProps) => {
-  const {
-    data: page,
-    isLoading,
-    error,
-  } = useQuery({
+  const { data: page } = useSuspenseQuery({
     queryKey: ['pageData', pageId],
     queryFn: () => getPage<ResumePageData>(pageId),
   });
-
   const breakpoint = useBreakpoint();
-
-  if (isLoading || error || !page) {
-    return <LoadingOrError error={error} isLoading={isLoading} />;
-  }
 
   return (
     <div className={resumeWrapper}>

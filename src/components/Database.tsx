@@ -2,11 +2,18 @@ import type {
   PropertyItemObjectResponse,
   RichTextItemResponse,
 } from '@notionhq/client';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { getDatabase } from '../data/database';
-import { LoadingOrError } from './Loading';
+import { ErrorMessage } from './ui/ErrorMessage';
 import { Heading } from './ui/Heading';
+import { Loading } from './ui/Loading';
 import { RichText } from './ui/RichText';
+
+type DatabaseProps = {
+  databaseId: string;
+};
 
 const TableCell = ({ data }: { data: PropertyItemObjectResponse }) => {
   if (typeof data === 'string' || typeof data === 'number') {
@@ -38,21 +45,12 @@ const TableCell = ({ data }: { data: PropertyItemObjectResponse }) => {
   return <td>{`[ ${data.type} ]`}</td>;
 };
 
-export const Database = ({ databaseId }: { databaseId: string }) => {
-  const {
-    data: database,
-    isLoading,
-    error,
-  } = useQuery({
+const DatabaseTable = ({ databaseId }: DatabaseProps) => {
+  const { data: database } = useSuspenseQuery({
     queryKey: ['databaseData', databaseId],
     queryFn: () => getDatabase(databaseId),
   });
 
-  if (isLoading || error || !database) {
-    return (
-      <LoadingOrError dataType="database" error={error} isLoading={isLoading} />
-    );
-  }
   const { data } = database;
 
   return (
@@ -84,5 +82,15 @@ export const Database = ({ databaseId }: { databaseId: string }) => {
         </table>
       )}
     </div>
+  );
+};
+
+export const Database = ({ databaseId }: DatabaseProps) => {
+  return (
+    <ErrorBoundary fallback={<ErrorMessage />}>
+      <Suspense fallback={<Loading />}>
+        <DatabaseTable databaseId={databaseId} />
+      </Suspense>{' '}
+    </ErrorBoundary>
   );
 };
