@@ -3,7 +3,6 @@ import { getLandingPage } from '../data/page';
 import { headerClass, landingPageClass } from '../styles/pages/LandingPage.css';
 import { Page } from './Page';
 import { Heading } from './ui/Heading';
-// import { LoadingOrError } from './ui/Loading';
 import { RichText } from './ui/RichText';
 import { TypeWriter } from './ui/TypeWriter';
 
