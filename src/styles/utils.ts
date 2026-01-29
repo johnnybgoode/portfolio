@@ -51,3 +51,15 @@ export const space = (cssProp: SpaceProp, cssString: string) => {
       };
   }
 };
+
+export const hexToDec = (hexStr: string) => {
+  const hex = hexStr.charAt(0) === '#' ? hexStr.substring(1) : hexStr;
+  if (hex.length < 6) {
+    throw new Error(`Invalid hex color string ${hexStr}`);
+  }
+  const rgb = [];
+  for (let i = 0; i < hex.length; i += 2) {
+    rgb.push(parseInt(hex.slice(i, i + 2), 16));
+  }
+  return rgb;
+};

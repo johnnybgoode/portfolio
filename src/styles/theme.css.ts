@@ -1,4 +1,5 @@
 import { createGlobalTheme, createTheme } from '@vanilla-extract/css';
+import { hexToDec } from './utils';
 
 export const breakpoints = {
   mobile: {
@@ -19,8 +20,17 @@ const colors = {
   sand: '#ECE1D7',
   foam: '#85B695',
   cyan: '#89B3B6',
+  dark_red: '#7D2A2F',
+  red: '#BD8183',
   sun: '#EBC06D', // '#E2C28C'
+  stone: '#F1F1F1',
 };
+const rgb = Object.fromEntries(
+  Object.entries(colors).map(([colorName, colorHex]) => [
+    colorName,
+    hexToDec(colorHex).join(','),
+  ]),
+);
 
 export const vars = createGlobalTheme(':root', {
   space: {
@@ -92,6 +102,7 @@ export const [darkThemeClass, colorVars] = createTheme({
   background: colors.dusk,
   body: colors.sand,
   ...colors,
+  rgb,
 });
 
 export const lightThemeClass = createTheme(colorVars, {
@@ -99,4 +110,5 @@ export const lightThemeClass = createTheme(colorVars, {
   background: colors.sand,
   body: colors.dusk,
   ...colors,
+  rgb,
 });
