@@ -6,18 +6,15 @@ export const useBreakpoint = () => {
   const [breakpoint, setBreakpoint] =
     useState<keyof typeof breakpoints>('mobile');
 
-  const breakpointEntries = objectEntries(breakpoints);
-
   const handleResize = useCallback(() => {
-    const winWidth = window.innerWidth;
-    const currentBreakpoint = breakpointEntries
+    const currentBreakpoint = objectEntries(breakpoints)
       .reverse()
-      .find(([, value]) => winWidth >= value.width);
+      .find(([, value]) => window.innerWidth >= value.width);
 
     if (currentBreakpoint) {
       setBreakpoint(currentBreakpoint[0]);
     }
-  }, [breakpointEntries]);
+  }, []);
 
   useEffect(() => {
     window.addEventListener('resize', throttle(handleResize));
