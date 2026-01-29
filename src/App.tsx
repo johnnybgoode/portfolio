@@ -13,10 +13,11 @@ export const App = () => {
   const [colorScheme] = useColorScheme();
   const colorSchemeClass =
     colorScheme === 'dark' ? darkThemeClass : lightThemeClass;
+
   return (
     <div className={[appWrapper, colorSchemeClass].join(' ')}>
       <ErrorBoundary fallback={<ErrorMessage />}>
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<Loading size="lg" variant="fullscreen" />}>
           <Router />
         </Suspense>
       </ErrorBoundary>
