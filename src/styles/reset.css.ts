@@ -11,7 +11,7 @@ globalStyle('html, body', {
 });
 
 globalStyle('body', {
-  lineHeight: 1.5,
+  lineHeight: 1,
   fontSynthesis: 'none',
   textRendering: 'optimizeLegibility',
   WebkitFontSmoothing: 'antialiased',

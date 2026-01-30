@@ -22,6 +22,11 @@ const iconBase = style([
   iconFontBase,
   {
     fontFamily: `${faIconFont} !important`,
+    '@media': {
+      print: {
+        opacity: '0.5',
+      },
+    },
   },
 ]);
 
