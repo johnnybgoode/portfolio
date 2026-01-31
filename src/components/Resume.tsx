@@ -37,8 +37,16 @@ export const Resume = ({ pageId }: ResumeProps) => {
         <Divider direction="vertical" marginX="400" marginY="400" width="50" />
 
         <Box alignSelf="center" style={{ minWidth: '210px' }}>
-          <IconLink href={page.email?.email} iconName="mail" />
-          <IconLink href={page.phone?.phone_number} iconName="phone" />
+          <IconLink
+            href={page.email?.email}
+            iconName="mail"
+            protocol="mailto:"
+          />
+          <IconLink
+            href={page.phone?.phone_number}
+            iconName="phone"
+            protocol="tel:"
+          />
           <IconLink href={page.linkedin?.url} iconName="linkedin" />
           <IconLink href={page.github?.url} iconName="github" />
           <IconLink href={page.website?.url} iconName="link" />
