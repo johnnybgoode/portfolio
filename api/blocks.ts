@@ -1,10 +1,8 @@
 import type { BlockObjectResponse } from '@notionhq/client';
 import { Client, isFullBlock } from '@notionhq/client';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import {
-  isBulletedListItemBlock,
-  type NotionBlock,
-} from '../src/data/block.ts';
+import { isBulletedListItemBlock, type NotionBlock } from '#data/block.ts';
+import { parseId } from './utils.ts';
 
 // Initializing a client
 const notion = new Client({
@@ -47,16 +45,8 @@ const filterGroups = <T>(arr: T[], predicate: (i: T) => boolean) => {
   return groups;
 };
 
-const parseParentId = (url: string, res: VercelResponse) => {
-  try {
-    return url.split('?')[0].split('/').pop();
-  } catch (__e: unknown) {
-    res.status(400).json({ error: 'Failed to parse URL' });
-  }
-};
-
 export default async function GET(req: VercelRequest, res: VercelResponse) {
-  const parentId = parseParentId(req.url!, res);
+  const parentId = parseId(req.url!, res);
 
   if (!parentId || typeof parentId !== 'string') {
     return res.status(400).json({ error: 'Parent ID is required.' });

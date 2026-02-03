@@ -1,5 +1,6 @@
 import { Client, isFullDatabase } from '@notionhq/client';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { parseId } from './utils.ts';
 
 const dataSource = import('./data-source.ts');
 
@@ -14,16 +15,9 @@ const fetchDatabase = async (databaseId: string) => {
   return response;
 };
 
-const parseDatabaseId = (url: string, res: VercelResponse) => {
-  try {
-    return url.split('?')[0].split('/').pop();
-  } catch (__e: unknown) {
-    res.status(400).json({ error: 'Failed to parse URL' });
-  }
-};
-
 export default async function GET(req: VercelRequest, res: VercelResponse) {
-  const databaseId = parseDatabaseId(req.url!, res);
+  const databaseId = parseId(req.url!, res);
+
   if (!databaseId || typeof databaseId !== 'string') {
     return res.status(400).json({ error: 'Database ID is required.' });
   }

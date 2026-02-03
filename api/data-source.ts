@@ -5,6 +5,7 @@ import {
   isFullPageOrDataSource,
 } from '@notionhq/client';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { parseId } from './utils';
 
 // Initializing a client
 const notion = new Client({
@@ -45,16 +46,8 @@ export const fetchAndQueryDataSource = async (dataSourceId: string) => {
   };
 };
 
-const parseDataSourceId = (url: string, res: VercelResponse) => {
-  try {
-    return url.split('?')[0].split('/').pop();
-  } catch (__e: unknown) {
-    res.status(400).json({ error: 'Failed to parse URL' });
-  }
-};
-
 export default async function GET(req: VercelRequest, res: VercelResponse) {
-  const dataSourceId = parseDataSourceId(req.url!, res);
+  const dataSourceId = parseId(req.url!, res);
 
   if (!dataSourceId || typeof dataSourceId !== 'string') {
     return res.status(400).json({ error: 'Data source ID is required.' });
