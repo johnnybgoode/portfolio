@@ -1,8 +1,8 @@
 import type { BlockObjectResponse } from '@notionhq/client';
 import { Client, isFullBlock } from '@notionhq/client';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { isBulletedListItemBlock, type NotionBlock } from '#data/block.ts';
-import { parseId } from './utils.ts';
+import { isBulletedListItemBlock, type NotionBlock } from '#data/block.js';
+import { parseId } from './utils.js';
 
 // Initializing a client
 const notion = new Client({

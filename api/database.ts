@@ -1,8 +1,7 @@
 import { Client, isFullDatabase } from '@notionhq/client';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { parseId } from './utils.ts';
-
-const dataSource = import('./data-source.ts');
+import { parseId } from './utils.js';
+import { fetchAndQueryDataSource } from './data-source.js';
 
 const notion = new Client({
   auth: process.env.NOTION_AUTH_TK,
@@ -34,7 +33,6 @@ export default async function GET(req: VercelRequest, res: VercelResponse) {
         .status(404)
         .json({ error: 'Data source not found for the given database.' });
     }
-    const { fetchAndQueryDataSource } = await dataSource;
     const dataSourceId = databaseResponse.data_sources[0].id;
     const dataSourceResponse = await fetchAndQueryDataSource(dataSourceId);
     const name = databaseResponse.data_sources[0].name

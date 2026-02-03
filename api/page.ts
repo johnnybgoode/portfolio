@@ -5,7 +5,7 @@ import {
   isNotionClientError,
 } from '@notionhq/client';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { parseId } from './utils.ts';
+import { parseId } from './utils.js';
 
 // Initializing a client
 const notion = new Client({

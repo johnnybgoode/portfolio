@@ -5,7 +5,7 @@ import {
   isFullPageOrDataSource,
 } from '@notionhq/client';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { parseId } from './utils';
+import { parseId } from './utils.js';
 
 // Initializing a client
 const notion = new Client({
