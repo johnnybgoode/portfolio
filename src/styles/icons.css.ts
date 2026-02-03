@@ -1,7 +1,7 @@
 import { fontFace, style, styleVariants } from '@vanilla-extract/css';
 
 const faIconFont = fontFace({
-  src: "url('fonts/fa-icons.woff2?55abcg') format('woff2')",
+  src: "url('/fonts/fa-icons.woff2?55abcg') format('woff2')",
   fontDisplay: 'block',
   fontStyle: 'normal',
   fontWeight: 'normal',
