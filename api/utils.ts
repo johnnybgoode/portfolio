@@ -13,7 +13,8 @@ export const parseId = (url: string, res: VercelResponse) => {
       return STATIC_PAGE_IDS[id as StaticPageKeys];
     }
     return id;
-  } catch (__e: unknown) {
+  } catch (e: unknown) {
+    console.error(e);
     res.status(400).json({ error: 'Failed to parse ID from URL' });
   }
 };
