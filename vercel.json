@@ -1,5 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
   "headers": [
     {
       "source": "/api/(.*)",
@@ -15,17 +16,16 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=3600"
+          "value": "public, max-age=0, s-maxage=3600"
         }
       ]
     }
   ],
-  "functions": {
-    "api/blocks*.ts": {
-      "includeFiles": "src/data/block.ts"
-    }
-  },
   "redirects": [
+    {
+      "source": "/api/blocksRecursive(.*)",
+      "destination": "/"
+    },
     {
       "source": "/api/utils(.*)",
       "destination": "/"
@@ -34,19 +34,23 @@
   "rewrites": [
     {
       "source": "/api/blocks/:id",
-      "destination": "/api/blocks.ts"
+      "destination": "/api/blocks"
     },
     {
       "source": "/api/database/:id",
-      "destination": "/api/database.ts"
+      "destination": "/api/database"
     },
     {
       "source": "/api/data-source/:id",
-      "destination": "/api/data-source.ts"
+      "destination": "/api/data-source"
     },
     {
       "source": "/api/page/:id",
-      "destination": "/api/page.ts"
+      "destination": "/api/page"
+    },
+    {
+      "source": "/([^.@]+)",
+      "destination": "/"
     }
   ]
 }
