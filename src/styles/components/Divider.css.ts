@@ -4,7 +4,7 @@ import { colorVars } from '../theme.css';
 const base = style({
   borderColor: colorVars.body,
   flexShrink: 1,
-  opacity: '0.5',
+  opacity: 0.7,
 });
 
 export const dividerVariants = styleVariants({

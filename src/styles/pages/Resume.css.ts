@@ -6,4 +6,9 @@ export const resumeWrapper = style({
   margin: '0 auto',
   paddingBlockStart: vars.space[500],
   paddingInline: vars.space[500],
+  '@media': {
+    print: {
+      paddingInline: vars.space[500],
+    },
+  },
 });

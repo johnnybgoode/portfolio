@@ -1,20 +1,38 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { createVar, globalStyle, style } from '@vanilla-extract/css';
 import { colorVars, vars } from '../theme.css';
 import { dividerVariants } from './Divider.css';
 
-const timelineDot = style({
-  fill: colorVars.body,
-  width: '6px',
-});
+const dotSize = createVar();
 
 const timelineSegment = style({
   position: 'absolute',
-  left: '-3px',
+  left: `calc(${dotSize} / 2 * -1)`,
   top: '11px',
   bottom: '-11px',
   selectors: {
     '&:last-of-type': {
       bottom: '11px',
+    },
+  },
+  vars: {
+    [dotSize]: '6px',
+  },
+  '@media': {
+    print: {
+      vars: {
+        [dotSize]: '5px',
+      },
+    },
+  },
+});
+
+const timelineDot = style({
+  fill: colorVars.body,
+  opacity: 0.7,
+  width: dotSize,
+  '@media': {
+    print: {
+      width: dotSize,
     },
   },
 });
@@ -31,11 +49,20 @@ export default {
   experienceItem,
 } as const;
 
+globalStyle(`${experienceItem}:last-of-type`, {
+  paddingBlockEnd: 0,
+});
+
 globalStyle(`${experienceItem}:last-of-type > ${timelineSegment}`, {
-  bottom: '11px',
+  bottom: vars.space[250],
 });
 
 globalStyle(`${timelineSegment} > ${dividerVariants['vertical']}`, {
-  height: '100%',
-  marginLeft: 'calc(50% - 0.5px)',
+  height: `calc(100% - ${dotSize})`,
+  marginInlineStart: 'calc(50% - 0.5px)',
+  '@media': {
+    print: {
+      marginInlineStart: '2px',
+    },
+  },
 });

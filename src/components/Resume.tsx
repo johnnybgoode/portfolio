@@ -67,21 +67,30 @@ export const Resume = ({ pageId }: ResumeProps) => {
       <Divider marginY="400" width="50" />
 
       <Flex alignItems="stretch" flexDirection={['column', 'row']}>
-        <Box flexGrow={1} paddingY="300">
+        <Box flexGrow={1} paddingY="100">
           <Experience experience={page.experience} />
         </Box>
 
         <Divider
           direction={breakpoint === 'mobile' ? 'horizontal' : 'vertical'}
+          marginBlockEnd="350"
+          marginBlockStart="400"
           marginX={['0', '400']}
-          marginY={['400', '200']}
           paddingBlockStart={['300', '0']}
           width="50"
         />
 
-        <Box paddingY={['0', '300']} style={{ minWidth: '210px' }}>
+        <Box
+          paddingBlockStart={['0', '100']}
+          paddingInlineEnd={['0', '300']}
+          style={{ minWidth: '210px', maxWidth: '210px' }}
+        >
           <Heading level={3}>{page.skills?.label}</Heading>
-          <List items={page.skills?.multi_select.map(item => item.name)} />
+          <List
+            items={page.skills?.multi_select.map(item => item.name)}
+            paddingBlockStart="200"
+            variant="inline"
+          />
         </Box>
       </Flex>
     </div>

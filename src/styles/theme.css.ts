@@ -42,9 +42,9 @@ export const vars = createGlobalTheme(':root', {
     '350': '12px',
     '400': '16px',
     '500': '24px',
-    // '600': '32px',
-    // '700': '40px',
-    // '800': '48px',
+    '600': '32px',
+    '700': '40px',
+    '800': '48px',
   },
   typography: {
     font: {

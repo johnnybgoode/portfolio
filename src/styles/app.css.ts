@@ -12,7 +12,7 @@ export const appWrapper = style({
     print: {
       background: 'white',
       color: 'black',
-      lineHeight: 1.2,
+      lineHeight: 1.3,
       vars: {
         [colorVars.background]: 'white',
         [colorVars.body]: 'black',
@@ -34,7 +34,7 @@ globalStyle(':root', {
       fontSize: breakpoints.tablet.fontSize,
     },
     print: {
-      fontSize: breakpoints.tablet.fontSize,
+      fontSize: '13px', //breakpoints.tablet.fontSize,
     },
   },
 });

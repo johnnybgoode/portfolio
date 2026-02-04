@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { ListClass } from '../../styles/components/List.css';
+import { listWrapper } from '../../styles/components/List.css';
 import type {
   ListProps as ListStyleProps,
   SpaceProps,
@@ -8,6 +8,7 @@ import { Box, type BoxElementWithStyles } from './Box';
 
 type BaseListProps = {
   type?: 'bulleted' | 'numbered';
+  variant?: keyof typeof listWrapper;
 } & BoxElementWithStyles<'ul' | 'ol', ListStyleProps | SpaceProps>;
 
 interface ItemListProps extends BaseListProps {
@@ -26,14 +27,16 @@ export const List = ({
   children,
   items,
   type,
+  variant,
   ...rest
 }: ListProps) => {
   if (!items && !children) {
     return null;
   }
   const tag = type === 'numbered' ? 'ol' : 'ul';
+
   return (
-    <Box as={tag} className={ListClass} {...rest}>
+    <Box as={tag} className={listWrapper[variant || 'block']} {...rest}>
       {children || items?.map((item, i) => <li key={i}>{item}</li>)}
     </Box>
   );

@@ -52,11 +52,11 @@ const ExperienceItem = ({ pageId }: { pageId: string }) => {
           </Heading>
           <Box>
             <RichText text={page.start?.rich_text} />
-            &mdash;
+            &nbsp;&mdash;&nbsp;
             <RichText text={page.end?.rich_text} />
           </Box>
         </Flex>
-        <Box>
+        <Box paddingBlockEnd="200">
           <TextBox fontWeight="500">
             <RichText text={page.position?.rich_text} />
           </TextBox>
