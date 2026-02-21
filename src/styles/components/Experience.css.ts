@@ -1,6 +1,7 @@
 import { createVar, globalStyle, style } from '@vanilla-extract/css';
 import { colorVars, vars } from '../theme.css';
 import { dividerVariants } from './Divider.css';
+import { listWrapper } from './List.css';
 
 const dotSize = createVar();
 
@@ -19,6 +20,8 @@ const timelineSegment = style({
   },
   '@media': {
     print: {
+      top: '9px',
+      bottom: '-9px',
       vars: {
         [dotSize]: '5px',
       },
@@ -41,6 +44,12 @@ const experienceItem = style({
   paddingInlineStart: vars.space[400],
   paddingBlockEnd: vars.space[400],
   position: 'relative',
+  '@media': {
+    print: {
+      paddingInlineStart: vars.space[350],
+      paddingBlockEnd: vars.space[350],
+    },
+  },
 });
 
 export default {
@@ -54,7 +63,7 @@ globalStyle(`${experienceItem}:last-of-type`, {
 });
 
 globalStyle(`${experienceItem}:last-of-type > ${timelineSegment}`, {
-  bottom: vars.space[250],
+  bottom: vars.space[200],
 });
 
 globalStyle(`${timelineSegment} > ${dividerVariants['vertical']}`, {
@@ -62,7 +71,24 @@ globalStyle(`${timelineSegment} > ${dividerVariants['vertical']}`, {
   marginInlineStart: 'calc(50% - 0.5px)',
   '@media': {
     print: {
-      marginInlineStart: '2px',
+      marginInlineStart: '2.125px',
+    },
+  },
+});
+
+globalStyle(`${experienceItem} ${listWrapper['block']} li`, {
+  '@media': {
+    print: {
+      lineHeight: '1.25',
+      marginBlockEnd: vars.space[250],
+    },
+  },
+});
+
+globalStyle(`${experienceItem} ${listWrapper['block']} li:last-of-type`, {
+  '@media': {
+    print: {
+      marginBlockEnd: 0,
     },
   },
 });

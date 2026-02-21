@@ -38,6 +38,7 @@ type ExperienceProperties = {
   name: TitlePropertyValue;
   start: RichTextPropertyValue;
   end: RichTextPropertyValue;
+  location: RichTextPropertyValue;
   position: RichTextPropertyValue;
 };
 export type ExperiencePageData = Partial<{

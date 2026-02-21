@@ -12,13 +12,14 @@ export const appWrapper = style({
     print: {
       background: 'white',
       color: 'black',
-      lineHeight: 1.3,
+      lineHeight: 1.1,
       vars: {
         [colorVars.background]: 'white',
         [colorVars.body]: 'black',
-        [vars.typography.h1.size]: '3rem',
-        [vars.typography.h2.size]: '2rem',
-        [vars.typography.h3.size]: '1.45rem',
+        [vars.typography.h1.size]: '2.75rem',
+        [vars.typography.h2.size]: '1.8rem',
+        [vars.typography.h3.size]: '1.4rem',
+        [vars.typography.h4.size]: '1.2rem',
       },
     },
   },
@@ -34,7 +35,7 @@ globalStyle(':root', {
       fontSize: breakpoints.tablet.fontSize,
     },
     print: {
-      fontSize: '13px', //breakpoints.tablet.fontSize,
+      fontSize: '12px',
     },
   },
 });

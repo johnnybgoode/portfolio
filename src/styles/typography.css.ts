@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 import { colorVars, vars } from './theme.css';
 import { space } from './utils';
 
@@ -47,7 +47,7 @@ const h5Class = style({
   fontSize: vars.typography.h5.size,
   fontWeight: vars.typography.h5.weight,
   lineHeight: vars.typography.h5.lineHeight,
-  ...space('margin', '0.5em 0'),
+  ...space('margin', '0.95em 0 0.35em 0'),
 });
 
 export const headingClasses = {
@@ -72,4 +72,8 @@ export const linkClass = style({
     color: colorVars.primary,
     textDecoration: 'underline',
   },
+});
+
+globalStyle('strong', {
+  fontWeight: '500',
 });

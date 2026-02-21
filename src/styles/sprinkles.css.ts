@@ -73,8 +73,9 @@ const flexProperties = defineProperties({
   conditions: {
     mobile: {},
     tablet: { '@media': breakpoints.tablet.mediaQuery },
+    print: { '@media': 'print' },
   },
-  responsiveArray: ['mobile', 'tablet'],
+  responsiveArray: ['mobile', 'tablet', 'print'],
 });
 export const flexProps = keyOf(flexProperties.styles);
 
@@ -119,8 +120,9 @@ const spaceProperties = defineProperties({
   conditions: {
     mobile: {},
     tablet: { '@media': breakpoints.tablet.mediaQuery },
+    print: { '@media': 'print' },
   },
-  responsiveArray: ['mobile', 'tablet'],
+  responsiveArray: ['mobile', 'tablet', 'print'],
 });
 export const spaceProps = keyOf(spaceProperties.styles);
 
@@ -143,8 +145,9 @@ const sizeProperties = defineProperties({
   conditions: {
     mobile: {},
     tablet: { '@media': breakpoints.tablet.mediaQuery },
+    print: { '@media': 'print' },
   },
-  responsiveArray: ['mobile', 'tablet'],
+  responsiveArray: ['mobile', 'tablet', 'print'],
 });
 export const sizeProps = keyOf(sizeProperties.styles);
 
