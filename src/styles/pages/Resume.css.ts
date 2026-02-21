@@ -28,7 +28,7 @@ export const resumeRightCol = style({
   },
 });
 
-export const lowerWrapper = style({})
+export const lowerWrapper = style({});
 
 export const skillsWrapper = style({});
 

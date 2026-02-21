@@ -7,7 +7,7 @@ const dotSize = createVar();
 
 const timelineSegment = style({
   position: 'absolute',
-  left: `calc(${ dotSize } / 2 * -1)`,
+  left: `calc(${dotSize} / 2 * -1)`,
   top: '11px',
   bottom: '-11px',
   selectors: {
@@ -40,7 +40,6 @@ const timelineDot = style({
   },
 });
 
-
 const experienceItem = style({
   paddingInlineStart: vars.space[400],
   paddingBlockEnd: vars.space[400],
@@ -59,16 +58,16 @@ export default {
   experienceItem,
 } as const;
 
-globalStyle(`${ experienceItem }:last-of-type`, {
+globalStyle(`${experienceItem}:last-of-type`, {
   paddingBlockEnd: 0,
 });
 
-globalStyle(`${ experienceItem }:last-of-type > ${ timelineSegment }`, {
+globalStyle(`${experienceItem}:last-of-type > ${timelineSegment}`, {
   bottom: vars.space[200],
 });
 
-globalStyle(`${ timelineSegment } > ${ dividerVariants['vertical'] }`, {
-  height: `calc(100% - ${ dotSize })`,
+globalStyle(`${timelineSegment} > ${dividerVariants['vertical']}`, {
+  height: `calc(100% - ${dotSize})`,
   marginInlineStart: 'calc(50% - 0.5px)',
   '@media': {
     print: {
@@ -77,7 +76,7 @@ globalStyle(`${ timelineSegment } > ${ dividerVariants['vertical'] }`, {
   },
 });
 
-globalStyle(`${ experienceItem } ${ listWrapper['block'] } li`, {
+globalStyle(`${experienceItem} ${listWrapper['block']} li`, {
   '@media': {
     print: {
       lineHeight: '1.25',
@@ -86,7 +85,7 @@ globalStyle(`${ experienceItem } ${ listWrapper['block'] } li`, {
   },
 });
 
-globalStyle(`${ experienceItem } ${ listWrapper['block'] } li:last-of-type`, {
+globalStyle(`${experienceItem} ${listWrapper['block']} li:last-of-type`, {
   '@media': {
     print: {
       marginBlockEnd: 0,

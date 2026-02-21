@@ -41,15 +41,3 @@ globalStyle(`${listWrapper['inline']} > li::before`, {
   paddingInlineEnd: vars.space[250],
   opacity: 0.8,
 });
-
-globalStyle(`${listWrapper['inline']} > li:nth-of-type(8n)`, {
-  '@media': {
-    print: {
-      flexBasis: '51%',
-    },
-  },
-});
-
-globalStyle(`${listWrapper['inline']} > li:nth-of-type(24)`, {
-  flexBasis: 'min-content',
-});
