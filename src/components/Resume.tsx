@@ -66,10 +66,7 @@ export const Resume = ({ pageId }: ResumeProps) => {
 
       <Divider marginY="400" width="50" />
 
-      <Flex alignItems="stretch" flexDirection={['column', 'row']}>
-        <Box flexGrow={1} paddingY="100">
-          <Experience experience={page.experience} />
-        </Box>
+            <Experience experience={page.experience} pageId={pageId} />
 
         <Divider
           direction={breakpoint === 'mobile' ? 'horizontal' : 'vertical'}

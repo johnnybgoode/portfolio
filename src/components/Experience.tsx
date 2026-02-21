@@ -1,6 +1,8 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
+import { getBlockData } from '#data/block.ts';
+import { getDatabase } from '#data/database.ts';
 import {
   type ExperiencePageData,
   getPage,
@@ -67,12 +69,53 @@ const ExperienceItem = ({ pageId }: { pageId: string }) => {
   );
 };
 
+type ExperienceDatabaseResult = {
+  [k in Capitalize<keyof ExperiencePageData>]: ExperiencePageData[Lowercase<k>];
+} & { id: string };
+
+const ExperienceRows = ({ pageId }: { pageId: string }) => {
+  const { data } = useSuspenseQuery({
+    queryKey: ['experienceDatabase', pageId],
+    queryFn: async () => {
+      const { blocks } = await getBlockData(pageId);
+      const databaseBlock = blocks.find(b => b.type === 'child_database');
+      if (!databaseBlock) {
+        throw new Error(`No child database found for page ${pageId}`);
+      }
+      const database = await getDatabase(databaseBlock.id);
+      if (!database.data?.results) {
+        throw new Error('No database results');
+      }
+      return (database.data.results as unknown as ExperienceDatabaseResult[])
+        .map(r => ({
+          start: Number(r.Start?.rich_text[0].plain_text),
+          end: Number(r.End?.rich_text[0].plain_text),
+          id: r.id,
+        }))
+        .sort((a, b) => b.start - a.start);
+    },
+  });
+
+  return (
+    <>
+      {data.map(({ id }) => (
+        <ErrorBoundary fallback={<ErrorMessage />} key={id}>
+          <Suspense fallback={<Loading />}>
+            <ExperienceItem pageId={id} />
+          </Suspense>
+        </ErrorBoundary>
+      ))}
+    </>
+  );
+};
+
 type ExperienceProps = {
+  pageId: string;
   experience: ResumePageData['experience'];
 };
 
-export const Experience = ({ experience }: ExperienceProps) => {
-  if (!experience || !experience.relation) {
+export const Experience = ({ pageId, experience }: ExperienceProps) => {
+  if (!pageId || !experience || !experience.label) {
     return;
   }
 
@@ -80,14 +123,11 @@ export const Experience = ({ experience }: ExperienceProps) => {
     <Box>
       <Heading level={3}>{experience.label}</Heading>
       <Flex alignItems="stretch">
-        <Box paddingInlineEnd="300" paddingInlineStart="400" paddingY="200">
-          {experience.relation.map(({ id }) => (
-            <ErrorBoundary fallback={<ErrorMessage />} key={id}>
-              <Suspense fallback={<Loading />}>
-                <ExperienceItem pageId={id} />
-              </Suspense>
-            </ErrorBoundary>
-          ))}
+          <ErrorBoundary fallback={<ErrorMessage />}>
+            <Suspense fallback={<Loading />}>
+              <ExperienceRows pageId={pageId} />
+            </Suspense>
+          </ErrorBoundary>
         </Box>
       </Flex>
     </Box>
