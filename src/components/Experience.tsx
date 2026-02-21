@@ -43,26 +43,33 @@ const ExperienceItem = ({ pageId }: { pageId: string }) => {
   return (
     <div className={styles.experienceItem}>
       <TimelineSegment />
-      <Flex flexDirection="column" gap="100">
-        <Flex
-          alignItems="center"
-          justifyContent="space-between"
-          paddingInlineEnd="400"
-        >
+      <Flex
+        flexDirection="column"
+        gap="100"
+        paddingInlineEnd={['300', '400', '0']}
+      >
+        <Flex alignItems="center" justifyContent="space-between">
           <Heading level={4} marginY="200">
             <RichText text={page.name?.title} />
           </Heading>
+          <TextBox fontWeight="500">
+            <RichText text={page.location?.rich_text} />
+          </TextBox>
+        </Flex>
+        <Flex
+          alignItems="center"
+          justifyContent="space-between"
+          paddingBlockEnd="200"
+        >
+          <TextBox fontWeight="500">
+            <RichText text={page.position?.rich_text} />
+          </TextBox>
           <Box>
             <RichText text={page.start?.rich_text} />
             &nbsp;&mdash;&nbsp;
             <RichText text={page.end?.rich_text} />
           </Box>
         </Flex>
-        <Box paddingBlockEnd="200">
-          <TextBox fontWeight="500">
-            <RichText text={page.position?.rich_text} />
-          </TextBox>
-        </Box>
         <Blocks parentId={pageId} />
       </Flex>
     </div>
@@ -123,6 +130,11 @@ export const Experience = ({ pageId, experience }: ExperienceProps) => {
     <Box>
       <Heading level={3}>{experience.label}</Heading>
       <Flex alignItems="stretch">
+        <Box
+          paddingInlineEnd={['300', '300', '250']}
+          paddingInlineStart={['300', '400', '300']}
+          paddingY="200"
+        >
           <ErrorBoundary fallback={<ErrorMessage />}>
             <Suspense fallback={<Loading />}>
               <ExperienceRows pageId={pageId} />
