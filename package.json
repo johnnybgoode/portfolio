@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "biome check --write ",
+    "lint": "biome check --diagnostic-level=warn --write",
     "format": "biome format --write ",
     "fml": "biome format . --write; biome check . --write",
-    "precommit": "biome format ./src && biome check ./src",
+    "precommit": "biome check --staged ./src",
     "preview": "vite preview",
     "test": "vitest"
   },

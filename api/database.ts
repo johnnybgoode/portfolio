@@ -1,7 +1,7 @@
 import { Client, isFullDatabase } from '@notionhq/client';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { parseId } from './utils.js';
 import { fetchAndQueryDataSource } from './data-source.js';
+import { parseId } from './utils.js';
 
 const notion = new Client({
   auth: process.env.NOTION_AUTH_TK,
