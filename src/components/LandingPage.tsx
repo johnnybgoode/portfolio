@@ -1,4 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
+import { useDocumentTitle } from '#hooks/useDocumentTitle.ts';
 import { getLandingPage } from '../data/page';
 import { headerClass, landingPageClass } from '../styles/pages/LandingPage.css';
 import { Page } from './Page';
@@ -15,6 +16,7 @@ export const LandingPage = ({ pageId }: LandingPageProps) => {
     queryKey: ['pageData', pageId],
     queryFn: () => getLandingPage(pageId),
   });
+  useDocumentTitle('', true);
 
   return (
     <div className={landingPageClass}>
