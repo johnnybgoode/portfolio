@@ -1,9 +1,12 @@
 import { screen } from '@testing-library/react';
 import { describe, it } from 'vitest';
 import { Resume } from '../../components/Resume';
+import { makeChildDatabaseBlock } from '../mocks/fixtures/blocks';
 import { makeProperty, makeRichText } from '../mocks/fixtures/properties';
 import {
   makeGetBlocksHandler,
+  makeGetDatabaseHandler,
+  makeGetNestedBlocksHandler,
   makeGetPageHandler,
   makeGetRelatedPagesHandler,
 } from '../mocks/handlers';
@@ -50,9 +53,10 @@ describe('Resume', () => {
   });
 
   it('renders experience section', async () => {
-    const [getPagesHandler, registerResponse] = makeGetRelatedPagesHandler();
+    const [getPagesHandler, registerPageResponse] = makeGetRelatedPagesHandler();
+    const [getBlocksHandler, registerBlocksResponse] = makeGetNestedBlocksHandler();
 
-    registerResponse({
+    registerPageResponse({
       pageId: 'resume',
       pageData: {
         title: makeProperty({
@@ -74,11 +78,11 @@ describe('Resume', () => {
         experience: makeProperty({
           type: 'relation',
           label: 'Experience',
-          value: { relation: [{ id: 'exp-1' }] },
+          value: { relation: [] },
         }),
       },
     });
-    registerResponse({
+    registerPageResponse({
       pageId: 'exp-1',
       pageData: {
         name: makeProperty({
@@ -101,7 +105,20 @@ describe('Resume', () => {
       },
     });
 
-    server.use(getPagesHandler, makeGetBlocksHandler([]));
+    registerBlocksResponse({ parentId: 'resume', blocks: [makeChildDatabaseBlock('exp-db')] });
+    registerBlocksResponse({ parentId: 'exp-1', blocks: [] });
+
+    server.use(
+      getPagesHandler,
+      getBlocksHandler,
+      makeGetDatabaseHandler([
+        {
+          id: 'exp-1',
+          Start: { rich_text: [{ plain_text: '2015' }] },
+          End: { rich_text: [{ plain_text: '2020' }] },
+        },
+      ]),
+    );
 
     render(<Resume pageId="resume" />);
 
