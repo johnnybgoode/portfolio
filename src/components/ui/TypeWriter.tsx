@@ -54,11 +54,9 @@ export const TypeWriter = ({
 }: TypeWriterProps) => {
   const [charIndex, setCharIndex] = useState(0);
   const [messageIndex, setMessagIndex] = useState(0);
-  const [visibleText, setVisibleText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [lastUpdateTime, setLastUpdateTime] = useState(Date.now());
   const [isPaused, setIsPaused] = useState(false);
-  const [isTyping, setIsTyping] = useState(true);
   const messages = textItems.map(str => str.trim());
   const loop = typeof loopProp === 'boolean' ? loopProp : true;
 
@@ -66,6 +64,10 @@ export const TypeWriter = ({
     // End on first message
     messages.push(messages[0]);
   }
+
+  const visibleText = messages[messageIndex].slice(0, charIndex);
+  const currentText = messages[messageIndex];
+  const isTyping = !isPaused && (isDeleting ? charIndex > 0 : charIndex < currentText.length);
 
   useEffect(() => {
     let frameId: number;
@@ -78,29 +80,21 @@ export const TypeWriter = ({
 
       if (elapsed >= delayPerChar) {
         if (!isDeleting && charIndex < currentText.length) {
-          setIsTyping(true);
-          setVisibleText(prev => `${prev}${currentText.charAt(charIndex)}`);
           setCharIndex(charIndex + 1);
           setLastUpdateTime(now);
         } else if (!isDeleting && charIndex === currentText.length) {
           if (messageIndex === messages.length - 1 && !loop) {
             setIsPaused(true);
           } else {
-            setIsTyping(false);
             setIsDeleting(true);
             setLastUpdateTime(now + typingDelay);
           }
         } else if (isDeleting && charIndex > 0) {
-          setIsTyping(true);
           setCharIndex(charIndex - 1);
-          setVisibleText(prev => prev.slice(0, -1));
           setLastUpdateTime(now);
         } else if (isDeleting && charIndex === 0) {
-          setIsTyping(false);
           setIsDeleting(false);
           setLastUpdateTime(now + typingDelay * 0.6);
-          setCharIndex(0);
-          setVisibleText('');
           setMessagIndex((messageIndex + 1) % messages.length);
         }
       }
@@ -126,11 +120,9 @@ export const TypeWriter = ({
   useEffect(() => {
     const onFocus = () => {
       setIsPaused(false);
-      setIsTyping(true);
     };
     const onBlur = () => {
       setIsPaused(true);
-      setIsTyping(false);
     };
     window.addEventListener('focus', onFocus);
     window.addEventListener('blur', onBlur);
