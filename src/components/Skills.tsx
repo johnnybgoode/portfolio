@@ -160,13 +160,3 @@ export const SkillsFrontend = ({ page }: { page: PageData }) => (
     />
   </Box>
 );
-/*
-Core: TypeScript · JavaScript · React · Redux · React Context · Jotai · React Query · RxJS
-Architecture & Patterns: SSR/SSG · Next.js (App Router patterns) · Component architecture · Technical design / RFC authorship · Microservices
-Performance & Observability: Core Web Vitals (FCP, LCP, CLS) · Bundle analysis · Grafana · New Relic · Sentry · Datadog
-Testing: Jest · Vitest · Jasmine · React Testing Library · Playwright · Selenium · Test-driven development
-Styling: Tailwind CSS · CSS-in-JS (styled-components) · Atomic / utility-first CSS systems
-Tooling: Webpack · Vite · GitHub Actions · Travis CI
-Additional: PHP · Python · Drupal · SQL · LLM-powered UX · Web Accessibility (WCAG) · ElevenLabs · OpenAI Integration
-
-*/
