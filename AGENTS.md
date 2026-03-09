@@ -1,5 +1,3 @@
-Use 'bd' for task tracking
-
 <!-- BEGIN BEADS INTEGRATION -->
 ## Issue Tracking with bd (beads)
 
