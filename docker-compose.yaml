@@ -1,5 +1,5 @@
 # Run with
-# GIT_USER="<your name>" GIT_EMAIL="<your email>" docker compose up
+# GIT_USER="<your name>" GIT_EMAIL="<your email>" FOLDER="/Users/you/code" docker compose up -d
 
 services:
   portfolio:
