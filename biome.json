@@ -199,6 +199,15 @@
       "linter": {
         "enabled": false
       }
+    },
+    {
+      "includes": [".beads/**"],
+      "formatter": {
+        "enabled": false
+      },
+      "linter": {
+        "enabled": false
+      }
     }
   ]
 }
