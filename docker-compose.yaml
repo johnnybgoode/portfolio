@@ -1,0 +1,38 @@
+# Run with
+# GIT_USER="<your name>" GIT_EMAIL="<your email>" docker compose up
+
+services:
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile.sandbox
+    container_name: portfolio-sandbox
+    stdin_open: false
+    tty: false
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETUID
+      - SETGID
+      - DAC_OVERRIDE
+      - FOWNER
+      - NET_RAW
+    environment:
+      IS_SANDBOX: 1
+      GIT_USER: ${GIT_USER:-TestUser}
+      GIT_EMAIL: ${GIT_EMAIL:-test@example.com}
+      ENABLE_LSP_TOOLS: 1
+    volumes:
+      - agent-home:/home/agent
+      - ${PWD}:/app
+    #ports:
+    #  - "${DASHBOARD_PORT:-8080}:8080"
+    command: sleep infinity
+
+    # Exec into the container with: docker compose exec portfolio zsh
+
+volumes:
+  agent-home:
