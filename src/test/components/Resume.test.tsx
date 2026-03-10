@@ -53,8 +53,10 @@ describe('Resume', () => {
   });
 
   it('renders experience section', async () => {
-    const [getPagesHandler, registerPageResponse] = makeGetRelatedPagesHandler();
-    const [getBlocksHandler, registerBlocksResponse] = makeGetNestedBlocksHandler();
+    const [getPagesHandler, registerPageResponse] =
+      makeGetRelatedPagesHandler();
+    const [getBlocksHandler, registerBlocksResponse] =
+      makeGetNestedBlocksHandler();
 
     registerPageResponse({
       pageId: 'resume',
@@ -105,7 +107,10 @@ describe('Resume', () => {
       },
     });
 
-    registerBlocksResponse({ parentId: 'resume', blocks: [makeChildDatabaseBlock('exp-db')] });
+    registerBlocksResponse({
+      parentId: 'resume',
+      blocks: [makeChildDatabaseBlock('exp-db')],
+    });
     registerBlocksResponse({ parentId: 'exp-1', blocks: [] });
 
     server.use(
