@@ -1,0 +1,26 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "~/*": ["./src/*"],
+      "~components/*": ["./src/components/*"],
+      "~data/*": ["./src/data/*"],
+      "~styles/*": ["./src/styles/*"],
+      "~test/*": ["./src/test/*"],
+      "~utils/*": ["./src/utils/*"],
+      "@portfolio/notion": ["../../packages/notion/src/index.ts"]
+    },
+    "allowJs": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "jsx": "preserve"
+  },
+  "include": ["src", "next-env.d.ts", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
