@@ -67,7 +67,8 @@ export const TypeWriter = ({
 
   const visibleText = messages[messageIndex].slice(0, charIndex);
   const currentText = messages[messageIndex];
-  const isTyping = !isPaused && (isDeleting ? charIndex > 0 : charIndex < currentText.length);
+  const isTyping =
+    !isPaused && (isDeleting ? charIndex > 0 : charIndex < currentText.length);
 
   useEffect(() => {
     let frameId: number;

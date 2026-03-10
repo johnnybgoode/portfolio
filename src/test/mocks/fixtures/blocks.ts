@@ -1,6 +1,7 @@
 import type {
   BulletedListItemBlock,
   CalloutBlock,
+  ChildDatabaseBlock,
   Heading1Block,
   Heading2Block,
   Heading3Block,
@@ -113,5 +114,13 @@ export const makeListBlock = (children: ListBlock['children']): ListBlock => {
     parent: makePageParent(id),
   };
 };
+
+export const makeChildDatabaseBlock = (id: string): ChildDatabaseBlock => ({
+  type: 'child_database',
+  child_database: { title: '' },
+  id,
+  has_children: false,
+  parent: makePageParent(id),
+});
 
 export const makeBlocks = () => ({ blocks: [] });

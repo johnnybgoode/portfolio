@@ -48,6 +48,16 @@ export const makeGetNestedBlocksHandler = () => {
   return [getBlocksHandler, registerBlocks] as const;
 };
 
+type DatabaseRow = { id: string } & Record<
+  string,
+  { rich_text: Array<{ plain_text: string }> } | undefined
+>;
+
+export const makeGetDatabaseHandler = (results: DatabaseRow[]) =>
+  http.get('/api/database/:id', () =>
+    HttpResponse.json({ name: 'experience', data: { title: [], results } }),
+  );
+
 export const makeGetRelatedPagesHandler = () => {
   const responses = {} as Record<string, PageData>;
 
