@@ -30,8 +30,10 @@ const Dot = () => (
   </Box>
 );
 
+const PAGE_ID = 'resume';
+
 export default async function ResumePage() {
-  const page = await fetchPage<ResumePageData>('resume');
+  const page = await fetchPage<ResumePageData>(PAGE_ID);
 
   return (
     <div className={resumeWrapper}>
@@ -101,7 +103,7 @@ export default async function ResumePage() {
           flexDirection={['column', 'row']}
         >
           <Box flexGrow={1} paddingY="100">
-            <Experience experience={page.experience} pageId="resume" />
+            <Experience experience={page.experience} pageId={PAGE_ID} />
           </Box>
 
           <ResponsiveDivider />

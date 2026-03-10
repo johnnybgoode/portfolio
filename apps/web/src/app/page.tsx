@@ -8,10 +8,12 @@ import { TypeWriter } from '../components/ui/TypeWriter';
 import { headerClass, landingPageClass } from '../styles/pages/LandingPage.css';
 import { pageWrapper } from '../styles/pages/Page.css';
 
+const PAGE_ID = 'home';
+
 export default async function HomePage() {
   const [page, { blocks }] = await Promise.all([
-    fetchLandingPage('home'),
-    fetchBlocks('home'),
+    fetchLandingPage(PAGE_ID),
+    fetchBlocks(PAGE_ID),
   ]);
 
   return (
