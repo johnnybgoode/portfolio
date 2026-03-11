@@ -98,6 +98,23 @@ globalStyle(`${resumeWrapper} h4`, {
   },
 });
 
+export const dot = style({
+  fontSize: '8px',
+  marginTop: '-1px',
+});
+
+export const relativeWrapper = style({
+  position: 'relative',
+});
+
+export const titleHeading = style({
+  minWidth: '210px',
+});
+
+export const summaryText = style({
+  lineHeight: '1.3',
+});
+
 export const printPageBackground = style({
   display: 'none',
   background: '#eee',

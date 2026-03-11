@@ -1,8 +1,8 @@
-import type {
-  PropertyItemObjectResponse,
-  RichTextItemResponse,
-} from '@notionhq/client';
-import { fetchDatabase } from '@portfolio/notion';
+import {
+  fetchDatabase,
+  type PropertyItemObjectResponse,
+  type RichTextItemResponse,
+} from '@portfolio/notion';
 import { Heading } from './ui/Heading';
 import { RichText } from './ui/RichText';
 

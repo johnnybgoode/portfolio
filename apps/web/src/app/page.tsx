@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 import { fetchBlocks, fetchLandingPage } from '@portfolio/notion';
 import { BlockItems } from '../components/Blocks';
 import { Heading } from '../components/ui/Heading';
@@ -7,6 +5,8 @@ import { RichText } from '../components/ui/RichText';
 import { TypeWriter } from '../components/ui/TypeWriter';
 import { headerClass, landingPageClass } from '../styles/pages/LandingPage.css';
 import { pageWrapper } from '../styles/pages/Page.css';
+
+export const revalidate = 3600;
 
 const PAGE_ID = 'home';
 

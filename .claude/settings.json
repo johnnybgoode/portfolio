@@ -6,6 +6,10 @@
         "hooks": [
           {
             "type": "command",
+            "command": "BEADS_DIR=/Users/jack/work/portfolio/.beads; if ! nc -z 127.0.0.1 13958 2>/dev/null; then rm -f \"$BEADS_DIR/dolt/.dolt/noms/LOCK\" \"$BEADS_DIR/dolt/portfolio/.dolt/noms/LOCK\" \"$BEADS_DIR/dolt-server.lock\" \"$BEADS_DIR/dolt-monitor.pid.lock\"; fi"
+          },
+          {
+            "type": "command",
             "command": "bd prime"
           }
         ]

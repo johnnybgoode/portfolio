@@ -40,7 +40,7 @@ export const BlocksClient = ({ parentId }: BlocksProps) => {
     <ErrorBoundary fallback={<ErrorMessage />}>
       <Suspense fallback={<Loading />}>
         <BlockChildren parentId={parentId} />
-      </Suspense>{' '}
+      </Suspense>
     </ErrorBoundary>
   );
 };
