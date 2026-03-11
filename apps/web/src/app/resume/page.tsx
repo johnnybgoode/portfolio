@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 import type { ResumePageData } from '@portfolio/notion';
 import { fetchPage } from '@portfolio/notion';
 import type { Metadata } from 'next';
@@ -14,18 +12,24 @@ import { IconLink } from '../../components/ui/IconLink';
 import { RichText } from '../../components/ui/RichText';
 import { TextBox } from '../../components/ui/TextBox';
 import {
+  dot,
   lowerWrapper,
   printPageBackground,
+  relativeWrapper,
   resumeRightCol,
   resumeWrapper,
+  summaryText,
+  titleHeading,
 } from '../../styles/pages/Resume.css';
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Senior Software Engineer | Resume | John Entwistle',
 };
 
 const Dot = () => (
-  <Box paddingX="200" style={{ fontSize: '8px', marginTop: '-1px' }}>
+  <Box className={dot} paddingX="200">
     •
   </Box>
 );
@@ -38,7 +42,7 @@ export default async function ResumePage() {
   return (
     <div className={resumeWrapper}>
       <div className={printPageBackground}>&nbsp;</div>
-      <div style={{ position: 'relative' }}>
+      <div className={relativeWrapper}>
         <Flex
           alignItems="stretch"
           justifyContent="space-between"
@@ -47,9 +51,9 @@ export default async function ResumePage() {
           <Box flexGrow={1} paddingInlineStart="100" width={['40', '70']}>
             {page.title && (
               <Heading
+                className={titleHeading}
                 level={1}
                 paddingInlineStart="100"
-                style={{ minWidth: '210px' }}
                 width="30"
               >
                 <RichText text={page.title.rich_text} />
@@ -89,7 +93,7 @@ export default async function ResumePage() {
         >
           <Heading level={3}>{page.professionalSummary?.label}</Heading>
           <Box as="aside" paddingInlineEnd="500" paddingX="350" paddingY="200">
-            <TextBox as="aside" fontSize="200" style={{ lineHeight: '1.3' }}>
+            <TextBox as="aside" className={summaryText} fontSize="200">
               <RichText text={page.professionalSummary?.rich_text} />
             </TextBox>
           </Box>

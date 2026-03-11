@@ -1,4 +1,8 @@
 // Types
+export type {
+  PropertyItemObjectResponse,
+  RichTextItemResponse,
+} from '@notionhq/client';
 
 // Fetch functions
 export { fetchBlocks } from './blocks.ts';
