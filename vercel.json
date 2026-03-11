@@ -1,6 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "cleanUrls": true,
+  "framework": "nextjs",
+  "outputDirectory": "apps/web/.next",
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm --filter @portfolio/web build",
   "headers": [
     {
       "source": "/api/(.*)",
@@ -19,38 +22,6 @@
           "value": "public, max-age=0, s-maxage=3600"
         }
       ]
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/api/blocksRecursive(.*)",
-      "destination": "/"
-    },
-    {
-      "source": "/api/utils(.*)",
-      "destination": "/"
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/blocks/:id",
-      "destination": "/api/blocks"
-    },
-    {
-      "source": "/api/database/:id",
-      "destination": "/api/database"
-    },
-    {
-      "source": "/api/data-source/:id",
-      "destination": "/api/data-source"
-    },
-    {
-      "source": "/api/page/:id",
-      "destination": "/api/page"
-    },
-    {
-      "source": "/([^.@]+)",
-      "destination": "/"
     }
   ]
 }

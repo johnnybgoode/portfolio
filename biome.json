@@ -158,31 +158,39 @@
       }
     },
     {
-      "includes": ["api/**"],
-      "linter": {
-        "rules": {
-          "style": {
-            "noDefaultExport": "off"
-          }
-        }
-      }
-    },
-    {
-      "includes": ["vite.config.ts"],
+      "includes": [
+        "apps/web/src/app/**/page.tsx",
+        "apps/web/src/app/**/layout.tsx",
+        "apps/web/src/app/**/not-found.tsx",
+        "apps/web/src/app/**/route.ts",
+        "apps/web/next.config.ts",
+        "apps/web/vitest.config.ts"
+      ],
       "linter": {
         "rules": {
           "correctness": {
             "noNodejsModules": "off"
           },
           "style": {
+            "noDefaultExport": "off",
             "noProcessEnv": "off",
-            "noDefaultExport": "off"
+            "useComponentExportOnlyModules": "off"
           }
         }
       }
     },
     {
-      "includes": ["src/**/*.test.tsx"],
+      "includes": ["packages/notion/src/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noProcessEnv": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["apps/web/src/**/*.test.tsx"],
       "linter": {
         "rules": {
           "performance": {
@@ -192,7 +200,7 @@
       }
     },
     {
-      "includes": ["public/**"],
+      "includes": ["public/**", "apps/web/public/**"],
       "formatter": {
         "enabled": false
       },
@@ -201,7 +209,7 @@
       }
     },
     {
-      "includes": [".beads/**"],
+      "includes": [".beads/**", "apps/web/.next/**"],
       "formatter": {
         "enabled": false
       },
