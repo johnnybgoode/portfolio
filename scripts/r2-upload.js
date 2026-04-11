@@ -35,8 +35,9 @@ async function objectExists(key) {
   try {
     await s3.send(new HeadObjectCommand({ Bucket: R2_BUCKET_NAME, Key: key }));
     return true;
-  } catch {
-    return false;
+  } catch (err) {
+    if (err.$metadata?.httpStatusCode === 404 || err.name === 'NotFound') return false;
+    throw err; // rethrow auth errors, network errors, etc.
   }
 }
 

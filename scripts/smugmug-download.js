@@ -1,7 +1,6 @@
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import * as dotenv from 'dotenv';
 import OAuth from 'oauth-1.0a';
 
@@ -41,22 +40,6 @@ async function apiGet(uri) {
 
 function slugify(name) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-}
-
-async function getAlbumsFromNode(nodeUri, depth = 0) {
-  const data = await apiGet(`${nodeUri}!children?count=100`);
-  const nodes = data.Response?.Node ?? [];
-  const albums = [];
-
-  for (const node of nodes) {
-    if (node.Type === 'Album') {
-      albums.push({ name: node.Name, uri: node.Uris.Album.Uri, depth });
-    } else if (node.Type === 'Folder') {
-      const children = await getAlbumsFromNode(node.Uri, depth + 1);
-      albums.push(...children);
-    }
-  }
-  return albums;
 }
 
 async function getImagesForAlbum(albumUri) {
@@ -113,7 +96,12 @@ async function main() {
       const subMeta = { name: subNode.Name, slug: subSlug, photos: [] };
 
       console.log(`  Fetching album: ${topNode.Name}/${subNode.Name}`);
-      const images = await getImagesForAlbum(subNode.Uris.Album.Uri);
+      const albumUri = subNode.Uris?.Album?.Uri;
+      if (!albumUri) {
+        console.warn(`  Skipping ${subNode.Name} — no Album URI`);
+        continue;
+      }
+      const images = await getImagesForAlbum(albumUri);
 
       for (const img of images) {
         const filename = img.FileName;
