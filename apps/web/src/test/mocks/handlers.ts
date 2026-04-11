@@ -1,5 +1,6 @@
 import type { NotionBlock, PageData } from '@portfolio/notion';
 import { HttpResponse, http } from 'msw';
+import type { Manifest } from '../../types/photos';
 import blockData from './data/blocks.json' with { type: 'json' };
 import pageData from './data/pages.json' with { type: 'json' };
 import { makeBlocks } from './fixtures/blocks';
@@ -15,6 +16,9 @@ export const handlers = [
     const responseData = blockData[blockId] ? blockData[blockId] : makeBlocks();
     return HttpResponse.json(responseData);
   }),
+  http.get('/api/photos/manifest', () =>
+    HttpResponse.json({ generated: '', albums: [] }),
+  ),
 ];
 
 export const makeGetPageHandler = (data: PageData) =>
@@ -56,6 +60,9 @@ export const makeGetDatabaseHandler = (results: DatabaseRow[]) =>
       data: { id: 'db-1', title: [], results },
     }),
   );
+
+export const makeManifestHandler = (manifest: Manifest) =>
+  http.get('/api/photos/manifest', () => HttpResponse.json(manifest));
 
 export const makeGetRelatedPagesHandler = () => {
   const responses = {} as Record<string, PageData>;
