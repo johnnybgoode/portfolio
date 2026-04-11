@@ -10,11 +10,18 @@ dotenv.config({ path: path.join(process.env.HOME, '.env') });
 const {
   SMUGMUG_API_KEY,
   SMUGMUG_API_SEC,
+  SMUGMUG_ACCESS_TOKEN,
+  SMUGMUG_ACCESS_TOKEN_SECRET,
   SMUGMUG_USER,
 } = process.env;
 
 if (!SMUGMUG_API_KEY || !SMUGMUG_API_SEC || !SMUGMUG_USER) {
   console.error('Missing SMUGMUG_API_KEY, SMUGMUG_API_SEC, or SMUGMUG_USER in ~/.env');
+  process.exit(1);
+}
+if (!SMUGMUG_ACCESS_TOKEN || !SMUGMUG_ACCESS_TOKEN_SECRET) {
+  console.error('Missing SMUGMUG_ACCESS_TOKEN or SMUGMUG_ACCESS_TOKEN_SECRET in ~/.env');
+  console.error('Run: node scripts/smugmug-auth.js');
   process.exit(1);
 }
 
@@ -29,10 +36,13 @@ const oauth = new OAuth({
   },
 });
 
+const accessToken = { key: SMUGMUG_ACCESS_TOKEN, secret: SMUGMUG_ACCESS_TOKEN_SECRET };
+
+// Authenticated API requests (needed for original image access)
 async function apiGet(uri) {
   const url = uri.startsWith('http') ? uri : `${BASE_URL}${uri}`;
   const fullUrl = `${url}${url.includes('?') ? '&' : '?'}_accept=application%2Fjson`;
-  const authHeader = oauth.toHeader(oauth.authorize({ url: fullUrl, method: 'GET' }));
+  const authHeader = oauth.toHeader(oauth.authorize({ url: fullUrl, method: 'GET' }, accessToken));
   const res = await fetch(fullUrl, { headers: { ...authHeader, Accept: 'application/json' } });
   if (!res.ok) throw new Error(`SmugMug API error ${res.status} for ${fullUrl}`);
   return res.json();
@@ -106,7 +116,11 @@ async function main() {
       for (const img of images) {
         const filename = img.FileName;
         const destPath = path.join(OUTPUT_DIR, albumSlug, subSlug, filename);
-        const downloaded = await downloadFile(img.ArchivedUri, destPath);
+        // ArchivedUri is the original download URL (requires auth). Fall back to
+        // LargestImage if somehow absent.
+        const downloadUrl = img.ArchivedUri
+          ?? (await apiGet(img.Uris.LargestImage.Uri)).Response.LargestImage.Url;
+        const downloaded = await downloadFile(downloadUrl, destPath);
         if (downloaded) {
           totalDownloaded++;
           process.stdout.write('.');
