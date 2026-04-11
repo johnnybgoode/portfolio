@@ -1,0 +1,11 @@
+{
+  "name": "portfolio-scripts",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.0.0",
+    "dotenv": "^16.0.0",
+    "oauth-1.0a": "^2.2.6"
+  }
+}
