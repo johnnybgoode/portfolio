@@ -12,7 +12,7 @@ import * as readline from 'node:readline/promises';
 import * as dotenv from 'dotenv';
 import OAuth from 'oauth-1.0a';
 
-const ENV_PATH = path.join(process.env.HOME, '.env');
+const ENV_PATH = path.join('.env');
 dotenv.config({ path: ENV_PATH });
 
 const { SMUGMUG_API_KEY, SMUGMUG_API_SEC } = process.env;
@@ -29,16 +29,21 @@ const oauth = new OAuth({
   },
 });
 
-async function oauthPost(url, token = null) {
-  const requestData = { url, method: 'POST' };
+async function oauthPost(url, token = null, extraData = {}) {
+  const requestData = { url, method: 'POST', data: extraData };
   const authData = token
     ? oauth.authorize(requestData, token)
     : oauth.authorize(requestData);
   const authHeader = oauth.toHeader(authData);
 
+  const body = Object.keys(extraData).length
+    ? new URLSearchParams(extraData).toString()
+    : undefined;
+
   const res = await fetch(url, {
     method: 'POST',
     headers: { ...authHeader, 'Content-Type': 'application/x-www-form-urlencoded' },
+    body,
   });
   const text = await res.text();
   if (!res.ok) throw new Error(`OAuth request failed ${res.status}: ${text}`);
@@ -56,10 +61,12 @@ function appendEnvVar(key, value) {
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
 try {
-  // Step 1: get request token
+  // Step 1: get request token (oauth_callback=oob for PIN-based flow)
   console.log('Requesting OAuth token...');
   const requestToken = await oauthPost(
     'https://api.smugmug.com/services/oauth/1.0a/getRequestToken',
+    null,
+    { oauth_callback: 'oob' },
   );
 
   // Step 2: user authorizes
@@ -70,10 +77,11 @@ try {
 
   const verifier = await rl.question('Paste the 6-digit verifier code here: ');
 
-  // Step 3: exchange for access token
+  // Step 3: exchange for access token (oauth_verifier must be signed)
   const accessToken = await oauthPost(
     'https://api.smugmug.com/services/oauth/1.0a/getAccessToken',
-    { key: requestToken.oauth_token, secret: requestToken.oauth_token_secret, verifier: verifier.trim() },
+    { key: requestToken.oauth_token, secret: requestToken.oauth_token_secret },
+    { oauth_verifier: verifier.trim() },
   );
 
   appendEnvVar('SMUGMUG_ACCESS_TOKEN', accessToken.oauth_token);

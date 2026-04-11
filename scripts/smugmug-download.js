@@ -5,7 +5,8 @@ import * as dotenv from 'dotenv';
 import OAuth from 'oauth-1.0a';
 
 // Load credentials from ~/.env
-dotenv.config({ path: path.join(process.env.HOME, '.env') });
+//dotenv.config({ path: path.join(process.env.HOME, '.env') });
+dotenv.config()
 
 const {
   SMUGMUG_API_KEY,
@@ -75,76 +76,74 @@ async function downloadFile(url, destPath) {
   return true;
 }
 
+// Recursively traverse the node tree. Albums found at any depth are collected
+// with their full folder path. `pathParts` is the list of slug segments from
+// root down to (but not including) the current node.
+async function traverseNodes(nodeUri, pathParts, albums, stats) {
+  let start = 1;
+  while (true) {
+    const data = await apiGet(`${nodeUri}!children?count=100&start=${start}`);
+    const nodes = data.Response?.Node ?? [];
+
+    for (const node of nodes) {
+      const slug = slugify(node.Name);
+      const nodePath = [...pathParts, slug];
+
+      if (node.Type === 'Folder') {
+        await traverseNodes(node.Uri, nodePath, albums, stats);
+      } else if (node.Uris?.Album?.Uri) {
+        // Covers both Type=Album and Type=Page nodes that back an album
+        const albumUri = node.Uris.Album.Uri;
+        console.log(`  Fetching: ${nodePath.join('/')}`);
+        const images = await getImagesForAlbum(albumUri);
+        const photos = [];
+
+        for (const img of images) {
+          const filename = img.FileName;
+          const destPath = path.join(OUTPUT_DIR, ...nodePath, filename);
+          const downloadUrl = img.ArchivedUri
+            ?? (await apiGet(img.Uris.LargestImage.Uri)).Response.LargestImage.Url;
+          const downloaded = await downloadFile(downloadUrl, destPath);
+          if (downloaded) {
+            stats.downloaded++;
+            process.stdout.write('.');
+          } else {
+            stats.skipped++;
+          }
+          photos.push({
+            filename,
+            width: img.OriginalWidth,
+            height: img.OriginalHeight,
+            title: img.Title || null,
+          });
+        }
+
+        albums.push({ path: nodePath, name: node.Name, photos });
+      } else {
+        console.log(`  Skipping ${node.Type} node: ${nodePath.join('/')}`);
+      }
+    }
+
+    if (nodes.length < 100) break;
+    start += 100;
+  }
+}
+
 async function main() {
   console.log(`Fetching album tree for user: ${SMUGMUG_USER}`);
   const userData = await apiGet(`/api/v2/user/${SMUGMUG_USER}`);
   const rootNodeUri = userData.Response.User.Uris.Node.Uri;
 
-  const rootChildren = await apiGet(`${rootNodeUri}!children?count=100`);
-  const topLevelNodes = rootChildren.Response?.Node ?? [];
+  const albums = [];
+  const stats = { downloaded: 0, skipped: 0 };
+  await traverseNodes(rootNodeUri, [], albums, stats);
 
-  const metadata = { albums: [] };
-  let totalDownloaded = 0;
-  let totalSkipped = 0;
-
-  for (const topNode of topLevelNodes) {
-    if (topNode.Type !== 'Folder' && topNode.Type !== 'Album') continue;
-    const albumSlug = slugify(topNode.Name);
-    const albumMeta = { name: topNode.Name, slug: albumSlug, subAlbums: [] };
-
-    let subNodes = [];
-    if (topNode.Type === 'Folder') {
-      const subData = await apiGet(`${topNode.Uri}!children?count=100`);
-      subNodes = subData.Response?.Node ?? [];
-    } else {
-      subNodes = [topNode];
-    }
-
-    for (const subNode of subNodes) {
-      if (subNode.Type !== 'Album') continue;
-      const subSlug = slugify(subNode.Name);
-      const subMeta = { name: subNode.Name, slug: subSlug, photos: [] };
-
-      console.log(`  Fetching album: ${topNode.Name}/${subNode.Name}`);
-      const albumUri = subNode.Uris?.Album?.Uri;
-      if (!albumUri) {
-        console.warn(`  Skipping ${subNode.Name} — no Album URI`);
-        continue;
-      }
-      const images = await getImagesForAlbum(albumUri);
-
-      for (const img of images) {
-        const filename = img.FileName;
-        const destPath = path.join(OUTPUT_DIR, albumSlug, subSlug, filename);
-        // ArchivedUri is the original download URL (requires auth). Fall back to
-        // LargestImage if somehow absent.
-        const downloadUrl = img.ArchivedUri
-          ?? (await apiGet(img.Uris.LargestImage.Uri)).Response.LargestImage.Url;
-        const downloaded = await downloadFile(downloadUrl, destPath);
-        if (downloaded) {
-          totalDownloaded++;
-          process.stdout.write('.');
-        } else {
-          totalSkipped++;
-        }
-        subMeta.photos.push({
-          filename,
-          width: img.OriginalWidth,
-          height: img.OriginalHeight,
-          title: img.Title || null,
-        });
-      }
-
-      albumMeta.subAlbums.push(subMeta);
-    }
-    metadata.albums.push(albumMeta);
-  }
-
+  const metadata = { albums };
   const metadataPath = path.join(OUTPUT_DIR, 'metadata.json');
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
 
-  console.log(`\nDone. Downloaded: ${totalDownloaded}, Skipped: ${totalSkipped}`);
+  console.log(`\nDone. Downloaded: ${stats.downloaded}, Skipped: ${stats.skipped}`);
   console.log(`Metadata written to ${metadataPath}`);
 }
 

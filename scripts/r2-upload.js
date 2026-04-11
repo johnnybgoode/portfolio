@@ -7,8 +7,8 @@ import {
   S3Client,
 } from '@aws-sdk/client-s3';
 import * as dotenv from 'dotenv';
-
-dotenv.config({ path: path.join(process.env.HOME, '.env') });
+// { path: path.join(process.env.HOME, '.env') }
+dotenv.config();
 
 const {
   R2_ACCOUNT_ID,
@@ -80,46 +80,40 @@ async function buildManifest(photosDir, metadata) {
     continuationToken = res.IsTruncated ? res.NextContinuationToken : undefined;
   } while (continuationToken);
 
-  // Group keys by album/subAlbum
+  // Build metadata index keyed by R2 key (full path including filename)
+  // New format: metadata.albums is a flat array of { path: string[], name, photos }
+  const metaIndex = {};
+  const nameIndex = {}; // "slug1/slug2/..." -> display name
+  if (metadata) {
+    for (const album of metadata.albums) {
+      const albumKeyPrefix = album.path.join('/');
+      nameIndex[albumKeyPrefix] = album.name;
+      for (const photo of album.photos) {
+        metaIndex[`${albumKeyPrefix}/${photo.filename}`] = photo;
+      }
+    }
+  }
+
+  // Group keys: top segment = album, remaining segments minus filename = subAlbum
+  // e.g. "landscape/utah/photo.jpg"         → album=landscape, sub=utah
+  //      "galleries/2020/album/photo.jpg"   → album=galleries, sub=2020/album
   const tree = {};
   for (const key of allKeys) {
     if (key === 'manifest.json') continue;
     const parts = key.split('/');
-    if (parts.length !== 3) continue;
-    const [album, subAlbum, filename] = parts;
-    tree[album] ??= {};
-    tree[album][subAlbum] ??= [];
-    tree[album][subAlbum].push(filename);
-  }
-
-  // Build manifest, enriching with metadata if available
-  const metaIndex = {};
-  if (metadata) {
-    for (const album of metadata.albums) {
-      for (const sub of album.subAlbums) {
-        for (const photo of sub.photos) {
-          metaIndex[`${album.slug}/${sub.slug}/${photo.filename}`] = photo;
-        }
-      }
-    }
-  }
-
-  // Determine display names from metadata or slugs
-  const albumNames = {};
-  const subAlbumNames = {};
-  if (metadata) {
-    for (const album of metadata.albums) {
-      albumNames[album.slug] = album.name;
-      for (const sub of album.subAlbums) {
-        subAlbumNames[`${album.slug}/${sub.slug}`] = sub.name;
-      }
-    }
+    if (parts.length < 3) continue; // need at least album/subAlbum/file
+    const [albumSlug, ...rest] = parts;
+    const filename = rest.pop();
+    const subSlug = rest.join('/'); // may be multi-segment for deep folders
+    tree[albumSlug] ??= {};
+    tree[albumSlug][subSlug] ??= [];
+    tree[albumSlug][subSlug].push({ filename, key });
   }
 
   const albums = Object.entries(tree).map(([albumSlug, subAlbums]) => {
-    const subAlbumList = Object.entries(subAlbums).map(([subSlug, filenames]) => {
-      const photos = filenames.map(filename => {
-        const key = `${albumSlug}/${subSlug}/${filename}`;
+    const subAlbumList = Object.entries(subAlbums).map(([subSlug, files]) => {
+      const subKeyPrefix = `${albumSlug}/${subSlug}`;
+      const photos = files.map(({ filename, key }) => {
         const meta = metaIndex[key];
         return {
           filename,
@@ -129,8 +123,11 @@ async function buildManifest(photosDir, metadata) {
           ...(meta?.title ? { title: meta.title } : {}),
         };
       });
+      // Display name: from metadata, or humanise the last path segment
+      const displayName = nameIndex[subKeyPrefix]
+        ?? subSlug.split('/').pop().replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
       return {
-        name: subAlbumNames[`${albumSlug}/${subSlug}`] ?? subSlug,
+        name: displayName,
         slug: subSlug,
         coverUrl: photos[0]?.url ?? '',
         photoCount: photos.length,
@@ -139,8 +136,10 @@ async function buildManifest(photosDir, metadata) {
     });
 
     const allPhotos = subAlbumList.flatMap(s => s.photos);
+    const displayName = nameIndex[albumSlug]
+      ?? albumSlug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     return {
-      name: albumNames[albumSlug] ?? albumSlug,
+      name: displayName,
       slug: albumSlug,
       coverUrl: allPhotos[0]?.url ?? '',
       photoCount: allPhotos.length,
@@ -161,34 +160,29 @@ async function main() {
   let uploaded = 0;
   let skipped = 0;
 
-  // Walk album/subAlbum/file structure
-  for (const albumDir of fs.readdirSync(photosDir)) {
-    const albumPath = path.join(photosDir, albumDir);
-    if (!fs.statSync(albumPath).isDirectory()) continue;
-    const albumSlug = slugify(albumDir);
-
-    for (const subDir of fs.readdirSync(albumPath)) {
-      const subPath = path.join(albumPath, subDir);
-      if (!fs.statSync(subPath).isDirectory()) continue;
-      const subSlug = slugify(subDir);
-
-      for (const filename of fs.readdirSync(subPath)) {
-        if (filename.startsWith('.')) continue;
-        const filePath = path.join(subPath, filename);
-        if (!fs.statSync(filePath).isFile()) continue;
-
-        const key = `${albumSlug}/${subSlug}/${filename}`;
+  // Recursively walk the photos directory. Any file at depth >= 2 (album/sub/.../file)
+  // gets uploaded; its R2 key is the relative path from photosDir.
+  async function walkAndUpload(dir, relParts) {
+    for (const entry of fs.readdirSync(dir)) {
+      if (entry.startsWith('.')) continue;
+      const fullPath = path.join(dir, entry);
+      const stat = fs.statSync(fullPath);
+      if (stat.isDirectory()) {
+        await walkAndUpload(fullPath, [...relParts, slugify(entry)]);
+      } else if (stat.isFile() && relParts.length >= 2) {
+        const key = [...relParts, entry].join('/');
         if (await objectExists(key)) {
           skipped++;
-          continue;
+        } else {
+          await uploadFile(fullPath, key, getContentType(entry));
+          uploaded++;
+          process.stdout.write('.');
         }
-
-        await uploadFile(filePath, key, getContentType(filename));
-        uploaded++;
-        process.stdout.write('.');
       }
     }
   }
+
+  await walkAndUpload(photosDir, []);
 
   console.log(`\nUploaded: ${uploaded}, Skipped: ${skipped}`);
   console.log('Generating manifest...');
