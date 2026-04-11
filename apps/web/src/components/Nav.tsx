@@ -1,20 +1,27 @@
+'use client';
+
 import Link from 'next/link';
-import { nav, navLink, navLinks, navLogo } from '../styles/components/Nav.css';
+import { usePathname } from 'next/navigation';
+import { nav, navLink, navLinkActive, navLinks } from '../styles/components/Nav.css';
 
 export function Nav() {
+  const pathname = usePathname();
   return (
     <nav className={nav}>
-      <Link className={navLogo} href="/">
-        Jack
-      </Link>
       <ul className={navLinks}>
         <li>
-          <Link className={navLink} href="/resume">
+          <Link
+            className={`${navLink}${pathname.startsWith('/resume') ? ` ${navLinkActive}` : ''}`}
+            href="/resume"
+          >
             Resume
           </Link>
         </li>
         <li>
-          <Link className={navLink} href="/photos">
+          <Link
+            className={`${navLink}${pathname.startsWith('/photos') ? ` ${navLinkActive}` : ''}`}
+            href="/photos"
+          >
             Photos
           </Link>
         </li>

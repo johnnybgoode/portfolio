@@ -4,21 +4,10 @@ import { colorVars, vars } from '../theme.css';
 export const nav = style({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
+  justifyContent: 'flex-end',
   paddingInline: vars.space['600'],
   paddingBlock: vars.space['500'],
   borderBottom: `1px solid ${colorVars.body}1a`,
-});
-
-export const navLogo = style({
-  fontFamily: vars.typography.font.heading,
-  fontSize: vars.typography.size['50'],
-  fontWeight: vars.typography.weight['500'],
-  letterSpacing: '0.12em',
-  textTransform: 'uppercase',
-  color: colorVars.body,
-  textDecoration: 'none',
-  opacity: 0.9,
 });
 
 export const navLinks = style({
@@ -39,4 +28,9 @@ export const navLink = style({
   selectors: {
     '&:hover': { opacity: 0.9 },
   },
+});
+
+export const navLinkActive = style({
+  opacity: 0.9,
+  fontWeight: vars.typography.weight['500'],
 });

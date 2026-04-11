@@ -116,7 +116,7 @@ export const albumCount = style({
 export const subAlbumGrid = style({
   columns: 2,
   columnGap: vars.space['350'],
-  maxWidth: '860px',
+  maxWidth: '1200px',
   marginInline: 'auto',
 });
 
@@ -178,7 +178,7 @@ export const photoGrid = style({
   display: 'flex',
   flexDirection: 'column',
   gap: vars.space['300'],
-  maxWidth: '1000px',
+  maxWidth: '1200px',
   marginInline: 'auto',
 });
 

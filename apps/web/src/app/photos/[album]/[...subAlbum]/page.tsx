@@ -7,7 +7,7 @@ import { Loading } from '../../../../components/ui/Loading';
 export const dynamic = 'force-dynamic';
 
 type SubAlbumPageProps = {
-  params: Promise<{ album: string; subAlbum: string }>;
+  params: Promise<{ album: string; subAlbum: string[] }>;
   searchParams: Promise<{ photo?: string }>;
 };
 
@@ -24,7 +24,7 @@ export default async function SubAlbumPage({
         <GalleryClient
           albumSlug={album}
           photoIndex={photoIndex}
-          subAlbumSlug={subAlbum}
+          subAlbumSlug={subAlbum.join('/')}
         />
       </Suspense>
     </ErrorBoundary>
