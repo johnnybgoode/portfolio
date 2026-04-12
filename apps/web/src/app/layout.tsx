@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import type { PropsWithChildren } from 'react';
+import { Nav } from '../components/Nav';
 import { QueryProvider } from '../components/QueryProvider';
 import { ThemeContextProvider } from '../components/ThemeContext';
 import { ThemeToggle } from '../components/ThemeToggle';
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <QueryProvider>
           <ThemeContextProvider>
             <ThemeWrapper>
+              <Nav />
               {children}
               <ThemeToggle />
             </ThemeWrapper>
